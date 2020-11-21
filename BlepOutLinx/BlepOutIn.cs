@@ -227,7 +227,7 @@ namespace BlepOutLinx
 		static string RootPath;
 		string BOIpath
         {
-			get { return Assembly.GetExecutingAssembly().Location.Replace("BlepOutLinx.exe", string.Empty); }
+			get { return Assembly.GetExecutingAssembly().Location.Replace("BlepOutIn.exe", string.Empty); }
         }
 
 		string cfgpath
