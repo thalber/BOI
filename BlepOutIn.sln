@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlepOutIn", "BlepOutLinx\BlepOutIn.csproj", "{CACC6F55-E518-4600-AA91-71739C5C73D7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CACC6F55-E518-4600-AA91-71739C5C73D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CACC6F55-E518-4600-AA91-71739C5C73D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CACC6F55-E518-4600-AA91-71739C5C73D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CACC6F55-E518-4600-AA91-71739C5C73D7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FA07080C-3622-4AB4-AD2B-FC1B7F129998}
+	EndGlobalSection
+EndGlobal
