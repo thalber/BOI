@@ -22,19 +22,16 @@ namespace BlepOutLinx
 			UpdateTargetPath(RootPath);
 		}
 
-		public override void Refresh()
-		{
-			base.Refresh();
-		}
-
 		public void UpdateTargetPath(string path)
 		{
+			Modlist.Enabled = false;
 			RootPath = path;
 			targetFiles.Clear();
 			pluginBlacklist.Clear();
 			patchBlacklist.Clear();
 			if (IsMyPathCorrect) Setup();
 			SaveConfig();
+
 		}
 
 		private void RetrieveConfig()
@@ -81,6 +78,7 @@ namespace BlepOutLinx
 			RetrieveAllDlls();
 			CompileModList();
 			RefreshList();
+			Modlist.Enabled = true;
 			
 		}
 
@@ -150,11 +148,16 @@ namespace BlepOutLinx
 				{
 					if (File.Exists(pathtomods(fi)))
                     {
-						if (fi.LastWriteTime > new FileInfo(pathtomods(fi)).LastWriteTime)
+						if (fi.CreationTime > new FileInfo(pathtomods(fi)).CreationTime)
                         {
 							File.Delete(pathtomods(fi));
 							File.Copy(s, pathtomods(fi));
 						}
+						if (fi.CreationTime < new FileInfo(pathtomods(fi)).CreationTime)
+                        {
+							File.Delete(s);
+							File.Copy(pathtomods(fi), s);
+                        }
                         
                     }
 					if (!File.Exists(pathtomods(fi))) File.Copy(s, pathtomods(fi));
@@ -203,8 +206,7 @@ namespace BlepOutLinx
 				}
 			}
 		}
-
-		public void RefreshList()
+		private void RefreshList()
         {
 			for (int i = 0; i < Modlist.Items.Count; i++)
             {
@@ -225,6 +227,17 @@ namespace BlepOutLinx
 			get { return (Directory.Exists(PluginsFolder) && Directory.Exists(PatchesFolder)); }
         }
 		static string RootPath;
+		private bool changetracker;
+		private bool TSbtnMode = false;
+		private bool tsbmswtch
+        {
+			get
+            {
+				TSbtnMode = !TSbtnMode;
+				return TSbtnMode;
+            }
+        }
+
 		string BOIpath
         {
 			get { return Assembly.GetExecutingAssembly().Location.Replace("BlepOutIn.exe", string.Empty); }
@@ -415,7 +428,16 @@ namespace BlepOutLinx
 
 		private void buttonSelectPath_Click(object sender, EventArgs e)
 		{
-			TargetSelect.ShowDialog();
+			if (!tsbmswtch)
+            {
+				TargetSelect.ShowDialog();
+				btnSelectPath.Text = "Press again to load modlist";
+            }
+            else
+            {
+				UpdateTargetPath(TargetSelect.SelectedPath);
+				btnSelectPath.Text = "Select path";
+            }
 		}
 		private void TargetSelect_Closed(object sender, EventArgs e)
 		{
@@ -427,29 +449,36 @@ namespace BlepOutLinx
 			RefreshList();
         }
 
-        private void btnApply_Click(object sender, EventArgs e)
+        private void BlepOut_Activated(object sender, EventArgs e)
         {
-			UpdateTargetPath(TargetSelect.SelectedPath);
-        }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-			UpdateTargetPath(RootPath);
-        }
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void labelHead_Click(object sender, EventArgs e)
-        {
-
+			fsw_mods.EnableRaisingEvents = false;
+			fsw_plugins.EnableRaisingEvents = false;
+			if (changetracker)
+            {
+				UpdateTargetPath(RootPath);
+            }
         }
 
         private void BlepOut_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void BlepOut_Deactivate(object sender, EventArgs e)
+        {
+			if (IsMyPathCorrect)
+            {
+				changetracker = false;
+				fsw_mods.Path = ModFolder;
+				fsw_mods.EnableRaisingEvents = true;
+				fsw_plugins.Path = PluginsFolder;
+				fsw_plugins.EnableRaisingEvents = true;
+            }
+        }
+
+		public void SomethingChanged()
+        {
+			changetracker = true;
         }
     }
 }
