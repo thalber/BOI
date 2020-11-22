@@ -24,6 +24,7 @@ namespace BlepOutLinx
 
 		public void UpdateTargetPath(string path)
 		{
+			btnLaunch.Enabled = false;
 			Modlist.Enabled = false;
 			RootPath = path;
 			targetFiles.Clear();
@@ -31,6 +32,7 @@ namespace BlepOutLinx
 			patchBlacklist.Clear();
 			if (IsMyPathCorrect) Setup();
 			SaveConfig();
+			StatusLabelsUpdate();
 
 		}
 
@@ -79,6 +81,8 @@ namespace BlepOutLinx
 			CompileModList();
 			RefreshList();
 			Modlist.Enabled = true;
+			btnLaunch.Enabled = true;
+			TargetSelect.SelectedPath = RootPath;
 			
 		}
 
@@ -228,15 +232,7 @@ namespace BlepOutLinx
         }
 		static string RootPath;
 		private bool changetracker;
-		private bool TSbtnMode = false;
-		private bool tsbmswtch
-        {
-			get
-            {
-				TSbtnMode = !TSbtnMode;
-				return TSbtnMode;
-            }
-        }
+		private bool TSbtnMode = true;
 
 		string BOIpath
         {
@@ -250,7 +246,8 @@ namespace BlepOutLinx
 		List<string> patchBlacklist;
 		List<string> pluginBlacklist;
 		List<ModRelay> targetFiles;
-		
+		System.Diagnostics.Process rw;
+
 		//List<TargetFileData> IgnoredFailed;
 		string hkblacklistpath
         {
@@ -428,20 +425,21 @@ namespace BlepOutLinx
 
 		private void buttonSelectPath_Click(object sender, EventArgs e)
 		{
-			if (!tsbmswtch)
+			
+			if (TSbtnMode)
             {
 				TargetSelect.ShowDialog();
 				btnSelectPath.Text = "Press again to load modlist";
+				TSbtnMode = false;
+				btnLaunch.Enabled = false;
+
             }
             else
             {
 				UpdateTargetPath(TargetSelect.SelectedPath);
 				btnSelectPath.Text = "Select path";
+				TSbtnMode = true;
             }
-		}
-		private void TargetSelect_Closed(object sender, EventArgs e)
-		{
-			this.UpdateTargetPath(TargetSelect.SelectedPath);
 		}
 
         private void checklistModlist_SelectedIndexChanged(object sender, EventArgs e)
@@ -457,6 +455,12 @@ namespace BlepOutLinx
             {
 				UpdateTargetPath(RootPath);
             }
+			if (rw != null && !rw.HasExited)
+			{
+				Modlist.Enabled = false;
+			}
+			else Modlist.Enabled = true;
+			StatusLabelsUpdate();
         }
 
         private void BlepOut_Load(object sender, EventArgs e)
@@ -479,6 +483,35 @@ namespace BlepOutLinx
 		public void SomethingChanged()
         {
 			changetracker = true;
+        }
+
+		private void StatusLabelsUpdate()
+        {
+			lblPathStatus.Text = IsMyPathCorrect ? "Path valid" : "Path invalid";
+			lblPathStatus.BackColor = IsMyPathCorrect ? System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.LightGreen) : System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.LightSalmon);
+			lblProcessStatus.Visible = IsMyPathCorrect;
+			lblProcessStatus.Text = (rw != null && !rw.HasExited) ? "Running" : "Not running";
+			lblProcessStatus.BackColor = (rw != null && !rw.HasExited) ? System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.Orange) : System.Drawing.Color.FromKnownColor(System.Drawing.KnownColor.Gray);
+
+		}
+
+        private void btnLaunch_MouseClick(object sender, MouseEventArgs e)
+        {
+			try
+            {
+				rw = new System.Diagnostics.Process();
+				rw.StartInfo.FileName = RootPath + @"\RainWorld.exe";
+				rw.Start();
+				rw.Exited += new System.EventHandler(this.BlepOut_Activated);
+            }
+
+            catch
+            {
+
+            }
+			btnLaunch.Enabled = false;
+			StatusLabelsUpdate();
+
         }
     }
 }

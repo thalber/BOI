@@ -39,11 +39,16 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.fsw_plugins = new System.IO.FileSystemWatcher();
             this.fsw_mods = new System.IO.FileSystemWatcher();
+            this.btnLaunch = new System.Windows.Forms.Button();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblPathStatus = new System.Windows.Forms.Label();
+            this.lblProcessStatus = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fsw_plugins)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fsw_mods)).BeginInit();
+            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSelectPath
@@ -71,6 +76,8 @@
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.btnSelectPath, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnLaunch, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 1, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // tableLayoutPanel2
@@ -110,6 +117,34 @@
             this.fsw_mods.EnableRaisingEvents = true;
             this.fsw_mods.SynchronizingObject = this;
             // 
+            // btnLaunch
+            // 
+            resources.ApplyResources(this.btnLaunch, "btnLaunch");
+            this.btnLaunch.Name = "btnLaunch";
+            this.btnLaunch.UseVisualStyleBackColor = true;
+            this.btnLaunch.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnLaunch_MouseClick);
+            // 
+            // tableLayoutPanel4
+            // 
+            resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
+            this.tableLayoutPanel4.Controls.Add(this.lblPathStatus, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.lblProcessStatus, 0, 0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            // 
+            // lblPathStatus
+            // 
+            resources.ApplyResources(this.lblPathStatus, "lblPathStatus");
+            this.lblPathStatus.AutoEllipsis = true;
+            this.lblPathStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblPathStatus.Name = "lblPathStatus";
+            this.lblPathStatus.UseMnemonic = false;
+            // 
+            // lblProcessStatus
+            // 
+            resources.ApplyResources(this.lblProcessStatus, "lblProcessStatus");
+            this.lblProcessStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblProcessStatus.Name = "lblProcessStatus";
+            // 
             // BlepOut
             // 
             resources.ApplyResources(this, "$this");
@@ -126,10 +161,13 @@
             this.Enter += new System.EventHandler(this.BlepOut_Activated);
             this.Validated += new System.EventHandler(this.BlepOut_Activated);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fsw_plugins)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fsw_mods)).EndInit();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -145,6 +183,10 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.IO.FileSystemWatcher fsw_plugins;
         private System.IO.FileSystemWatcher fsw_mods;
+        private System.Windows.Forms.Button btnLaunch;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.Label lblPathStatus;
+        private System.Windows.Forms.Label lblProcessStatus;
     }
 }
 
