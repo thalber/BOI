@@ -33,22 +33,23 @@
             this.TargetSelect = new System.Windows.Forms.FolderBrowserDialog();
             this.Modlist = new System.Windows.Forms.CheckedListBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelHead = new System.Windows.Forms.Label();
-            this.labelDesc = new System.Windows.Forms.Label();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.fsw_plugins = new System.IO.FileSystemWatcher();
-            this.fsw_mods = new System.IO.FileSystemWatcher();
             this.btnLaunch = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.lblPathStatus = new System.Windows.Forms.Label();
             this.lblProcessStatus = new System.Windows.Forms.Label();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelHead = new System.Windows.Forms.Label();
+            this.labelDesc = new System.Windows.Forms.Label();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.rwp = new System.Diagnostics.Process();
+            this.fsw_modsfolder = new System.IO.FileSystemWatcher();
+            this.fsw_pluginsfolder = new System.IO.FileSystemWatcher();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fsw_plugins)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fsw_mods)).BeginInit();
-            this.tableLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fsw_modsfolder)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fsw_pluginsfolder)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSelectPath
@@ -67,6 +68,7 @@
             // Modlist
             // 
             resources.ApplyResources(this.Modlist, "Modlist");
+            this.Modlist.CheckOnClick = true;
             this.Modlist.FormattingEnabled = true;
             this.Modlist.Name = "Modlist";
             this.Modlist.Sorted = true;
@@ -79,43 +81,6 @@
             this.tableLayoutPanel1.Controls.Add(this.btnLaunch, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 1, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
-            // tableLayoutPanel2
-            // 
-            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.Controls.Add(this.labelHead, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.labelDesc, 0, 1);
-            this.tableLayoutPanel2.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            // 
-            // labelHead
-            // 
-            resources.ApplyResources(this.labelHead, "labelHead");
-            this.labelHead.Name = "labelHead";
-            // 
-            // labelDesc
-            // 
-            resources.ApplyResources(this.labelDesc, "labelDesc");
-            this.labelDesc.Name = "labelDesc";
-            // 
-            // tableLayoutPanel3
-            // 
-            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
-            this.tableLayoutPanel3.Controls.Add(this.Modlist, 0, 2);
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel1, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel2, 0, 0);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            // 
-            // fsw_plugins
-            // 
-            this.fsw_plugins.EnableRaisingEvents = true;
-            this.fsw_plugins.Filter = "*.dll";
-            this.fsw_plugins.SynchronizingObject = this;
-            // 
-            // fsw_mods
-            // 
-            this.fsw_mods.EnableRaisingEvents = true;
-            this.fsw_mods.SynchronizingObject = this;
             // 
             // btnLaunch
             // 
@@ -145,6 +110,58 @@
             this.lblProcessStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblProcessStatus.Name = "lblProcessStatus";
             // 
+            // tableLayoutPanel2
+            // 
+            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+            this.tableLayoutPanel2.Controls.Add(this.labelHead, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.labelDesc, 0, 1);
+            this.tableLayoutPanel2.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            // 
+            // labelHead
+            // 
+            resources.ApplyResources(this.labelHead, "labelHead");
+            this.labelHead.Name = "labelHead";
+            // 
+            // labelDesc
+            // 
+            resources.ApplyResources(this.labelDesc, "labelDesc");
+            this.labelDesc.Name = "labelDesc";
+            // 
+            // tableLayoutPanel3
+            // 
+            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
+            this.tableLayoutPanel3.Controls.Add(this.Modlist, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel1, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel2, 0, 0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            // 
+            // rwp
+            // 
+            this.rwp.StartInfo.Domain = "";
+            this.rwp.StartInfo.LoadUserProfile = false;
+            this.rwp.StartInfo.Password = null;
+            this.rwp.StartInfo.StandardErrorEncoding = null;
+            this.rwp.StartInfo.StandardOutputEncoding = null;
+            this.rwp.StartInfo.UserName = "";
+            this.rwp.SynchronizingObject = this;
+            // 
+            // fsw_modsfolder
+            // 
+            this.fsw_modsfolder.EnableRaisingEvents = true;
+            this.fsw_modsfolder.SynchronizingObject = this;
+            this.fsw_modsfolder.Changed += new System.IO.FileSystemEventHandler(this.fsw_plugins_Changed);
+            this.fsw_modsfolder.Created += new System.IO.FileSystemEventHandler(this.fsw_plugins_Changed);
+            this.fsw_modsfolder.Deleted += new System.IO.FileSystemEventHandler(this.fsw_plugins_Changed);
+            // 
+            // fsw_pluginsfolder
+            // 
+            this.fsw_pluginsfolder.EnableRaisingEvents = true;
+            this.fsw_pluginsfolder.SynchronizingObject = this;
+            this.fsw_pluginsfolder.Changed += new System.IO.FileSystemEventHandler(this.fsw_plugins_Changed);
+            this.fsw_pluginsfolder.Created += new System.IO.FileSystemEventHandler(this.fsw_plugins_Changed);
+            this.fsw_pluginsfolder.Deleted += new System.IO.FileSystemEventHandler(this.fsw_plugins_Changed);
+            // 
             // BlepOut
             // 
             resources.ApplyResources(this, "$this");
@@ -157,17 +174,16 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Activated += new System.EventHandler(this.BlepOut_Activated);
             this.Deactivate += new System.EventHandler(this.BlepOut_Deactivate);
-            this.Load += new System.EventHandler(this.BlepOut_Load);
             this.Enter += new System.EventHandler(this.BlepOut_Activated);
-            this.Validated += new System.EventHandler(this.BlepOut_Activated);
+            this.Leave += new System.EventHandler(this.BlepOut_Deactivate);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.fsw_plugins)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fsw_mods)).EndInit();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.fsw_modsfolder)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fsw_pluginsfolder)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -181,12 +197,14 @@
         private System.Windows.Forms.Label labelHead;
         private System.Windows.Forms.Label labelDesc;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.IO.FileSystemWatcher fsw_plugins;
-        private System.IO.FileSystemWatcher fsw_mods;
         private System.Windows.Forms.Button btnLaunch;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Label lblPathStatus;
         private System.Windows.Forms.Label lblProcessStatus;
+        private System.Diagnostics.Process rwp;
+        private System.IO.FileSystemWatcher fsw_modsfolder;
+        private System.IO.FileSystemWatcher fsw_pluginsfolder;
+        
     }
 }
 
