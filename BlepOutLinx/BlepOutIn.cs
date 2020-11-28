@@ -17,6 +17,7 @@ namespace BlepOutLinx
 			targetFiles = new List<ModRelay>();
 			pluginBlacklist = new List<string>();
 			patchBlacklist = new List<string>();
+			outrmixmods = new List<string>();
 			RetrieveConfig();
 			UpdateTargetPath(RootPath);
 		}
@@ -73,9 +74,10 @@ namespace BlepOutLinx
 		private void Setup()
 		{
 			PubstuntFound = false;
+			MixmodsFound = false;
 			ReadyForRefresh = false;
 			Modlist.Items.Clear();
-			
+			outrmixmods.Clear();
 			targetFiles.Clear();
 			Rootout();
 			PrepareModsFolder();
@@ -88,10 +90,17 @@ namespace BlepOutLinx
 			TargetSelect.SelectedPath = RootPath;
 			if (PubstuntFound)
 			{
-				this.popup = new BlepOutIn.PubstuntInfoPopup();
+				BlepOutIn.PubstuntInfoPopup popup;
+				popup = new BlepOutIn.PubstuntInfoPopup();
 				this.AddOwnedForm(popup);
 				popup.Show();
 			}
+			if (MixmodsFound)
+            {
+				BlepOutIn.MixmodsPopup mixmodsPopup = new BlepOutIn.MixmodsPopup(outrmixmods);
+				this.AddOwnedForm(mixmodsPopup);
+				mixmodsPopup.Show();
+            }
 			ReadyForRefresh = true;
 		}
 
@@ -104,11 +113,11 @@ namespace BlepOutLinx
 		private void Rootout()
 		{
 			string[] patchfoldercontents = Directory.GetFiles(PatchesFolder);
-			string[] modfoldercontents = Directory.GetFiles(ModFolder);
 			string[] pluginfoldercontents = Directory.GetFiles(PluginsFolder);
 			foreach (string s in patchfoldercontents)
 			{
-				if (new FileInfo(s).Extension == ".dll")
+				var fi = new FileInfo(s);
+				if (fi.Extension == ".dll" && !fi.Attributes.HasFlag(FileAttributes.ReparsePoint))
 				{
 					if (s.Contains("PublicityStunt"))
 					{
@@ -118,29 +127,36 @@ namespace BlepOutLinx
 					else
 					{
 						ModRelay.ModType mt = ModRelay.GetModType(s);
-						if (mt == ModRelay.ModType.Partmixed) File.Delete(s);
+						if (mt == ModRelay.ModType.Partmixed)
+                        {
+							MixmodsFound = true;
+							outrmixmods.Add(new FileInfo(s).Name);
+							File.Delete(s);
+                        }
 					}
 				}
 			}
-			foreach (string s in modfoldercontents)
+			foreach (string s in pluginfoldercontents)
 			{
-				if (new FileInfo(s).Extension == ".dll")
+				var fi = new FileInfo(s);
+				if (fi.Extension == ".dll" && !fi.Attributes.HasFlag(FileAttributes.ReparsePoint))
 				{
-					if (s.Contains("PublicityStunt"))
+
+					if (fi.Name.Contains("PublicityStunt"))
 					{
 						File.Delete(s);
 						PubstuntFound = true;
 					}
-				}
-				
-
-			}
-			foreach (string s in pluginfoldercontents)
-			{
-				if (new FileInfo(s).Extension == ".dll")
-				{
-					ModRelay.ModType mt = ModRelay.GetModType(s);
-					if (mt == ModRelay.ModType.Partmixed) File.Delete(s);
+					else
+                    {
+						ModRelay.ModType mt = ModRelay.GetModType(s);
+						if (mt == ModRelay.ModType.Partmixed)
+						{
+							MixmodsFound = true;
+							outrmixmods.Add(new FileInfo(s).Name);
+							File.Delete(s);
+						}
+					}						
 				}
 			}
 		}
@@ -313,14 +329,12 @@ namespace BlepOutLinx
 
 		private List<string> patchBlacklist;
 		private List<string> pluginBlacklist;
+		private List<string> outrmixmods;
 		private List<ModRelay> targetFiles;
 		private Process rw;
 		private bool ReadyForRefresh;
 		private bool PubstuntFound;
-		private BlepOutIn.PubstuntInfoPopup popup;
-		
-
-		//List<TargetFileData> IgnoredFailed;
+		private bool MixmodsFound;
 		private string hkblacklistpath
 		{
 			get { return PluginsFolder + @"\plugins_blacklist.txt"; }
@@ -354,6 +368,11 @@ namespace BlepOutLinx
 				this.isValid = !ModData.AbsolutelyIgnore(ModPath);
 				if (isValid)
 				{
+					if (new FileInfo(path).Name.Contains("PublicityStunt"))
+                    {
+						this.AssociatedModData = new InvalidModData(path);
+						return;
+                    }
 					ModType mt = GetModType(path);
 					switch (mt)
 					{
@@ -370,7 +389,7 @@ namespace BlepOutLinx
 							this.MyType = ModType.Partmod;
 							break;
 						case ModType.Partmixed:
-							this.AssociatedModData = new MixedModData(path);
+							this.AssociatedModData = new InvalidModData(path);
 							this.MyType = ModType.Partmixed;
 							break;
 					}
@@ -380,29 +399,59 @@ namespace BlepOutLinx
 
 			public static ModType GetModType(string path)
 			{
-				bool ishk = false;
-				bool ispt = false;
+				mttup ultstate = new mttup(false, false);
 				using (ModuleDefinition md = ModuleDefinition.ReadModule(path))
 				{
+					
 					foreach (TypeDefinition t in md.Types)
 					{
-						if (t.BaseType != null && t.BaseType.FullName.Contains("PartialityMod")) ishk = true;
-						if (t.HasCustomAttributes)
-						{
-							foreach (CustomAttribute catr in t.CustomAttributes)
-							{
-								if (catr.AttributeType.Namespace == "MonoMod") ispt = true;
-							}
-						}
+						mttup tstate = new mttup(false, false);
+						CheckThisType(t, out tstate);
+						ultstate.ishk = (tstate.ishk) ? true : ultstate.ishk;
+						ultstate.ispt = (tstate.ispt) ? true : ultstate.ispt;
 					}
 					
 				}
-				if (ishk && ispt) return ModType.Partmixed;
-				else if (ishk && !ispt) return ModType.Partmod;
-				else if (ispt && !ishk) return ModType.Partpatch;
+				if (ultstate.ishk && ultstate.ispt) return ModType.Partmixed;
+				else if (ultstate.ishk && !ultstate.ispt) return ModType.Partmod;
+				else if (ultstate.ispt && !ultstate.ishk) return ModType.Partpatch;
 				else return ModType.Unknown;
 			}
 
+			private static void CheckThisType(TypeDefinition td, out mttup state)
+            {
+				state.ishk = false;
+				state.ispt = false;
+				if (td.BaseType != null && td.BaseType.Name == "PartialityMod") state.ishk = true;
+				if (td.HasCustomAttributes)
+                {
+					foreach (CustomAttribute catr in td.CustomAttributes)
+                    {
+						if (catr.AttributeType.Name == "MonoModPatch") state.ispt = true;
+                    }
+                }
+				if (td.HasNestedTypes)
+                {
+					foreach (TypeDefinition ntd in td.NestedTypes)
+                    {
+						mttup nestate;
+						CheckThisType(ntd, out nestate);
+						state.ishk = (nestate.ishk) ? true : state.ishk;
+						state.ispt = (nestate.ispt) ? true : state.ispt;
+                    }
+                }
+            }
+
+			public struct mttup
+            {
+                public mttup(bool hk, bool pt)
+                {
+					ishk = hk;
+					ispt = pt;
+                }
+				public bool ishk;
+				public bool ispt;
+            }
 			private string ModPath;
 			private ModData AssociatedModData;
 			public bool isValid;
@@ -423,14 +472,14 @@ namespace BlepOutLinx
 
 			public void Enable()
 			{
-				if (AssociatedModData is MixedModData) return;
+				if (AssociatedModData is InvalidModData) return;
 				if (enabled) return;
 				File.Copy(AssociatedModData.OrigPath, AssociatedModData.TarFolder + AssociatedModData.TarName);
 			}
 
 			public void Disable()
 			{
-				if (AssociatedModData is MixedModData) return;
+				if (AssociatedModData is InvalidModData) return;
 				if (!enabled) return;
 				File.Delete(AssociatedModData.TarFolder + AssociatedModData.TarName);
 			}
@@ -516,9 +565,9 @@ namespace BlepOutLinx
 			}
 		}
 
-		private class MixedModData : ModData
+		private class InvalidModData : ModData
 		{
-			public MixedModData(string path) : base(path)
+			public InvalidModData(string path) : base(path)
 			{
 
 			}
@@ -629,5 +678,14 @@ namespace BlepOutLinx
 		{
 			SomethingChanged();
 		}
-	}
+
+        private void btn_Help_Click(object sender, EventArgs e)
+        {
+			BlepOutIn.InfoWindow inw;
+			inw = new BlepOutIn.InfoWindow();
+			this.AddOwnedForm(inw);
+			inw.Show();
+        }
+
+    }
 }

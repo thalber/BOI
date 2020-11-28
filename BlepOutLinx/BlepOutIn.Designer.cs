@@ -39,11 +39,12 @@
             this.lblProcessStatus = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.labelHead = new System.Windows.Forms.Label();
-            this.labelDesc = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.rwp = new System.Diagnostics.Process();
             this.fsw_modsfolder = new System.IO.FileSystemWatcher();
             this.fsw_pluginsfolder = new System.IO.FileSystemWatcher();
+            this.btn_Help = new System.Windows.Forms.Button();
+            this.labelDesc = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -113,8 +114,8 @@
             // tableLayoutPanel2
             // 
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.Controls.Add(this.labelHead, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.labelDesc, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.labelHead, 0, 0);
             this.tableLayoutPanel2.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
@@ -123,16 +124,11 @@
             resources.ApplyResources(this.labelHead, "labelHead");
             this.labelHead.Name = "labelHead";
             // 
-            // labelDesc
-            // 
-            resources.ApplyResources(this.labelDesc, "labelDesc");
-            this.labelDesc.Name = "labelDesc";
-            // 
             // tableLayoutPanel3
             // 
             resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
-            this.tableLayoutPanel3.Controls.Add(this.Modlist, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel1, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.Modlist, 0, 3);
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             // 
@@ -162,11 +158,24 @@
             this.fsw_pluginsfolder.Created += new System.IO.FileSystemEventHandler(this.fsw_plugins_Changed);
             this.fsw_pluginsfolder.Deleted += new System.IO.FileSystemEventHandler(this.fsw_plugins_Changed);
             // 
+            // btn_Help
+            // 
+            resources.ApplyResources(this.btn_Help, "btn_Help");
+            this.btn_Help.Name = "btn_Help";
+            this.btn_Help.UseVisualStyleBackColor = true;
+            this.btn_Help.Click += new System.EventHandler(this.btn_Help_Click);
+            // 
+            // labelDesc
+            // 
+            resources.ApplyResources(this.labelDesc, "labelDesc");
+            this.labelDesc.Name = "labelDesc";
+            // 
             // BlepOut
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.Controls.Add(this.btn_Help);
             this.Controls.Add(this.tableLayoutPanel3);
             this.MaximizeBox = false;
             this.Name = "BlepOut";
@@ -181,6 +190,7 @@
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fsw_modsfolder)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fsw_pluginsfolder)).EndInit();
@@ -195,7 +205,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label labelHead;
-        private System.Windows.Forms.Label labelDesc;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button btnLaunch;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
@@ -204,7 +213,8 @@
         private System.Diagnostics.Process rwp;
         private System.IO.FileSystemWatcher fsw_modsfolder;
         private System.IO.FileSystemWatcher fsw_pluginsfolder;
-        
+        private System.Windows.Forms.Button btn_Help;
+        private System.Windows.Forms.Label labelDesc;
     }
 }
 

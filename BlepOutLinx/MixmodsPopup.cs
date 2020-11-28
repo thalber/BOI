@@ -1,17 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace BlepOutIn
 {
-    public partial class PubstuntInfoPopup : Form
+    public partial class MixmodsPopup : Form
     {
-        public PubstuntInfoPopup()
+        public MixmodsPopup(List<string> slist)
         {
-            
             InitializeComponent();
+            foreach (string s in slist)
+            {
+                listView.Items.Add(s);
+            }
+            
         }
-
         
+
         private void btnExit_Click(object sender, EventArgs e)
         {
             
