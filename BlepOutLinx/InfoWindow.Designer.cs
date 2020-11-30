@@ -29,58 +29,65 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InfoWindow));
-            this.Links = new System.Windows.Forms.TabControl();
+            this.TabControl = new System.Windows.Forms.TabControl();
             this.tabInfo = new System.Windows.Forms.TabPage();
-            this.tabTypes = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.tabLinks = new System.Windows.Forms.TabPage();
+            this.tabTroubles = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.tabTypes = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.tabLinks = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label11 = new System.Windows.Forms.Label();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.label16 = new System.Windows.Forms.Label();
+            this.linkLabelBep = new System.Windows.Forms.LinkLabel();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.linkLabelDiscord = new System.Windows.Forms.LinkLabel();
             this.linkLabelWiki = new System.Windows.Forms.LinkLabel();
             this.linkLabelRDB = new System.Windows.Forms.LinkLabel();
             this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label15 = new System.Windows.Forms.Label();
-            this.linkLabelBep = new System.Windows.Forms.LinkLabel();
-            this.label16 = new System.Windows.Forms.Label();
-            this.Links.SuspendLayout();
+            this.TabControl.SuspendLayout();
             this.tabInfo.SuspendLayout();
-            this.tabTypes.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tabLinks.SuspendLayout();
+            this.tabTroubles.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
+            this.tabTypes.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.tabLinks.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
-            // Links
+            // TabControl
             // 
-            this.Links.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.TabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Links.Controls.Add(this.tabInfo);
-            this.Links.Controls.Add(this.tabTypes);
-            this.Links.Controls.Add(this.tabLinks);
-            this.Links.Location = new System.Drawing.Point(12, 12);
-            this.Links.Name = "Links";
-            this.Links.SelectedIndex = 0;
-            this.Links.Size = new System.Drawing.Size(370, 332);
-            this.Links.TabIndex = 0;
+            this.TabControl.Controls.Add(this.tabInfo);
+            this.TabControl.Controls.Add(this.tabTroubles);
+            this.TabControl.Controls.Add(this.tabTypes);
+            this.TabControl.Controls.Add(this.tabLinks);
+            this.TabControl.Location = new System.Drawing.Point(12, 12);
+            this.TabControl.Name = "TabControl";
+            this.TabControl.SelectedIndex = 0;
+            this.TabControl.Size = new System.Drawing.Size(370, 332);
+            this.TabControl.TabIndex = 0;
             // 
             // tabInfo
             // 
@@ -92,18 +99,6 @@
             this.tabInfo.TabIndex = 0;
             this.tabInfo.Text = "Information";
             this.tabInfo.UseVisualStyleBackColor = true;
-            // 
-            // tabTypes
-            // 
-            this.tabTypes.AutoScroll = true;
-            this.tabTypes.Controls.Add(this.tableLayoutPanel2);
-            this.tabTypes.Location = new System.Drawing.Point(4, 22);
-            this.tabTypes.Name = "tabTypes";
-            this.tabTypes.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTypes.Size = new System.Drawing.Size(362, 306);
-            this.tabTypes.TabIndex = 1;
-            this.tabTypes.Text = "Mod types";
-            this.tabTypes.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
             // 
@@ -148,17 +143,71 @@
             this.label2.TabIndex = 1;
             this.label2.Text = resources.GetString("label2.Text");
             // 
-            // tabLinks
+            // tabTroubles
             // 
-            this.tabLinks.AutoScroll = true;
-            this.tabLinks.Controls.Add(this.tableLayoutPanel3);
-            this.tabLinks.Location = new System.Drawing.Point(4, 22);
-            this.tabLinks.Name = "tabLinks";
-            this.tabLinks.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLinks.Size = new System.Drawing.Size(362, 306);
-            this.tabLinks.TabIndex = 2;
-            this.tabLinks.Text = "Links";
-            this.tabLinks.UseVisualStyleBackColor = true;
+            this.tabTroubles.Controls.Add(this.tableLayoutPanel5);
+            this.tabTroubles.Location = new System.Drawing.Point(4, 22);
+            this.tabTroubles.Name = "tabTroubles";
+            this.tabTroubles.Padding = new System.Windows.Forms.Padding(3);
+            this.tabTroubles.Size = new System.Drawing.Size(362, 306);
+            this.tabTroubles.TabIndex = 3;
+            this.tabTroubles.Text = "Troubleshooting";
+            this.tabTroubles.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.ColumnCount = 1;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel5.Controls.Add(this.label17, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.label18, 0, 1);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(6, 6);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 3;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(350, 294);
+            this.tableLayoutPanel5.TabIndex = 0;
+            // 
+            // label17
+            // 
+            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label17.Location = new System.Drawing.Point(3, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(344, 20);
+            this.label17.TabIndex = 1;
+            this.label17.Text = "GENERAL INFO";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label18
+            // 
+            this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label18.Location = new System.Drawing.Point(3, 20);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(344, 20);
+            this.label18.TabIndex = 2;
+            this.label18.Text = "My stuff no work halp!1!!!";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // tabTypes
+            // 
+            this.tabTypes.AutoScroll = true;
+            this.tabTypes.Controls.Add(this.tableLayoutPanel2);
+            this.tabTypes.Location = new System.Drawing.Point(4, 22);
+            this.tabTypes.Name = "tabTypes";
+            this.tabTypes.Padding = new System.Windows.Forms.Padding(3);
+            this.tabTypes.Size = new System.Drawing.Size(362, 306);
+            this.tabTypes.TabIndex = 1;
+            this.tabTypes.Text = "Mod types";
+            this.tabTypes.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel2
             // 
@@ -198,28 +247,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label9.Location = new System.Drawing.Point(76, 138);
+            this.label9.Location = new System.Drawing.Point(76, 125);
             this.label9.Margin = new System.Windows.Forms.Padding(0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(268, 78);
             this.label9.TabIndex = 6;
             this.label9.Text = resources.GetString("label9.Text");
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label8
-            // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.Location = new System.Drawing.Point(76, 72);
-            this.label8.Margin = new System.Windows.Forms.Padding(0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(268, 65);
-            this.label8.TabIndex = 5;
-            this.label8.Text = resources.GetString("label8.Text");
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label7
             // 
@@ -247,9 +281,9 @@
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label4.Location = new System.Drawing.Point(9, 72);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(63, 65);
+            this.label4.Size = new System.Drawing.Size(63, 52);
             this.label4.TabIndex = 1;
-            this.label4.Text = "Hook";
+            this.label4.Text = "Partmod";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label5
@@ -259,7 +293,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(9, 138);
+            this.label5.Location = new System.Drawing.Point(9, 125);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(63, 78);
             this.label5.TabIndex = 2;
@@ -273,9 +307,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(9, 217);
+            this.label6.Location = new System.Drawing.Point(9, 204);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(63, 71);
+            this.label6.Size = new System.Drawing.Size(63, 84);
             this.label6.TabIndex = 3;
             this.label6.Text = "Invalid";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -301,15 +335,44 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label10.Location = new System.Drawing.Point(76, 217);
+            this.label10.Location = new System.Drawing.Point(76, 204);
             this.label10.Margin = new System.Windows.Forms.Padding(0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(268, 71);
+            this.label10.Size = new System.Drawing.Size(268, 84);
             this.label10.TabIndex = 7;
             this.label10.Text = "These mods will NOT function correctly with BepInEx, and BOI will delete them fro" +
     "m plugins and monomod folders on sight.\r\nDon\'t go anywhere and can not be enable" +
     "d.";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label8.Location = new System.Drawing.Point(76, 72);
+            this.label8.Margin = new System.Windows.Forms.Padding(0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(268, 52);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "Partiality mods, usually utilize MonoMod hooking tech. Most of the time do not di" +
+    "rectly conflict with each other.\r\nGo into BepInEx\\Plugins with their original na" +
+    "mes when enabled.";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // tabLinks
+            // 
+            this.tabLinks.AutoScroll = true;
+            this.tabLinks.Controls.Add(this.tableLayoutPanel3);
+            this.tabLinks.Location = new System.Drawing.Point(4, 22);
+            this.tabLinks.Name = "tabLinks";
+            this.tabLinks.Padding = new System.Windows.Forms.Padding(3);
+            this.tabLinks.Size = new System.Drawing.Size(362, 306);
+            this.tabLinks.TabIndex = 2;
+            this.tabLinks.Text = "Links";
+            this.tabLinks.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel3
             // 
@@ -367,22 +430,62 @@
             this.tableLayoutPanel4.Size = new System.Drawing.Size(344, 268);
             this.tableLayoutPanel4.TabIndex = 2;
             // 
-            // linkLabel1
+            // label16
             // 
-            this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.linkLabel1.Location = new System.Drawing.Point(3, 181);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(96, 39);
-            this.linkLabel1.TabIndex = 0;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = ":petthebee:";
-            this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.linkLabel1.Visible = false;
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(105, 132);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(236, 49);
+            this.label16.TabIndex = 9;
+            this.label16.Text = "BepInEx loader with a magical Partiality wrapper, provided by almighty Bee (Googl" +
+    "e Drive download).";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // linkLabelBep
+            // 
+            this.linkLabelBep.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkLabelBep.AutoSize = true;
+            this.linkLabelBep.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.linkLabelBep.Location = new System.Drawing.Point(3, 132);
+            this.linkLabelBep.Name = "linkLabelBep";
+            this.linkLabelBep.Size = new System.Drawing.Size(96, 49);
+            this.linkLabelBep.TabIndex = 8;
+            this.linkLabelBep.TabStop = true;
+            this.linkLabelBep.Text = "BepInEx 4 RW";
+            this.linkLabelBep.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.linkLabelBep.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelBep_LinkClicked);
+            // 
+            // label14
+            // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(105, 88);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(236, 44);
+            this.label14.TabIndex = 6;
+            this.label14.Text = "If you want to start making mods for Rain World, this is your place to start.";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label13
+            // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(105, 44);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(236, 44);
+            this.label13.TabIndex = 5;
+            this.label13.Text = "An island in an ocean of obscurity. Come on in if you haven\'t been there already." +
+    "";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // linkLabelDiscord
             // 
@@ -446,32 +549,22 @@
     "";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label13
+            // linkLabel1
             // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(105, 44);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(236, 44);
-            this.label13.TabIndex = 5;
-            this.label13.Text = "An island in an ocean of obscurity. Come on in if you haven\'t been there already." +
-    "";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label14
-            // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(105, 88);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(236, 44);
-            this.label14.TabIndex = 6;
-            this.label14.Text = "If you want to start making mods for Rain World, this is your place to start.";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.linkLabel1.Location = new System.Drawing.Point(3, 181);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(96, 39);
+            this.linkLabel1.TabIndex = 0;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = ":petthebee:";
+            this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.linkLabel1.Visible = false;
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // label15
             // 
@@ -487,55 +580,33 @@
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label15.Visible = false;
             // 
-            // linkLabelBep
-            // 
-            this.linkLabelBep.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkLabelBep.AutoSize = true;
-            this.linkLabelBep.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.linkLabelBep.Location = new System.Drawing.Point(3, 132);
-            this.linkLabelBep.Name = "linkLabelBep";
-            this.linkLabelBep.Size = new System.Drawing.Size(96, 49);
-            this.linkLabelBep.TabIndex = 8;
-            this.linkLabelBep.TabStop = true;
-            this.linkLabelBep.Text = "BepInEx 4 RW";
-            this.linkLabelBep.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.linkLabelBep.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelBep_LinkClicked);
-            // 
-            // label16
-            // 
-            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(105, 132);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(236, 49);
-            this.label16.TabIndex = 9;
-            this.label16.Text = "BepInEx loader with a magical Partiality wrapper, provided by almighty Bee (Googl" +
-    "e Drive download).";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // InfoWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(394, 356);
-            this.Controls.Add(this.Links);
+            this.Controls.Add(this.TabControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(410, 395);
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(410, 395);
             this.Name = "InfoWindow";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Help & Info";
-            this.Links.ResumeLayout(false);
+            this.TopMost = true;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.InfoWindow_FormClosed);
+            this.TabControl.ResumeLayout(false);
             this.tabInfo.ResumeLayout(false);
-            this.tabTypes.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.tabLinks.ResumeLayout(false);
+            this.tabTroubles.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
+            this.tabTypes.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.tabLinks.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
@@ -546,7 +617,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl Links;
+        private System.Windows.Forms.TabControl TabControl;
         private System.Windows.Forms.TabPage tabInfo;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label1;
@@ -575,5 +646,9 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.LinkLabel linkLabelBep;
+        private System.Windows.Forms.TabPage tabTroubles;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
     }
 }

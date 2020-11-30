@@ -38,13 +38,15 @@
             this.lblPathStatus = new System.Windows.Forms.Label();
             this.lblProcessStatus = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelDesc = new System.Windows.Forms.Label();
             this.labelHead = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.rwp = new System.Diagnostics.Process();
             this.fsw_modsfolder = new System.IO.FileSystemWatcher();
             this.fsw_pluginsfolder = new System.IO.FileSystemWatcher();
             this.btn_Help = new System.Windows.Forms.Button();
-            this.labelDesc = new System.Windows.Forms.Label();
+            this.buttonUprootPart = new System.Windows.Forms.Button();
+            this.buttonClearMeta = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -73,7 +75,7 @@
             this.Modlist.FormattingEnabled = true;
             this.Modlist.Name = "Modlist";
             this.Modlist.Sorted = true;
-            this.Modlist.SelectedIndexChanged += new System.EventHandler(this.checklistModlist_SelectedIndexChanged);
+            this.Modlist.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.Modlist_ItemCheck);
             // 
             // tableLayoutPanel1
             // 
@@ -118,6 +120,11 @@
             this.tableLayoutPanel2.Controls.Add(this.labelHead, 0, 0);
             this.tableLayoutPanel2.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            // 
+            // labelDesc
+            // 
+            resources.ApplyResources(this.labelDesc, "labelDesc");
+            this.labelDesc.Name = "labelDesc";
             // 
             // labelHead
             // 
@@ -165,16 +172,27 @@
             this.btn_Help.UseVisualStyleBackColor = true;
             this.btn_Help.Click += new System.EventHandler(this.btn_Help_Click);
             // 
-            // labelDesc
+            // buttonUprootPart
             // 
-            resources.ApplyResources(this.labelDesc, "labelDesc");
-            this.labelDesc.Name = "labelDesc";
+            resources.ApplyResources(this.buttonUprootPart, "buttonUprootPart");
+            this.buttonUprootPart.Name = "buttonUprootPart";
+            this.buttonUprootPart.UseVisualStyleBackColor = true;
+            this.buttonUprootPart.Click += new System.EventHandler(this.buttonUprootPart_Click);
+            // 
+            // buttonClearMeta
+            // 
+            resources.ApplyResources(this.buttonClearMeta, "buttonClearMeta");
+            this.buttonClearMeta.Name = "buttonClearMeta";
+            this.buttonClearMeta.UseVisualStyleBackColor = true;
+            this.buttonClearMeta.Click += new System.EventHandler(this.buttonClearMeta_Click);
             // 
             // BlepOut
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.Controls.Add(this.buttonClearMeta);
+            this.Controls.Add(this.buttonUprootPart);
             this.Controls.Add(this.btn_Help);
             this.Controls.Add(this.tableLayoutPanel3);
             this.MaximizeBox = false;
@@ -215,6 +233,8 @@
         private System.IO.FileSystemWatcher fsw_pluginsfolder;
         private System.Windows.Forms.Button btn_Help;
         private System.Windows.Forms.Label labelDesc;
+        private System.Windows.Forms.Button buttonUprootPart;
+        private System.Windows.Forms.Button buttonClearMeta;
     }
 }
 

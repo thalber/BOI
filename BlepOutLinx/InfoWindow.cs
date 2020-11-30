@@ -4,10 +4,13 @@ namespace BlepOutIn
 {
     public partial class InfoWindow : Form
     {
-        public InfoWindow()
+        public InfoWindow(BlepOutLinx.BlepOut mainform)
         {
             InitializeComponent();
+            mf = mainform;
+            mf.Enabled = false;
         }
+        private BlepOutLinx.BlepOut mf;
         private int hmm = 0;
 
         private void linkLabelRDB_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -43,6 +46,11 @@ namespace BlepOutIn
         private void linkLabelBep_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://drive.google.com/file/d/1WcCCsS3ABBdO1aX-iJGeqeE07YE4Qv88/view");
+        }
+
+        private void InfoWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            mf.Enabled = true;
         }
     }
 }

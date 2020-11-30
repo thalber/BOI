@@ -124,18 +124,14 @@ This tool only recognizes Rain World folder as valid if BepInEx is installed. Al
 
 Mod lists are fetched when loading and refreshed every time the window is focused.
 Mods are also brought up to date both ways, so neither AutoUpdate nor manual updates will cause conflicts.
-Mods that do not work with BepInEx can not be enabled and BOI notifies you when it does so.
+Mods that do not work with BepInEx are automatically removed from active folders (BOI notifies you when it does so) and can not be enabled again.
 Symlinks are ignored entirely.
 
-See "Mod types" tab for more info on different mod types, and "Links" tab for some potentially useful directions.</value>
+See "Troubleshooting" for help with common issues, "Mod types" tab for more info on different mod types, and "Links" tab for some potentially useful directions.</value>
   </data>
   <data name="label9.Text" xml:space="preserve">
     <value>Mods that would naturally patch Assembly-CSharp.dll file of the game. If two patches edit one method, they are not compatible; INCOMPATIBILITIES ARE NOT DETECTED BY BOI.
 Go into BepInEx\monomod and get renamed in a specific way when enabled.</value>
-  </data>
-  <data name="label8.Text" xml:space="preserve">
-    <value>Mods that utilize MonoMod/Partiality hooking tech. MonoMod's base hooks are not recognized, since no publicly available mods use exclusively that.
-Go into BepInEx\Plugins with their original names when enabled.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
