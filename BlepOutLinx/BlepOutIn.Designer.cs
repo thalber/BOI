@@ -201,6 +201,7 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Activated += new System.EventHandler(this.BlepOut_Activated);
             this.Deactivate += new System.EventHandler(this.BlepOut_Deactivate);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BlepOut_FormClosing);
             this.Enter += new System.EventHandler(this.BlepOut_Activated);
             this.Leave += new System.EventHandler(this.BlepOut_Deactivate);
             this.tableLayoutPanel1.ResumeLayout(false);

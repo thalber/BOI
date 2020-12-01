@@ -92,6 +92,7 @@
     <Compile Include="MixmodsPopup.Designer.cs">
       <DependentUpon>MixmodsPopup.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModDataClasses.cs" />
     <Compile Include="PartYeet.cs">
       <SubType>Form</SubType>
     </Compile>

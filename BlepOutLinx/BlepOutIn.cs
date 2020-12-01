@@ -10,9 +10,13 @@ using System.Security;
 namespace BlepOutLinx
 {
 	public partial class BlepOut : Form
-	{
+    {
+
+		TextWriterTraceListener tr = new TextWriterTraceListener(File.CreateText("BOILOG.txt"));
 		public BlepOut()
 		{
+			Debug.Listeners.Add(tr);
+			Debug.WriteLine("BOI starting " + DateTime.Now);
 			InitializeComponent();
 			targetFiles = new List<ModRelay>();
 			pluginBlacklist = new List<string>();
@@ -52,27 +56,36 @@ namespace BlepOutLinx
 					CreateConfig();
 					RootPath = string.Empty;
 				}
+				Debug.WriteLine("Config retrieved. Root path: [" + RootPath + "].");
 			}
 			else
 			{
 				CreateConfig();
+				Debug.WriteLine("Config file not found, creating an empty one instead.");
 				RootPath = string.Empty;
 			}
+			
 		}
 		private void CreateConfig()
 		{
 			StreamWriter sw = File.CreateText(cfgpath);
 			sw.WriteLine(string.Empty);
 			sw.Close();
+			sw.Dispose();
+			Debug.WriteLine("Empty config file created.");
 		}
 		private void SaveConfig()
 		{
 			StreamWriter sw = File.CreateText(cfgpath);
 			sw.WriteLine(RootPath);
 			sw.Close();
+			sw.Dispose();
+			Debug.WriteLine("Config file updated, new target path: [" + RootPath + "].");
 		}
 		private void Setup()
 		{
+			Debug.WriteLine("Path valid, starting setup.");
+			Debug.Indent();
 			PubstuntFound = false;
 			MixmodsFound = false;
 			metafiletracker = false;
@@ -80,12 +93,13 @@ namespace BlepOutLinx
 			Modlist.Items.Clear();
 			outrmixmods.Clear();
 			targetFiles.Clear();
+
 			Rootout();
 			PrepareModsFolder();
 			ResolveBlacklists();
 			RetrieveAllDlls();
 			CompileModList();
-			RefreshList();
+			ApplyModlist();
 			Modlist.Enabled = true;
 			btnLaunch.Enabled = true;
 			TargetSelect.SelectedPath = RootPath;
@@ -104,6 +118,7 @@ namespace BlepOutLinx
             }
 			ReadyForRefresh = true;
 			buttonClearMeta.Visible = metafiletracker;
+			Debug.Unindent();
 		}
 
 		private void ResolveBlacklists()
@@ -122,19 +137,27 @@ namespace BlepOutLinx
 				var fi = new FileInfo(s);
 				if (fi.Extension == ".dll" && !fi.Attributes.HasFlag(FileAttributes.ReparsePoint))
 				{
-					if (s.Contains("PublicityStunt"))
+					if (AintThisPS(s))
 					{
-						File.Delete(s);
 						PubstuntFound = true;
+						Debug.WriteLine("Located PublicityStunt in active Plugins folder, removing.");
+						File.Delete(s);
 					}
 					else
 					{
 						ModRelay.ModType mt = ModRelay.GetModType(s);
-						if (mt == ModRelay.ModType.Invalid)
+
+						if (mt != ModRelay.ModType.Patch && !patchBlacklist.Contains(s) && !fi.Attributes.HasFlag(FileAttributes.ReparsePoint))
                         {
-							MixmodsFound = true;
-							outrmixmods.Add(new FileInfo(s).Name);
-							File.Delete(s);
+							Debug.WriteLine("Found a misplaced mod in Patches folder: " + fi.Name + "; Type: " + mt.ToString());
+							if (File.Exists(ModFolder + PtModData.GiveMeBackMyName(fi.Name)))
+                            {
+								File.Delete(s);
+                            }
+                            else
+                            {
+								File.Move(s, ModFolder + PtModData.GiveMeBackMyName(fi.Name));
+                            }
                         }
 					}
 				}
@@ -142,22 +165,32 @@ namespace BlepOutLinx
 			foreach (string s in pluginfoldercontents)
 			{
 				var fi = new FileInfo(s);
-				if (fi.Extension == ".dll" && !fi.Attributes.HasFlag(FileAttributes.ReparsePoint))
+				if (fi.Extension == ".dll" && !pluginBlacklist.Contains(s) && !fi.Attributes.HasFlag(FileAttributes.ReparsePoint))
 				{
 
-					if (fi.Name.Contains("PublicityStunt"))
+					if (AintThisPS(s))
 					{
 						File.Delete(s);
+						Debug.WriteLine("Located PublicityStunt in active Plugins folder, removing.");
 						PubstuntFound = true;
 					}
 					else
                     {
 						ModRelay.ModType mt = ModRelay.GetModType(s);
-						if (mt == ModRelay.ModType.Invalid)
-						{
-							MixmodsFound = true;
-							outrmixmods.Add(new FileInfo(s).Name);
-							File.Delete(s);
+						
+						if (mt == ModRelay.ModType.Patch || mt == ModRelay.ModType.Invalid)
+                        {
+							Debug.WriteLine("Found a misplaced mod in Plugins folder: " + fi.Name + "; Type: " + mt.ToString());
+							if (File.Exists(ModFolder + PtModData.GiveMeBackMyName(fi.Name)))
+							{
+								File.Delete(s);
+								Debug.WriteLine("Duplicate exists in Mods folder, deleting.");
+							}
+							else
+							{
+								Debug.WriteLine("Moving to Mods folder.");
+								File.Move(s, ModFolder + PtModData.GiveMeBackMyName(fi.Name));
+							}
 						}
 					}						
 				}
@@ -168,6 +201,7 @@ namespace BlepOutLinx
 			metafiletracker = false;
 			if (!Directory.Exists(ModFolder))
 			{
+				Debug.WriteLine("Mods folder not found, creating.");
 				Directory.CreateDirectory(ModFolder);
 			}
 			string[] modfldcontents = Directory.GetFiles(ModFolder);
@@ -178,8 +212,13 @@ namespace BlepOutLinx
                 {
 					metafiletracker = true;
                 }
+				Debug.WriteLineIf(metafiletracker, "Found modhash/modmeta files in mods folder.");
             }
 		}
+		
+		//
+		//blacklist stuff
+		//
 		private void RetrieveHkBlacklist()
 		{
 			if (File.Exists(hkblacklistpath))
@@ -195,16 +234,22 @@ namespace BlepOutLinx
 				CreateHkBlacklist();
 				pluginBlacklist.Add("LogFix.dll");
 			}
+			Debug.WriteLine("Plugin folder blacklist contents: ");
+			Debug.Indent();
+			foreach(string s in pluginBlacklist)
+            {
+				Debug.WriteLine(new FileInfo(s).Name);
+            }
+			Debug.Unindent();
 		}
-		
-		//
-		//blacklist stuff
-		//
 		private void CreateHkBlacklist()
 		{
+			Debug.WriteLine("Creating new plugin blacklist file.");
 			StreamWriter sw = File.CreateText(hkblacklistpath);
 			sw.WriteLine("LogFix.dll");
 			sw.Close();
+			sw.Dispose();
+
 		}
 		private void RetrievePtBlacklist()
 		{
@@ -221,6 +266,13 @@ namespace BlepOutLinx
 				CreatePtBlacklist();
 				patchBlacklist.Add("Assembly-CSharp.PatchNothing.mm.dll");
 			}
+			Debug.WriteLine("Patch folder blacklist contents: ");
+			Debug.Indent();
+			foreach (string s in patchBlacklist)
+			{
+				Debug.WriteLine(new FileInfo(s).Name);
+			}
+			Debug.Unindent();
 		}
 		private void CreatePtBlacklist()
 		{
@@ -245,41 +297,54 @@ namespace BlepOutLinx
 					if (File.Exists(pathtomods(fi)))
 					{
 						try
-						{
+						{	
 							if (fi.CreationTime > new FileInfo(pathtomods(fi)).CreationTime)
 							{
 								File.Delete(pathtomods(fi));
 								File.Copy(s, pathtomods(fi));
+								Debug.WriteLine("Updated mod: " + fi.Name + " from Plugins to Mods folder.");
 							}
 							if (fi.CreationTime < new FileInfo(pathtomods(fi)).CreationTime)
 							{
 								File.Delete(s);
 								File.Copy(pathtomods(fi), s);
+								Debug.WriteLine("Updated mod: " + fi.Name + " from Mods folder to Plugins");
 							}
 						}
 						catch
 						{
-							//Console.WriteLine("Failed ")
+
 						}
 
 					}
-					if (!File.Exists(pathtomods(fi))) File.Copy(s, pathtomods(fi));
+					else
+                    {
+						File.Copy(s, pathtomods(fi));
+						Debug.WriteLine(fi.Name + " from Plugins does not have a counterpart in Mods, copying.");
+                    }
+
 				}
 
 			}
-
 			string[] patchFolderContents = Directory.GetFiles(PatchesFolder);
 			foreach (string s in patchFolderContents)
 			{
 				var fi = new FileInfo(s);
-				if (fi.Extension == ".dll" && !patchBlacklist.Contains(fi.Name) && !fi.Attributes.HasFlag(FileAttributes.ReparsePoint) && !File.Exists(ModFolder + PtModData.GiveMeBackMyName(fi.Name)))
+				if (fi.Extension == ".dll" && !patchBlacklist.Contains(fi.Name) && !fi.Attributes.HasFlag(FileAttributes.ReparsePoint))
 				{
-					File.Copy(s, ModFolder + PtModData.GiveMeBackMyName(fi.Name));
+					if (!File.Exists(ModFolder + PtModData.GiveMeBackMyName(fi.Name)))
+                    {
+						File.Copy(s, ModFolder + PtModData.GiveMeBackMyName(fi.Name));
+						Debug.WriteLine(fi.Name + "from patch folder does not have a counterpart in Mods, copying");
+                    }
+					else if (fi.LastWriteTime < new FileInfo(ModFolder + PtModData.GiveMeBackMyName(fi.Name)).LastWriteTime)
+                    {
+						File.Delete(s);
+						File.Copy(ModFolder + PtModData.GiveMeBackMyName(fi.Name), s);
+						Debug.WriteLine(fi.Name + "from Patches folder brought up to date.");
+                    }
 				}
 			}
-
-
-
 			string pathtomods(FileInfo fi)
 			{
 				return ModFolder + fi.Name;
@@ -313,8 +378,11 @@ namespace BlepOutLinx
 		}
 
 		//apply/unapply all mods needed
-		private void RefreshList()
+		//overload for autorefreshes
+		private void ApplyModlist()
 		{
+			Debug.WriteLine("Applying modlist.");
+			Debug.Indent();
 			for (int i = 0; i < Modlist.Items.Count; i++)
 			{
 				if (Modlist.Items[i] is ModRelay)
@@ -325,12 +393,16 @@ namespace BlepOutLinx
 						mr.Enable();
 					}
 					else mr.Disable();
+					Debug.WriteLine(mr.AssociatedModData.DisplayedName + " : " + ((mr.enabled) ? "ON" : "OFF"));
 				}
+				
 			}
+			Debug.Unindent();
 		}
-
-		private void RefreshList(CheckState[] cst)
+		//overload for manual checks/unchecks
+		private void ApplyModlist(CheckState[] cst)
         {
+			Debug.WriteLine("Applying modlist from manual check.");
 			if (cst != null && cst.Length == Modlist.Items.Count)
             {
 				for (int i = 0; i < cst.Length; i++)
@@ -369,6 +441,11 @@ namespace BlepOutLinx
 			get { return BOIpath + @"cfg.txt"; }
 		}
 
+		private bool AintThisPS(string path)
+        {
+			return (new FileInfo(path).Name.Contains("PublicityStunt"));
+        }
+
 		private List<string> patchBlacklist;
 		private List<string> pluginBlacklist;
 		private List<string> outrmixmods;
@@ -399,229 +476,6 @@ namespace BlepOutLinx
 			get { return RootPath + @"\BepInEx\monomod\"; }
 		}
 
-		private class ModRelay
-		{
-			public ModRelay(string path)
-			{
-				ModPath = path;
-				this.isValid = !ModData.AbsolutelyIgnore(ModPath);
-				if (isValid)
-				{
-					if (new FileInfo(path).Name.Contains("PublicityStunt"))
-                    {
-						this.AssociatedModData = new InvalidModData(path);
-						return;
-                    }
-					ModType mt = GetModType(path);
-					switch (mt)
-					{
-						case ModType.Unknown:
-							this.AssociatedModData = new ModData(path);
-							this.MyType = ModType.Unknown;
-							break;
-						case ModType.Patch:
-							this.AssociatedModData = new PtModData(path);
-							this.MyType = ModType.Patch;
-							break;
-						case ModType.Partmod:
-							this.AssociatedModData = new HkModData(path);
-							this.MyType = ModType.Partmod;
-							break;
-						case ModType.Invalid:
-							this.AssociatedModData = new InvalidModData(path);
-							this.MyType = ModType.Invalid;
-							break;
-					}
-
-				}
-			}
-
-			public static ModType GetModType(string path)
-			{
-				mttup ultstate = new mttup(false, false);
-				using (ModuleDefinition md = ModuleDefinition.ReadModule(path))
-				{
-					
-					foreach (TypeDefinition t in md.Types)
-					{
-						mttup tstate = new mttup(false, false);
-						CheckThisType(t, out tstate);
-						ultstate.ishk = (tstate.ishk) ? true : ultstate.ishk;
-						ultstate.ispt = (tstate.ispt) ? true : ultstate.ispt;
-					}
-					
-				}
-				if (ultstate.ishk && ultstate.ispt) return ModType.Invalid;
-				else if (ultstate.ishk && !ultstate.ispt) return ModType.Partmod;
-				else if (ultstate.ispt && !ultstate.ishk) return ModType.Patch;
-				else return ModType.Unknown;
-			}
-
-			private static void CheckThisType(TypeDefinition td, out mttup state)
-            {
-				state.ishk = false;
-				state.ispt = false;
-				if (td.BaseType != null && td.BaseType.Name == "PartialityMod") state.ishk = true;
-				if (td.HasCustomAttributes)
-                {
-					foreach (CustomAttribute catr in td.CustomAttributes)
-                    {
-						if (catr.AttributeType.Name == "MonoModPatch") state.ispt = true;
-                    }
-                }
-				if (td.HasNestedTypes)
-                {
-					foreach (TypeDefinition ntd in td.NestedTypes)
-                    {
-						mttup nestate;
-						CheckThisType(ntd, out nestate);
-						state.ishk = (nestate.ishk) ? true : state.ishk;
-						state.ispt = (nestate.ispt) ? true : state.ispt;
-                    }
-                }
-            }
-
-			public struct mttup
-            {
-                public mttup(bool hk, bool pt)
-                {
-					ishk = hk;
-					ispt = pt;
-                }
-				public bool ishk;
-				public bool ispt;
-            }
-			private string ModPath;
-			private ModData AssociatedModData;
-			public bool isValid;
-
-			public enum ModType
-			{
-				Patch,
-				Partmod,
-				Invalid,
-				Unknown
-			}
-			public ModType MyType;
-
-			public bool enabled
-			{
-				get { return AssociatedModData.Enabled; }
-			}
-
-			public void Enable()
-			{
-				if (AssociatedModData is InvalidModData) return;
-				if (enabled) return;
-				File.Copy(AssociatedModData.OrigPath, AssociatedModData.TarFolder + AssociatedModData.TarName);
-			}
-
-			public void Disable()
-			{
-				if (AssociatedModData is InvalidModData) return;
-				if (!enabled) return;
-				File.Delete(AssociatedModData.TarFolder + AssociatedModData.TarName);
-			}
-
-			public override string ToString()
-			{
-				return AssociatedModData.DisplayedName + " : " + this.MyType.ToString().ToUpper();
-			}
-		}
-
-		private class ModData
-		{
-			public ModData(string path)
-			{
-				this.OrigPath = path;
-
-			}
-			public virtual string TarName
-			{
-				get { return DisplayedName; }
-			}
-
-			public virtual string TarFolder
-			{
-				get { return RootPath + @"\BepInEx\Plugins\"; }
-			}
-			public string OrigPath;
-
-			public virtual bool Enabled
-			{
-				get { return (File.Exists(TarFolder + this.TarName)); }
-			}
-			public virtual string DisplayedName
-			{
-				get { return new FileInfo(OrigPath).Name; }
-			}
-			public static bool AbsolutelyIgnore(string tpath)
-			{
-				return (new FileInfo(tpath).Extension != @".dll" || new FileInfo(tpath).Attributes.HasFlag(FileAttributes.ReparsePoint));
-			}
-			public override string ToString()
-			{
-				return DisplayedName + " : UNKNOWN";
-			}
-		}
-
-		private class HkModData : ModData
-		{
-			public HkModData(string path) : base(path)
-			{
-
-			}
-
-			public override string ToString()
-			{
-				return DisplayedName + " : HOOK";
-			}
-		}
-
-		private class PtModData : ModData
-		{
-			public PtModData(string path) : base(path)
-			{
-
-			}
-
-			public override string TarName => "Assembly-CSharp." + DisplayedName.Replace(".dll", string.Empty) + ".mm.dll";
-
-			public override string TarFolder => RootPath + @"\BepInEx\Monomod\";
-
-			public static string GiveMeBackMyName(string partname)
-			{
-				string sl = partname.Replace("Assembly-CSharp.", string.Empty);
-				sl = sl.Replace(".mm.dll", ".dll");
-				return sl;
-			}
-
-			//public override bool Enabled => File.Exists(this.TarFolder + this.TarName);
-
-			public override string ToString()
-			{
-				return DisplayedName + " : PATCH";
-			}
-		}
-
-		private class InvalidModData : ModData
-		{
-			public InvalidModData(string path) : base(path)
-			{
-
-			}
-
-			public override bool Enabled => false;
-
-			public override string TarName => null;
-
-			public override string ToString()
-			{
-				return DisplayedName + ": INVALID";
-			}
-
-
-		}
 		private void buttonSelectPath_Click(object sender, EventArgs e)
 		{
 
@@ -640,21 +494,15 @@ namespace BlepOutLinx
 				TSbtnMode = true;
 			}
 		}
-		private void checklistModlist_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			RefreshList();
-		}
+
 		private void BlepOut_Activated(object sender, EventArgs e)
 		{
 			fsw_modsfolder.EnableRaisingEvents = false;
 			fsw_pluginsfolder.EnableRaisingEvents = false;
 			if (changetracker && ReadyForRefresh)
 			{
+				Debug.WriteLine("Changes detected in target folders, refreshing and reapplying modlist.");
 				UpdateTargetPath(RootPath);
-			}
-			if (IsMyPathCorrect)
-			{
-				RefreshList();
 			}
 			StatusUpdate();
 			buttonUprootPart.Visible = Directory.Exists(RootPath + @"\RainWorld_Data\Managed_backup");
@@ -675,6 +523,7 @@ namespace BlepOutLinx
 		public void SomethingChanged()
 		{
 			changetracker = true;
+			
 		}
 		private void StatusUpdate()
 		{
@@ -700,11 +549,13 @@ namespace BlepOutLinx
 				rw = new System.Diagnostics.Process();
 				rw.StartInfo.FileName = RootPath + @"\RainWorld.exe";
 				rw.Start();
+				Debug.WriteLine("Game launched.");
 			}
 
-			catch
+			catch (Exception ce)
 			{
-
+				Debug.WriteLine("Launch failed");
+				Debug.WriteLine(ce);
 			}
 			btnLaunch.Enabled = false;
 			StatusUpdate();
@@ -747,7 +598,15 @@ namespace BlepOutLinx
 				ich[i] = Modlist.GetItemCheckState(i);
             }
 			ich[e.Index] = e.NewValue;
-			RefreshList(ich);
+			Debug.WriteLine("Mod state about to change: " + (Modlist.Items[e.Index] as ModRelay).AssociatedModData.DisplayedName + "; Type: " + (Modlist.Items[e.Index] as ModRelay).MyType.ToString());
+			ApplyModlist(ich);
+			Debug.WriteLine("Resulting state: " + ((Modlist.Items[e.Index] as ModRelay).enabled ? "ON" : "OFF"));
 		}
+
+        private void BlepOut_FormClosing(object sender, FormClosingEventArgs e)
+        {
+			Debug.WriteLine("BOI shutting down. " + DateTime.Now);
+			Debug.Flush();
+        }
     }
 }
