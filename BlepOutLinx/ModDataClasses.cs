@@ -12,9 +12,10 @@ namespace BlepOutLinx
             this.isValid = !ModData.AbsolutelyIgnore(ModPath);
             if (isValid)
             {
-                if (new FileInfo(path).Name.Contains("PublicityStunt"))
+                if (BlepOut.AintThisPS(path))
                 {
                     this.AssociatedModData = new InvalidModData(path);
+                    this.MyType = ModType.Invalid;
                     return;
                 }
                 ModType mt = GetModType(path);

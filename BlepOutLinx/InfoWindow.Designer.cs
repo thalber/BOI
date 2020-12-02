@@ -194,7 +194,7 @@
             this.label9.Location = new System.Drawing.Point(79, 163);
             this.label9.Margin = new System.Windows.Forms.Padding(0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(267, 92);
+            this.label9.Size = new System.Drawing.Size(267, 88);
             this.label9.TabIndex = 6;
             this.label9.Text = resources.GetString("label9.Text");
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -238,7 +238,7 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label5.Location = new System.Drawing.Point(7, 163);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(68, 92);
+            this.label5.Size = new System.Drawing.Size(68, 88);
             this.label5.TabIndex = 2;
             this.label5.Text = "Patch";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -250,7 +250,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(7, 256);
+            this.label6.Location = new System.Drawing.Point(7, 252);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(68, 63);
             this.label6.TabIndex = 3;
@@ -277,7 +277,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label10.Location = new System.Drawing.Point(79, 256);
+            this.label10.Location = new System.Drawing.Point(79, 252);
             this.label10.Margin = new System.Windows.Forms.Padding(0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(267, 63);

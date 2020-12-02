@@ -441,9 +441,15 @@ namespace BlepOutLinx
 			get { return BOIpath + @"cfg.txt"; }
 		}
 
-		private bool AintThisPS(string path)
+		public static bool AintThisPS(string path)
         {
-			return (new FileInfo(path).Name.Contains("PublicityStunt"));
+			using (ModuleDefinition md = ModuleDefinition.ReadModule(path))
+            {
+
+                return (md.Assembly.FullName.Contains("PublicityStunt"));
+            }
+			
+			
         }
 
 		private List<string> patchBlacklist;
