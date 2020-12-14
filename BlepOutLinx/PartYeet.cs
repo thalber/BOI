@@ -26,7 +26,7 @@ namespace BlepOutIn
             buttonUproot.Visible = false;
             label2.Text = "Partiality Launcher successfully uninstalled, you're free to go!";
             buttonCancel.Text = "Back";
-
+            mf.buttonUprootPart.Visible = false;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

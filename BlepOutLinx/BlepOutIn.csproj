@@ -57,6 +57,9 @@
     <Reference Include="Mono.Cecil.Rocks, Version=0.11.3.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
       <HintPath>..\packages\Mono.Cecil.0.11.3\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -74,11 +77,18 @@
     <Compile Include="BlepOutIn.Designer.cs">
       <DependentUpon>BlepOutIn.cs</DependentUpon>
     </Compile>
+    <Compile Include="BoiCustom.cs" />
     <Compile Include="InfoWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="InfoWindow.Designer.cs">
       <DependentUpon>InfoWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InvalidModPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InvalidModPopup.Designer.cs">
+      <DependentUpon>InvalidModPopup.cs</DependentUpon>
     </Compile>
     <Compile Include="MetafilePurgeSuggestion.cs">
       <SubType>Form</SubType>
@@ -93,6 +103,12 @@
       <DependentUpon>MixmodsPopup.cs</DependentUpon>
     </Compile>
     <Compile Include="ModDataClasses.cs" />
+    <Compile Include="Options.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Options.Designer.cs">
+      <DependentUpon>Options.cs</DependentUpon>
+    </Compile>
     <Compile Include="PartYeet.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,11 +129,17 @@
     <EmbeddedResource Include="InfoWindow.resx">
       <DependentUpon>InfoWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InvalidModPopup.resx">
+      <DependentUpon>InvalidModPopup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MetafilePurgeSuggestion.resx">
       <DependentUpon>MetafilePurgeSuggestion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MixmodsPopup.resx">
       <DependentUpon>MixmodsPopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Options.resx">
+      <DependentUpon>Options.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PartYeet.resx">
       <DependentUpon>PartYeet.cs</DependentUpon>

@@ -42,17 +42,16 @@
             this.labelHead = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.rwp = new System.Diagnostics.Process();
-            this.fsw_modsfolder = new System.IO.FileSystemWatcher();
-            this.fsw_pluginsfolder = new System.IO.FileSystemWatcher();
             this.btn_Help = new System.Windows.Forms.Button();
             this.buttonUprootPart = new System.Windows.Forms.Button();
             this.buttonClearMeta = new System.Windows.Forms.Button();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonOption = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fsw_modsfolder)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fsw_pluginsfolder)).BeginInit();
+            this.tableLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSelectPath
@@ -149,22 +148,6 @@
             this.rwp.StartInfo.UserName = "";
             this.rwp.SynchronizingObject = this;
             // 
-            // fsw_modsfolder
-            // 
-            this.fsw_modsfolder.EnableRaisingEvents = true;
-            this.fsw_modsfolder.SynchronizingObject = this;
-            this.fsw_modsfolder.Changed += new System.IO.FileSystemEventHandler(this.fsw_plugins_Changed);
-            this.fsw_modsfolder.Created += new System.IO.FileSystemEventHandler(this.fsw_plugins_Changed);
-            this.fsw_modsfolder.Deleted += new System.IO.FileSystemEventHandler(this.fsw_plugins_Changed);
-            // 
-            // fsw_pluginsfolder
-            // 
-            this.fsw_pluginsfolder.EnableRaisingEvents = true;
-            this.fsw_pluginsfolder.SynchronizingObject = this;
-            this.fsw_pluginsfolder.Changed += new System.IO.FileSystemEventHandler(this.fsw_plugins_Changed);
-            this.fsw_pluginsfolder.Created += new System.IO.FileSystemEventHandler(this.fsw_plugins_Changed);
-            this.fsw_pluginsfolder.Deleted += new System.IO.FileSystemEventHandler(this.fsw_plugins_Changed);
-            // 
             // btn_Help
             // 
             resources.ApplyResources(this.btn_Help, "btn_Help");
@@ -186,18 +169,31 @@
             this.buttonClearMeta.UseVisualStyleBackColor = true;
             this.buttonClearMeta.Click += new System.EventHandler(this.buttonClearMeta_Click);
             // 
+            // tableLayoutPanel5
+            // 
+            resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
+            this.tableLayoutPanel5.Controls.Add(this.buttonClearMeta, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.buttonUprootPart, 1, 0);
+            this.tableLayoutPanel5.Controls.Add(this.btn_Help, 2, 0);
+            this.tableLayoutPanel5.Controls.Add(this.buttonOption, 3, 0);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            // 
+            // buttonOption
+            // 
+            resources.ApplyResources(this.buttonOption, "buttonOption");
+            this.buttonOption.Name = "buttonOption";
+            this.buttonOption.UseVisualStyleBackColor = true;
+            this.buttonOption.Click += new System.EventHandler(this.buttonOption_Click);
+            // 
             // BlepOut
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.Controls.Add(this.buttonClearMeta);
-            this.Controls.Add(this.buttonUprootPart);
-            this.Controls.Add(this.btn_Help);
             this.Controls.Add(this.tableLayoutPanel3);
+            this.Controls.Add(this.tableLayoutPanel5);
             this.MaximizeBox = false;
             this.Name = "BlepOut";
-            this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Activated += new System.EventHandler(this.BlepOut_Activated);
             this.Deactivate += new System.EventHandler(this.BlepOut_Deactivate);
@@ -211,8 +207,7 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.fsw_modsfolder)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fsw_pluginsfolder)).EndInit();
+            this.tableLayoutPanel5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -230,12 +225,12 @@
         private System.Windows.Forms.Label lblPathStatus;
         private System.Windows.Forms.Label lblProcessStatus;
         private System.Diagnostics.Process rwp;
-        private System.IO.FileSystemWatcher fsw_modsfolder;
-        private System.IO.FileSystemWatcher fsw_pluginsfolder;
         private System.Windows.Forms.Button btn_Help;
         private System.Windows.Forms.Label labelDesc;
-        private System.Windows.Forms.Button buttonUprootPart;
-        private System.Windows.Forms.Button buttonClearMeta;
+        public System.Windows.Forms.Button buttonClearMeta;
+        public System.Windows.Forms.Button buttonUprootPart;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.Button buttonOption;
     }
 }
 

@@ -1,6 +1,6 @@
 ﻿namespace BlepOutIn
 {
-    partial class PubstuntInfoPopup
+    partial class InvalidModPopup
     {
         /// <summary>
         /// Required designer variable.
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvalidModPopup));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
@@ -52,7 +53,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(284, 161);
-            this.tableLayoutPanel1.TabIndex = 0;
+            this.tableLayoutPanel1.TabIndex = 1;
             // 
             // label1
             // 
@@ -64,8 +65,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(276, 97);
             this.label1.TabIndex = 2;
-            this.label1.Text = "PublicityStunt is obsolete and can not be enabled. BepInEx has a built-in replace" +
-    "ment, any mods that are said to require PublicityStunt will keep functioning.";
+            this.label1.Text = resources.GetString("label1.Text");
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnExit
@@ -95,25 +95,22 @@
             this.label2.Text = "ATTENTION";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // PubstuntInfoPopup
+            // InvalidModPopup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.ClientSize = new System.Drawing.Size(284, 161);
             this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(300, 200);
-            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(300, 200);
-            this.Name = "PubstuntInfoPopup";
+            this.Name = "InvalidModPopup";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "BOI - info";
+            this.Text = "INFO";
             this.TopMost = true;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.InvalidModPopup_FormClosed);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

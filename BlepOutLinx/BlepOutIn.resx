@@ -169,7 +169,7 @@
     <value>True</value>
   </data>
   <data name="Modlist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>302, 262</value>
+    <value>302, 249</value>
   </data>
   <data name="Modlist.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -480,7 +480,7 @@ bee/pastebee</value>
     <value>4</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>310, 402</value>
+    <value>310, 389</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -495,7 +495,7 @@ bee/pastebee</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>0</value>
   </data>
   <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tableLayoutPanel1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="Modlist" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel2" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
@@ -518,14 +518,20 @@ bee/pastebee</value>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>334, 467</value>
   </data>
-  <data name="buttonClearMeta.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="tableLayoutPanel5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
+  <data name="tableLayoutPanel5.ColumnCount" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="buttonClearMeta.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
   <data name="buttonClearMeta.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 420</value>
+    <value>3, 3</value>
   </data>
   <data name="buttonClearMeta.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 35</value>
+    <value>94, 42</value>
   </data>
   <data name="buttonClearMeta.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -540,19 +546,19 @@ bee/pastebee</value>
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonClearMeta.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>tableLayoutPanel5</value>
   </data>
   <data name="&gt;&gt;buttonClearMeta.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="buttonUprootPart.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="buttonUprootPart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 420</value>
+    <value>103, 3</value>
   </data>
   <data name="buttonUprootPart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 35</value>
+    <value>58, 42</value>
   </data>
   <data name="buttonUprootPart.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -570,28 +576,22 @@ bee/pastebee</value>
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonUprootPart.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>tableLayoutPanel5</value>
   </data>
   <data name="&gt;&gt;buttonUprootPart.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="btn_Help.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="btn_Help.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btn_Help.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 420</value>
-  </data>
-  <data name="btn_Help.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>75, 35</value>
-  </data>
-  <data name="btn_Help.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>75, 35</value>
+    <value>167, 3</value>
   </data>
   <data name="btn_Help.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 35</value>
+    <value>45, 42</value>
   </data>
   <data name="btn_Help.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -606,10 +606,140 @@ bee/pastebee</value>
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btn_Help.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>tableLayoutPanel5</value>
   </data>
   <data name="&gt;&gt;btn_Help.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="buttonOption.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="buttonOption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>218, 3</value>
+  </data>
+  <data name="buttonOption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 42</value>
+  </data>
+  <data name="buttonOption.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="buttonOption.Text" xml:space="preserve">
+    <value>Options &amp;&amp; Additional Tools</value>
+  </data>
+  <data name="&gt;&gt;buttonOption.Name" xml:space="preserve">
+    <value>buttonOption</value>
+  </data>
+  <data name="&gt;&gt;buttonOption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonOption.Parent" xml:space="preserve">
+    <value>tableLayoutPanel5</value>
+  </data>
+  <data name="&gt;&gt;buttonOption.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tableLayoutPanel5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 407</value>
+  </data>
+  <data name="tableLayoutPanel5.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>311, 48</value>
+  </data>
+  <data name="tableLayoutPanel5.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel5.Name" xml:space="preserve">
+    <value>tableLayoutPanel5</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel5.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel5.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel5.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="buttonClearMeta" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="buttonUprootPart" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="btn_Help" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="buttonOption" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,100,Absolute,64,Absolute,51,Percent,100" /&gt;&lt;Rows Styles="Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAICAAAAEAIACoEAAAFgAAACgAAAAgAAAAQAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAwAAAAMAAAAAAAAAAAAAAC0AAAD8AAAA9gAAAAgAAAACAAAAAAAAAAEAAAAEAAAAAQAA
+        AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAP8AAAD/AAAA/QAAAPoAAAD/AAAA/3MxJf8oEQ3/AgEB/wAAAP8AAAAAAAAA/wIB
+        AfwBAAD8AAAA/wAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAD/AAAA//91Wv//dlr/KBEN/wAAAP/9bFL//2xS//9sUv/7a1H/AAAA/wAA
+        AP/9bFP//25T//9wVf+OPC7/AAAA/wAAAAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//c1f//3JW//xvVP//dln/lkEx//9uU///bVP//21T//9t
+        Uv/pY0v//GpR//9sUv//bFL//2xS//9sUv9fKB//AAAA/wAAAP8AAAD/AAAA/wAAAAIAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAA/woEA/8AAAD/BAIB/wAAAP//dVn//29U//9u
+        VP//blP//21T//9tUv//bVL//2xS//9sUv//bFL//2xS/1YkG/8AAAD/AAAA/20uI/8AAAD/AAAA/AAA
+        AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAA/wAAAP0DAQH/AAAA/41BMf//eVz//3NX//9y
+        Vv//cVb//3BV//9vVP//blP//21T//9tU///bVL//2xS//9sUv//bFL/CgQD/1MjG///bFL//2xS//9s
+        Uv/oY0v/AAAA/wAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAP8AAAD//4Jh//x6XP//elz//3ha//93
+        Wv//dVj//3RY//9yV///clb//3BV//9vVP//b1T//25T//9tU///bVL//21S//9sUv/+bFL//2xS//9s
+        Uv//bFL//2xS//pqUf8EAgH/AAAAAAAAAAAAAAAAAAAAAAAAAAMAAAD8Viwh//+CYf//gGD//35f//99
+        Xv//e13//3lb//94Wv//dln//3VY//9zV///clb//3FW//9wVf//b1T//25U//9uU///bVP//21S//9s
+        Uv//bFL//2xS//9sUv//bFL//GpR/wEAAf8AAAAAAAAAAAAAAAAAAAAAAAAA/wwHBf//h2X//4Vj//+D
+        Yv//gWH//39f//99Xv//fF3//3pc//95W///d1r//3ZZ//90WP//c1f//3JW//9wVf//b1T//29U//9u
+        U///bVP//21T//9sUv//bFL//2xS//9sUv//clf/AAAA/QAAAAQAAAAAAAAAAAAAAAEEAgL//Yto//+K
+        Z///h2X//4Zk//+EY//9gWD/5nRX/xIJB/8OBwX//4Ji//96XP//eFr//3dZ//91WP//dFf//3JW//9x
+        Vv//cFX//29U//9uU///bVP//21T//9tUv//bFL//GpR/wAAAP8AAABMAAAAAAAAAAAAAAAAAAAAAAAA
+        AP//j2r//41p//+LZ///iWb//ohm/wAAAP8AAAD/a0J2/2Q+bv8CAQL/mUs4//97XP//eVv//3da//92
+        Wf//dFj//3NX//9yVv//cVX//3BV//9vVP//blP//21T//5sU/8AAAD/AAAA/wAAAP8DAQH+AAAA/wAA
+        AAAAAAACBwQD/wAAAP//j2v//Ito//+MaP8AAAD/sWzD/6tovf+raL3/q2i9/7Brw/8CAQL//4Fh//x6
+        W///elz//3ha//12WP//dVj//3RX//9yVv//cVX/+G1T//9vVP//blT//25T//9tU///bFL//mxS//xr
+        Uf8CAQH/AAAAGwAAACEAAAD/AQAB//+bc/8EAgL//5Jt/wAAAP+raL3/qmi8/5ddpv+raL3/q2i9/wAA
+        AP/NZ03/AwEB//9/X//9elz/AAAA//53Wf/vb1X/AAAA/wAAAP8AAAD//nBV//9wVf//b1T//25T//9t
+        U///bVP//2xS/+ZhSv8AAAD/AAAAIgAAAP8LBgX/ZDss/wAAAP//onj/CAUJ/6tovf+zbcb/MB42/6to
+        vf+raL3/ZD5v/35BMP8AAAD/AAAA/wAAAP8AAAD/BQIC/wAAAP8TCQf//3xd//50V///clb//3FW//9w
+        Vf//b1T//25U//9uU///bVP/8mZN/wAAAP8AAAAFBQMC/4xUPv8AAAD/AAAA/zwjGv8AAAD/rWm//69q
+        wv8DAgP/qmi8/5BZn/8AAAD/AwIB/wIBAf8AAAD/Visg//+Na///fV7//npc//95W///d1r//3ZZ//91
+        WP//c1f//3JW//9xVf//cFX//29U//1tU/8BAQD/AAAAQQAAAPAAAAD/AAAA/wEBAf//nXT/wXRW/wAA
+        AP8FAwP/AQEB/wAAAP8AAAD/AAAA/9h4Wf//i2j//IVj//+JZ/8DAgH/AAAA/wEBAf/HYkn//3xd//96
+        XP//eFv//3dZ//91WP//dFf//3NX//FrUf8AAAD/AAAA/wAAAP8AAAAAAAAA/QAAAP8AAAD/AAAA/wAA
+        AP/9mHD//5dw//yUbv90RDL/AAAA/+eGZP//j2r//41p//+LaP//imf/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP/+fl///31e//97Xf//eVv//3ha//11WP+6VkH/AQEA/wAAAP8AAAAAAAAAAAAAAAAAAAD+AAAA/wAA
+        AP8AAAD/AQAA//yZcv//mnL//5hx//+XcP//m3P//5Ru//+SbP//kGv//45q//+Naf8AAAD/AAAA/wAA
+        AP8AAAD/AQAA//+BYf//f1///35e//98Xf/8eFv/AgEB//x2Wf/2c1f/AAAA/wAAAAAAAAAAAAAAAAAA
+        AAAAAAD7AAAA/wAAAP+LV0D//510//+cdP//m3L//6J4//+YcP//nHT//pNt//+Tbf//kWz//49r//+V
+        bv8EAgH/AAAA/wMCAf//jGj//4Rj//+CYv//gGD//4Bh/wEBAP+eSzj//3lb//96XP8BAQD/AAAAAgAA
+        AAAAAAAAAAAAAAAAAAMAAAAAAAAA/eqVbv//n3b//551//2cc/8DAgH//6R5/wEBAf92RjT//5Zv//+U
+        bv//kmz//5Br//uNaP//kmz/+4lm//+JZv//h2X//4Vk/+R1WP8DAQH/AAAA/wEAAP/udFf/p1A9/wAA
+        AP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAA/wAAAP/8nXT//591/5heRv/+m3P//6J4//+Z
+        cv//mHH//5Zv//+Vbv//k23//5Fs//+Pa///jmr//4xo//+Oav8AAAD/AAAA/gAAAP8AAAAAAAAAAAAA
+        AP8AAAD/AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/wEBAf+7dlf/+5x0//+e
+        df//nXT//5xz//+acv//mXH//5dw//+Wb///lG7//5Jt//+WcP8bDwv/AQAA/wAAAP8AAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAA/wAA
+        AP8AAAD/AAAA/wAAAP//o3j//6Z7//+kev//pHn/95Nt/0ksIf8AAAD/AAAA/wAAAP8AAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAwAAAAQAAAD/AAAA/wAAAPwAAAD8AAAA/QAAAPwAAAD9AAAA/wAAAP8AAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAA//////////////////////8wQ//+AEH//AAA//wAAA/4AAAH4AAAA8AA
+        AAeAAAAHgAAAAwAAAAeAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAHAAAAB4AAAAOgAAAH4AAAx/gA
+        A//4AA///gA///////////////////////8=
+</value>
   </data>
   <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>600, 800</value>
@@ -632,28 +762,10 @@ bee/pastebee</value>
   <data name="&gt;&gt;rwp.Type" xml:space="preserve">
     <value>System.Diagnostics.Process, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;fsw_modsfolder.Name" xml:space="preserve">
-    <value>fsw_modsfolder</value>
-  </data>
-  <data name="&gt;&gt;fsw_modsfolder.Type" xml:space="preserve">
-    <value>System.IO.FileSystemWatcher, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;fsw_pluginsfolder.Name" xml:space="preserve">
-    <value>fsw_pluginsfolder</value>
-  </data>
-  <data name="&gt;&gt;fsw_pluginsfolder.Type" xml:space="preserve">
-    <value>System.IO.FileSystemWatcher, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>BlepOut</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <metadata name="fsw_modsfolder.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="fsw_pluginsfolder.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>154, 17</value>
-  </metadata>
 </root>

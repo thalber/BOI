@@ -117,10 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="label9.Text" xml:space="preserve">
-    <value>Mods that would naturally patch Assembly-CSharp.dll file of the game. If two patches edit one method, they are not compatible; INCOMPATIBILITIES ARE NOT DETECTED BY BOI.
-Go into BepInEx\monomod and get renamed in a specific way when enabled.</value>
-  </data>
   <data name="label2.Text" xml:space="preserve">
     <value>BOI is a mod manager created to supplement BepInEx loader port for Rain World.
 
@@ -131,7 +127,18 @@ Mods are also brought up to date both ways, so neither AutoUpdate nor manual upd
 Mods that do not work with BepInEx are automatically removed from active folders (BOI notifies you when it does so) and can not be enabled again.
 Symlinks are ignored entirely.
 
-See "Mod types" tab for more info on different mod types, and "Links" tab for some potentially useful directions.</value>
+See "Mod types" tab for more info on different mod types, and "Links" tab for some potentially useful directions.
+
+If you have any questions, feel free to come ask them in #modding-support of the official Rain World discord server.</value>
+  </data>
+  <data name="label10.Text" xml:space="preserve">
+    <value>These are the mods which can NOT function correctly with BepInEx, BOI will delete them from plugins and monomod folders on sight.
+Don't go anywhere and can not be enabled. Files that for whatever reason can't be read are also marked as invalid mods.
+</value>
+  </data>
+  <data name="label9.Text" xml:space="preserve">
+    <value>Mods that would naturally patch Assembly-CSharp.dll file of the game. If two patches edit one method, they are not compatible; INCOMPATIBILITIES ARE NOT DETECTED BY BOI.
+Go into BepInEx\monomod and get renamed in a specific way when enabled.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

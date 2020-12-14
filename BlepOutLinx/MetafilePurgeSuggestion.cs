@@ -22,6 +22,7 @@ namespace BlepOutIn
 
         private void buttonUproot_Click(object sender, EventArgs e)
         {
+            
             string[] modfoldercontents = Directory.GetFiles(BlepOutLinx.BlepOut.ModFolder);
             foreach (string path in modfoldercontents)
             {
@@ -31,6 +32,7 @@ namespace BlepOutIn
                     File.Delete(path);
                 }
             }
+            mf.buttonClearMeta.Visible = false;
             buttonUproot.Visible = false;
             buttonCancel.Text = "Back";
             label2.Text = "Hash and meta files deleted successfully. Your karma just went up a notch.";

@@ -12,21 +12,42 @@ namespace BlepOutLinx
 	public partial class BlepOut : Form
     {
 
-		TextWriterTraceListener tr = new TextWriterTraceListener(File.CreateText("BOILOG.txt"));
 		public BlepOut()
 		{
+			InitializeComponent();
+			firstshow = true;
+			TextWriterTraceListener tr = new TextWriterTraceListener(File.CreateText("BOILOG.txt"));
 			Debug.Listeners.Add(tr);
 			Debug.WriteLine("BOI starting " + DateTime.Now);
-			InitializeComponent();
 			targetFiles = new List<ModRelay>();
 			pluginBlacklist = new List<string>();
 			patchBlacklist = new List<string>();
 			outrmixmods = new List<string>();
 			RetrieveConfig();
 			UpdateTargetPath(RootPath);
+			firstshow = false;
+			if (File.Exists(RootPath + @"\BepInEx\LogOutput.log"))
+            {
+				string[] lans = File.ReadAllLines(RootPath + @"\BepInEx\LogOutput.log");
+				for (int cuwo = 0; cuwo < lans.Length; cuwo++)
+                {
+					string scrpyr = lans[cuwo];
+					if (scrpyr.Contains("Here be dragons!"))
+                    {
+						
+						Debug.WriteLine("Dragon thoughts found. Saying hi.");
+						goto iolaa;
+					}
+                }
+			iolaa:
+                {
+					Debug.WriteLine("...");
+					Debug.WriteLine("To you and your parent, greetings. May your work persist for as long as we do. I wish you all well.");
+				}
+            }
 		}
 		public void UpdateTargetPath(string path)
-		{
+		{	
 			btnLaunch.Enabled = false;
 			Modlist.Enabled = false;
 			RootPath = path;
@@ -36,7 +57,7 @@ namespace BlepOutLinx
 			if (IsMyPathCorrect) Setup();
 			SaveConfig();
 			StatusUpdate();
-			Process[] searchres = Process.GetProcessesByName("Rain World");
+			Process[] searchres = Process.GetProcessesByName("RainWorld");
 			foreach (Process pr in searchres)
 			{
 				Console.WriteLine(pr.Id);
@@ -84,7 +105,7 @@ namespace BlepOutLinx
 		}
 		private void Setup()
 		{
-			Debug.WriteLine("Path valid, starting setup.");
+			Debug.WriteLine("Path valid, starting setup " + DateTime.Now);
 			Debug.Indent();
 			PubstuntFound = false;
 			MixmodsFound = false;
@@ -99,11 +120,11 @@ namespace BlepOutLinx
 			ResolveBlacklists();
 			RetrieveAllDlls();
 			CompileModList();
-			ApplyModlist();
+			BringUpToDate();
 			Modlist.Enabled = true;
 			btnLaunch.Enabled = true;
 			TargetSelect.SelectedPath = RootPath;
-			if (PubstuntFound)
+			if (PubstuntFound && firstshow)
 			{
 				BlepOutIn.PubstuntInfoPopup popup;
 				popup = new BlepOutIn.PubstuntInfoPopup();
@@ -296,25 +317,6 @@ namespace BlepOutLinx
 				{
 					if (File.Exists(pathtomods(fi)))
 					{
-						try
-						{	
-							if (fi.CreationTime > new FileInfo(pathtomods(fi)).CreationTime)
-							{
-								File.Delete(pathtomods(fi));
-								File.Copy(s, pathtomods(fi));
-								Debug.WriteLine("Updated mod: " + fi.Name + " from Plugins to Mods folder.");
-							}
-							if (fi.CreationTime < new FileInfo(pathtomods(fi)).CreationTime)
-							{
-								File.Delete(s);
-								File.Copy(pathtomods(fi), s);
-								Debug.WriteLine("Updated mod: " + fi.Name + " from Mods folder to Plugins");
-							}
-						}
-						catch
-						{
-
-						}
 
 					}
 					else
@@ -360,7 +362,7 @@ namespace BlepOutLinx
 				{
 					targetFiles.Add(new ModRelay(s));
 				}
-
+				if (AintThisPS(s)) PubstuntFound = true;
 			}
 			foreach (ModRelay mr in targetFiles)
 			{
@@ -379,6 +381,7 @@ namespace BlepOutLinx
 
 		//apply/unapply all mods needed
 		//overload for autorefreshes
+		[Obsolete]
 		private void ApplyModlist()
 		{
 			Debug.WriteLine("Applying modlist.");
@@ -420,16 +423,44 @@ namespace BlepOutLinx
             }
         }
 		
+		private void BringUpToDate()
+        {
+			foreach (ModRelay mr in Modlist.Items)
+            {
+				if (mr.MyType == ModRelay.ModType.Invalid || !mr.enabled) continue;
+				byte[] ModOrigSha = mr.origchecksum;
+				byte[] ModTarSha = mr.TarCheckSum;
+				
+				if (!BlepOutIn.BoiCustom.BOIC_Bytearr_Compare(ModTarSha, ModOrigSha))
+                {
+					FileInfo orfi = new FileInfo(mr.ModPath);
+					FileInfo tarfi = new FileInfo(mr.TarPath);
+					if (orfi.LastWriteTime > tarfi.LastWriteTime)
+                    {
+						File.Delete(tarfi.FullName);
+						File.Copy(orfi.FullName, tarfi.FullName);
+						Debug.WriteLine($"Bringing {orfi.Name} up to date: copying from Mods to {((mr.MyType != ModRelay.ModType.Patch) ? "Plugins" : "Monomod")}.");
+                    }
+					else
+                    {
+						File.Delete(orfi.FullName);
+						File.Copy(tarfi.FullName, orfi.FullName);
+						Debug.WriteLine($"Bringing {orfi.Name} up to date: copying from {((mr.MyType != ModRelay.ModType.Patch) ? "Plugins" : "Monomod")} to Mods.");
+					}
+                }
+            }
+        }
 
-		private bool IsMyPathCorrect
+		public bool IsMyPathCorrect
 		{
 			get { return (Directory.Exists(PluginsFolder) && Directory.Exists(PatchesFolder)); }
 		}
 
 		public static string RootPath;
-		private bool changetracker;
 		private bool metafiletracker;
 		private bool TSbtnMode = true;
+		private BlepOutIn.Options opwin;
+		private BlepOutIn.InvalidModPopup inp;
 
 		private string BOIpath
 		{
@@ -443,12 +474,24 @@ namespace BlepOutLinx
 
 		public static bool AintThisPS(string path)
         {
-			using (ModuleDefinition md = ModuleDefinition.ReadModule(path))
+			var fi = new FileInfo(path);
+			if (fi.Extension != ".dll" || fi.Attributes.HasFlag(FileAttributes.ReparsePoint)) return false;
+			try
             {
-
-                return (md.Assembly.FullName.Contains("PublicityStunt"));
+				using (ModuleDefinition md = ModuleDefinition.ReadModule(path))
+				{
+					return (md.Assembly.FullName.Contains("PublicityStunt"));
+				}
+			}
+            catch (IOException ioe)
+            {
+				Debug.WriteLine("ATPS: ERROR CHECKING MOD ASSEMBLY :");
+				Debug.Indent();
+				Debug.WriteLine(ioe);
+				Debug.Unindent();
+				Debug.WriteLine("Well, it's probably not PS.");
+				return false;
             }
-			
 			
         }
 
@@ -457,6 +500,7 @@ namespace BlepOutLinx
 		private List<string> outrmixmods;
 		private List<ModRelay> targetFiles;
 		private Process rw;
+		private bool firstshow;
 		private bool ReadyForRefresh;
 		private bool PubstuntFound;
 		private bool MixmodsFound;
@@ -500,36 +544,18 @@ namespace BlepOutLinx
 				TSbtnMode = true;
 			}
 		}
-
 		private void BlepOut_Activated(object sender, EventArgs e)
 		{
-			fsw_modsfolder.EnableRaisingEvents = false;
-			fsw_pluginsfolder.EnableRaisingEvents = false;
-			if (changetracker && ReadyForRefresh)
-			{
-				Debug.WriteLine("Changes detected in target folders, refreshing and reapplying modlist.");
-				UpdateTargetPath(RootPath);
-			}
+			UpdateTargetPath(RootPath);
 			StatusUpdate();
 			buttonUprootPart.Visible = Directory.Exists(RootPath + @"\RainWorld_Data\Managed_backup");
 		}
-
 		private void BlepOut_Deactivate(object sender, EventArgs e)
 		{
-			if (IsMyPathCorrect)
+			if (IsMyPathCorrect && Directory.Exists(ModFolder))
 			{
-				changetracker = false;
-				fsw_modsfolder.Path = ModFolder;
-				fsw_pluginsfolder.Path = PluginsFolder;
-				fsw_modsfolder.EnableRaisingEvents = true;
-				fsw_pluginsfolder.EnableRaisingEvents = true;
+				
 			}
-		}
-
-		public void SomethingChanged()
-		{
-			changetracker = true;
-			
 		}
 		private void StatusUpdate()
 		{
@@ -547,7 +573,6 @@ namespace BlepOutLinx
 			btnSelectPath.Enabled = Modlist.Enabled;
 
 		}
-
 		private void btnLaunch_MouseClick(object sender, MouseEventArgs e)
 		{
 			try
@@ -567,12 +592,6 @@ namespace BlepOutLinx
 			StatusUpdate();
 
 		}
-
-		private void fsw_plugins_Changed(object sender, FileSystemEventArgs e)
-		{
-			SomethingChanged();
-		}
-
         private void btn_Help_Click(object sender, EventArgs e)
         {
 			BlepOutIn.InfoWindow inw;
@@ -580,24 +599,27 @@ namespace BlepOutLinx
 			this.AddOwnedForm(inw);
 			inw.Show();
         }
-
         private void buttonUprootPart_Click(object sender, EventArgs e)
         {
 			BlepOutIn.PartYeet py = new BlepOutIn.PartYeet(this);
 			this.AddOwnedForm(py);
 			py.ShowDialog();
         }
-
         private void buttonClearMeta_Click(object sender, EventArgs e)
         {
 			BlepOutIn.MetafilePurgeSuggestion psg = new BlepOutIn.MetafilePurgeSuggestion(this);
 			this.AddOwnedForm(psg);
 			psg.ShowDialog();
         }
-
         private void Modlist_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-			if (!ReadyForRefresh || Modlist.Items[e.Index] is ModRelay && (Modlist.Items[e.Index] as ModRelay).MyType == ModRelay.ModType.Invalid) return;
+			if (!ReadyForRefresh) return;
+			if (Modlist.Items[e.Index] is ModRelay && (Modlist.Items[e.Index] as ModRelay).MyType == ModRelay.ModType.Invalid)
+            {
+				e.NewValue = CheckState.Unchecked;
+				if (inp == null || inp.IsDisposed) inp = new BlepOutIn.InvalidModPopup(this, (Modlist.Items[e.Index] as ModRelay).AssociatedModData.DisplayedName);
+				inp.ShowDialog();
+            }
 			CheckState[] ich = new CheckState[Modlist.Items.Count];
 			for (int i = 0; i < ich.Length; i++)
             {
@@ -608,11 +630,15 @@ namespace BlepOutLinx
 			ApplyModlist(ich);
 			Debug.WriteLine("Resulting state: " + ((Modlist.Items[e.Index] as ModRelay).enabled ? "ON" : "OFF"));
 		}
-
         private void BlepOut_FormClosing(object sender, FormClosingEventArgs e)
         {
 			Debug.WriteLine("BOI shutting down. " + DateTime.Now);
 			Debug.Flush();
         }
+        private void buttonOption_Click(object sender, EventArgs e)
+        {
+			if (opwin == null || opwin.IsDisposed) opwin = new BlepOutIn.Options(this);
+			opwin.Show();
+		}
     }
 }
