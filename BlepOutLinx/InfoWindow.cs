@@ -8,7 +8,6 @@ namespace BlepOutIn
         {
             InitializeComponent();
             mf = mainform;
-            mf.Enabled = false;
         }
         private BlepOutLinx.BlepOut mf;
         private int hmm = 0;
@@ -50,7 +49,7 @@ namespace BlepOutIn
 
         private void InfoWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
-            mf.Enabled = true;
+            
         }
     }
 }

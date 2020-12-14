@@ -107,7 +107,7 @@
             this.tabControl.Location = new System.Drawing.Point(12, 12);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(464, 352);
+            this.tabControl.Size = new System.Drawing.Size(465, 352);
             this.tabControl.TabIndex = 0;
             // 
             // tabCRS
@@ -116,7 +116,7 @@
             this.tabCRS.Location = new System.Drawing.Point(4, 22);
             this.tabCRS.Name = "tabCRS";
             this.tabCRS.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCRS.Size = new System.Drawing.Size(456, 326);
+            this.tabCRS.Size = new System.Drawing.Size(457, 326);
             this.tabCRS.TabIndex = 1;
             this.tabCRS.Text = "Custom Regions";
             this.tabCRS.UseVisualStyleBackColor = true;
@@ -136,7 +136,7 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(447, 314);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(448, 314);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
             // tableLayoutPanel4
@@ -155,7 +155,7 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.285714F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.71429F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 54F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(189, 306);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(190, 306);
             this.tableLayoutPanel4.TabIndex = 1;
             // 
             // CRSlist
@@ -168,7 +168,7 @@
             this.CRSlist.Location = new System.Drawing.Point(3, 26);
             this.CRSlist.Name = "CRSlist";
             this.CRSlist.ScrollAlwaysVisible = true;
-            this.CRSlist.Size = new System.Drawing.Size(183, 222);
+            this.CRSlist.Size = new System.Drawing.Size(184, 222);
             this.CRSlist.TabIndex = 0;
             this.CRSlist.SelectedIndexChanged += new System.EventHandler(this.CRSlist_SelectedIndexChanged);
             // 
@@ -221,7 +221,7 @@
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(3, 251);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(183, 55);
+            this.label12.Size = new System.Drawing.Size(184, 55);
             this.label12.TabIndex = 2;
             this.label12.Text = "\"Load order\" option manages which region mods are applied to the world first. Don" +
     "\'t mess with it if you don\'t know what you are doing.";
@@ -236,7 +236,7 @@
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel6.Controls.Add(this.label6, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel7, 0, 1);
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(200, 4);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(201, 4);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 2;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.28739F));
@@ -458,7 +458,7 @@
             this.tabEDT.Controls.Add(this.tableLayoutPanel9);
             this.tabEDT.Location = new System.Drawing.Point(4, 22);
             this.tabEDT.Name = "tabEDT";
-            this.tabEDT.Size = new System.Drawing.Size(456, 326);
+            this.tabEDT.Size = new System.Drawing.Size(457, 326);
             this.tabEDT.TabIndex = 3;
             this.tabEDT.Text = "Extended Devtools / ComMod";
             this.tabEDT.UseVisualStyleBackColor = true;
@@ -879,8 +879,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(488, 376);
+            this.ClientSize = new System.Drawing.Size(489, 376);
             this.Controls.Add(this.tabControl);
+            this.MaximumSize = new System.Drawing.Size(505, 415);
+            this.MinimumSize = new System.Drawing.Size(505, 415);
             this.Name = "Options";
             this.ShowIcon = false;
             this.Text = "Options";

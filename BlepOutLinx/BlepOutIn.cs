@@ -42,7 +42,8 @@ namespace BlepOutLinx
 			iolaa:
                 {
 					Debug.WriteLine("...");
-					Debug.WriteLine("To you and your parent, greetings. May your work persist for as long as we do. I wish you all well.");
+					Debug.WriteLine("To you and your parent, greetings. May your work persist for as long as we do.");
+					Debug.WriteLine("Wish you all well. Bzz!");
 				}
             }
 		}
@@ -380,7 +381,7 @@ namespace BlepOutLinx
 		}
 
 		//apply/unapply all mods needed
-		//overload for autorefreshes
+		//overload for autorefreshes (unneeded)
 		[Obsolete]
 		private void ApplyModlist()
 		{
@@ -422,7 +423,7 @@ namespace BlepOutLinx
 				}
             }
         }
-		
+
 		private void BringUpToDate()
         {
 			foreach (ModRelay mr in Modlist.Items)
@@ -450,17 +451,16 @@ namespace BlepOutLinx
                 }
             }
         }
-
 		public bool IsMyPathCorrect
 		{
 			get { return (Directory.Exists(PluginsFolder) && Directory.Exists(PatchesFolder)); }
 		}
-
 		public static string RootPath;
 		private bool metafiletracker;
 		private bool TSbtnMode = true;
 		private BlepOutIn.Options opwin;
 		private BlepOutIn.InvalidModPopup inp;
+		BlepOutIn.InfoWindow iw;
 
 		private string BOIpath
 		{
@@ -594,10 +594,8 @@ namespace BlepOutLinx
 		}
         private void btn_Help_Click(object sender, EventArgs e)
         {
-			BlepOutIn.InfoWindow inw;
-			inw = new BlepOutIn.InfoWindow(this);
-			this.AddOwnedForm(inw);
-			inw.Show();
+			if (iw == null || iw.IsDisposed) iw = new BlepOutIn.InfoWindow(this);
+			iw.Show();
         }
         private void buttonUprootPart_Click(object sender, EventArgs e)
         {

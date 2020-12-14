@@ -432,13 +432,22 @@ namespace BlepOutLinx
                 jo["loadOrder"] = value;
             }
         }
-
         public void ReadRegInfo()
         {
             if (pathToCfg != null)
             {
-                string jscts = File.ReadAllText(pathToCfg);
-                jo = JObject.Parse(jscts);
+                try
+                {
+                    string jscts = File.ReadAllText(pathToCfg);
+                    jo = JObject.Parse(jscts);
+                }
+                catch (IOException ioe)
+                {
+                    Debug.WriteLine($"ERROR READING REGPACK CONFIG JSON FOR: {this.regionName}");
+                    Debug.Indent();
+                    Debug.WriteLine(ioe);
+                    Debug.Unindent();
+                }
             }
         }
         public void WriteRegInfo()
@@ -448,10 +457,14 @@ namespace BlepOutLinx
                 Debug.WriteLine($"Region mod {regionName} does not have a config file; cannot apply any changes.");
                 return;
             }
+            Debug.WriteLine($"Writing changes to regpack config for: {this.regionName}, contents:");
+            Debug.Indent();
+            Debug.WriteLine(jo);
+            Debug.Unindent();
+            
             hasBeenChanged = false;
             File.WriteAllText(pathToCfg, jo.ToString());
         }
-
         public override string ToString()
         {
             return regionName;

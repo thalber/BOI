@@ -19,6 +19,7 @@ namespace BlepOutIn
         {
             InitializeComponent();
             mf = mainForm;
+            Debug.WriteLine("Options window opened " + DateTime.Now);
             labelREGIONNAME.Text = string.Empty;
             labelREGIONDESC.Text = string.Empty;
             labelSTRUCTURESTATUS.Text = string.Empty;
@@ -63,6 +64,7 @@ namespace BlepOutIn
         }*/
         private void FetchStuff()
         {
+            Debug.WriteLine("Fetching jsons and stuff.");
             CRSlist.Items.Clear();
             regmodlist.Clear();
             if (Directory.Exists(CRSpath))
@@ -71,7 +73,6 @@ namespace BlepOutIn
                 foreach (string path in CRcts)
                 {
                     regmodlist.Add(new RegModData(path));
-
                 }
                 foreach (RegModData rmd in regmodlist)
                 {
@@ -93,7 +94,6 @@ namespace BlepOutIn
                 labelCOMMODSTATUS.Text = "Language folder is in the wrong spot!";
                 labelCOMMODDETAILS.Text = @"Translation patch files have been found inside Mods but not Plugins. Press the button below to order BOI to move translation patch to RainWorld\BepInEx\plugins, or move it manually if you want it enabled.";
                 buttonMM2P.Visible = true;
-                
             }
             else
             {
@@ -169,6 +169,7 @@ namespace BlepOutIn
         private static string CRSpath => BlepOut.ModFolder + @"CustomResources";
         private void Options_Activated(object sender, EventArgs e)
         {
+            //this.Enabled = mf.Enabled;
             if (mf.IsMyPathCorrect)
             {
                 //StatusUpdate();
@@ -265,8 +266,20 @@ namespace BlepOutIn
         }
         private void buttonclickCOMMOD(object sender, EventArgs e)
         {
-            
-            Directory.Move(langinmods, langinplugins);
+            try
+            {
+                Directory.Move(langinmods, langinplugins);
+
+            }
+            catch (IOException ioe)
+            {
+                Debug.WriteLine("ERROR MOVING LANGUAGE FOLDER:");
+                Debug.Indent();
+                Debug.WriteLine(ioe);
+                Debug.Unindent();
+            }
+            ApplyStuff();
+            FetchStuff();
         }
 
         string langinplugins => BlepOut.PluginsFolder + "Language";
