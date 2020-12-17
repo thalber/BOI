@@ -665,13 +665,6 @@ namespace BlepOutLinx
                 System.IO.File.Copy(ModFileInfo.FullName, ModFilePath);
                 // get mod data
                 var mr = new ModRelay(ModFilePath);
-                // check if the mod is valid before adding it to the list
-                if (mr.MyType == ModRelay.ModType.Unknown)
-                {
-                    System.IO.File.Delete(ModFilePath);
-                    Debug.WriteLine($"Error: {ModFileInfo.Name} was not added to the mod list, as it is not recognized as a mod. The file was removed from the Mods folder.");
-                    continue;
-                }
                 // add the mod to the mod list
                 Modlist.Items.Add(mr);
                 Debug.WriteLine($"{ModFileInfo.Name} successfully added.");
