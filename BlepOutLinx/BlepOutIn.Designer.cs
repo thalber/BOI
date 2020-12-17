@@ -69,12 +69,15 @@
             // 
             // Modlist
             // 
+            this.Modlist.AllowDrop = true;
             resources.ApplyResources(this.Modlist, "Modlist");
             this.Modlist.CheckOnClick = true;
             this.Modlist.FormattingEnabled = true;
             this.Modlist.Name = "Modlist";
             this.Modlist.Sorted = true;
             this.Modlist.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.Modlist_ItemCheck);
+            this.Modlist.DragDrop += new System.Windows.Forms.DragEventHandler(this.Modlist_DragDrop);
+            this.Modlist.DragEnter += new System.Windows.Forms.DragEventHandler(this.Modlist_DragEnter);
             // 
             // tableLayoutPanel1
             // 
