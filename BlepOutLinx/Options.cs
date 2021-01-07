@@ -30,38 +30,7 @@ namespace BlepOutIn
         private bool readytoapply = true;
         private RegModData curRmd;
         private List<RegModData> regmodlist;
-        /*private void StatusUpdate()
-        {
-            if (Directory.Exists(BlepOut.ModFolder + @"Language") || Directory.Exists(BlepOut.PluginsFolder + @"Language"))
-            {
-                labelSTATUS_COMMOD.Text = "Language pack detected";
-            }
-            else
-            {
-                labelSTATUS_COMMOD.Text = "None found";
-            }
 
-            if (Directory.Exists(BlepOut.ModFolder + @"CustomResources"))
-            {
-                labelSTATUS_CRS.Text = "CRS folder found";
-            }
-            else
-            {
-                labelSTATUS_CRS.Text = "None detected";
-            }
-
-            if (File.Exists(BlepOut.RootPath + @"\edtSetup.json"))
-            {
-                labelSTATUS_EDT.Text = "EDT config found";
-            }
-
-            else
-            {
-                labelSTATUS_EDT.Text = "Not enabled";
-            }
-
-
-        }*/
         private void FetchStuff()
         {
             Debug.WriteLine("Fetching jsons and stuff.");
@@ -198,7 +167,11 @@ namespace BlepOutIn
         private void tbLOADORDER_Leave(object sender, EventArgs e)
         {
             if (curRmd == null || !readytoapply) return;
-            curRmd.loadOrder = int.Parse(tbLOADORDER.Text);
+            if (int.TryParse(tbLOADORDER.Text, out int i))
+            {
+                curRmd.loadOrder = i;
+            }
+            
         }
         private void EDT_PROPERTY_CHANGED(object sender, EventArgs e)
         {
@@ -213,17 +186,11 @@ namespace BlepOutIn
             }
             else if (sender == textBoxEDT_CHARSELECT)
             {
-                try
+                if (int.TryParse(textBoxEDT_CHARSELECT.Text, out int res))
                 {
-                    EDTCFGDATA.forcechar = int.Parse(textBoxEDT_CHARSELECT.Text);
+                    EDTCFGDATA.forcechar = res;
                 }
-                catch (FormatException fe)
-                {
-                    Debug.WriteLine("Format error while reading for EDTCFG.forcechar");
-                    Debug.Indent();
-                    Debug.WriteLine(fe);
-                    Debug.Unindent();
-                }
+
             }
             else if (sender == checkBoxEDT_DISABLERAIN)
             {
@@ -235,16 +202,9 @@ namespace BlepOutIn
             }
             else if (sender == TextBoxEDT_CHEATKARMA)
             {
-                try
+                if (int.TryParse(TextBoxEDT_CHEATKARMA.Text, out int res))
                 {
-                    EDTCFGDATA.cheatkarma = int.Parse(TextBoxEDT_CHEATKARMA.Text);
-                }
-                catch (FormatException fe)
-                {
-                    Debug.WriteLine("Format error while reading for EDTCFG.cheatkarma");
-                    Debug.Indent();
-                    Debug.WriteLine(fe);
-                    Debug.Unindent();
+                    EDTCFGDATA.cheatkarma = res;
                 }
             }
             else if (sender == checkBoxEDT_MAPREVEAL)
@@ -282,8 +242,8 @@ namespace BlepOutIn
             FetchStuff();
         }
 
-        string langinplugins => BlepOut.PluginsFolder + "Language";
-        string langinmods => BlepOut.ModFolder + "Language";
+        string langinplugins => Path.Combine(BlepOut.PluginsFolder, "Language");
+        string langinmods => Path.Combine(BlepOut.ModFolder + "Language");
     }
 
     

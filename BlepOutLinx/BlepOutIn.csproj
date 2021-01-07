@@ -78,6 +78,7 @@
       <DependentUpon>BlepOutIn.cs</DependentUpon>
     </Compile>
     <Compile Include="BoiCustom.cs" />
+    <Compile Include="ConfigManager.cs" />
     <Compile Include="InfoWindow.cs">
       <SubType>Form</SubType>
     </Compile>

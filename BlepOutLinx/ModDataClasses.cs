@@ -436,18 +436,20 @@ namespace BlepOutLinx
         {
             if (pathToCfg != null)
             {
+
                 try
                 {
                     string jscts = File.ReadAllText(pathToCfg);
                     jo = JObject.Parse(jscts);
                 }
-                catch (IOException ioe)
+                catch (JsonException ioe)
                 {
                     Debug.WriteLine($"ERROR READING REGPACK CONFIG JSON FOR: {this.regionName}");
                     Debug.Indent();
                     Debug.WriteLine(ioe);
                     Debug.Unindent();
                 }
+                
             }
         }
         public void WriteRegInfo()

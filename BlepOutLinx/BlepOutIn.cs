@@ -6,6 +6,8 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Security;
+using Newtonsoft.Json;
+using BlepOutIn;
 
 namespace BlepOutLinx
 {
@@ -18,17 +20,18 @@ namespace BlepOutLinx
             firstshow = true;
             TextWriterTraceListener tr = new TextWriterTraceListener(File.CreateText("BOILOG.txt"));
             Debug.Listeners.Add(tr);
+            Debug.AutoFlush = true;
             Debug.WriteLine("BOI starting " + DateTime.Now);
             targetFiles = new List<ModRelay>();
             pluginBlacklist = new List<string>();
             patchBlacklist = new List<string>();
             outrmixmods = new List<string>();
-            RetrieveConfig();
-            UpdateTargetPath(RootPath);
+            BoiConfigManager.ReadConfig();
+            UpdateTargetPath(BoiConfigManager.TarPath);
             firstshow = false;
-            if (File.Exists(RootPath + @"\BepInEx\LogOutput.log"))
+            if (File.Exists(Path.Combine(RootPath, "BepInEx", "LogOutput.log")))
             {
-                string[] lans = File.ReadAllLines(RootPath + @"\BepInEx\LogOutput.log");
+                string[] lans = File.ReadAllLines(Path.Combine(RootPath, "BepInEx", "LogOutput.log"));
                 for (int cuwo = 0; cuwo < lans.Length; cuwo++)
                 {
                     string scrpyr = lans[cuwo];
@@ -52,57 +55,17 @@ namespace BlepOutLinx
             btnLaunch.Enabled = false;
             Modlist.Enabled = false;
             RootPath = path;
+            BoiConfigManager.TarPath = path;
             targetFiles.Clear();
             pluginBlacklist.Clear();
             patchBlacklist.Clear();
             if (IsMyPathCorrect) Setup();
-            SaveConfig();
             StatusUpdate();
             Process[] searchres = Process.GetProcessesByName("RainWorld");
             foreach (Process pr in searchres)
             {
                 Console.WriteLine(pr.Id);
             }
-        }
-        private void RetrieveConfig()
-        {
-            if (File.Exists(cfgpath))
-            {
-                string[] cfgstrings = File.ReadAllLines(cfgpath);
-                try
-                {
-                    RootPath = cfgstrings[0];
-                }
-                catch
-                {
-                    CreateConfig();
-                    RootPath = string.Empty;
-                }
-                Debug.WriteLine("Config retrieved. Root path: [" + RootPath + "].");
-            }
-            else
-            {
-                CreateConfig();
-                Debug.WriteLine("Config file not found, creating an empty one instead.");
-                RootPath = string.Empty;
-            }
-
-        }
-        private void CreateConfig()
-        {
-            StreamWriter sw = File.CreateText(cfgpath);
-            sw.WriteLine(string.Empty);
-            sw.Close();
-            sw.Dispose();
-            Debug.WriteLine("Empty config file created.");
-        }
-        private void SaveConfig()
-        {
-            StreamWriter sw = File.CreateText(cfgpath);
-            sw.WriteLine(RootPath);
-            sw.Close();
-            sw.Dispose();
-            Debug.WriteLine("Config file updated, new target path: [" + RootPath + "].");
         }
         private void Setup()
         {
@@ -350,7 +313,7 @@ namespace BlepOutLinx
             }
             string pathtomods(FileInfo fi)
             {
-                return ModFolder + fi.Name;
+                return Path.Combine(ModFolder, fi.Name);
             }
         }
         private void CompileModList()
@@ -455,21 +418,21 @@ namespace BlepOutLinx
         {
             get { return (Directory.Exists(PluginsFolder) && Directory.Exists(PatchesFolder)); }
         }
-        public static string RootPath;
+        public static string RootPath = string.Empty;
         private bool metafiletracker;
         private bool TSbtnMode = true;
         private BlepOutIn.Options opwin;
         private BlepOutIn.InvalidModPopup inp;
         BlepOutIn.InfoWindow iw;
 
-        private string BOIpath
+        public static string BOIpath
         {
             get { return Assembly.GetExecutingAssembly().Location.Replace("BlepOutIn.exe", string.Empty); }
         }
 
-        private string cfgpath
+        public static string cfgpath
         {
-            get { return BOIpath + @"cfg.txt"; }
+            get { return Path.Combine(BOIpath, "cfg.json"); }
         }
 
         public static bool AintThisPS(string path)
@@ -506,24 +469,24 @@ namespace BlepOutLinx
         private bool MixmodsFound;
         private string hkblacklistpath
         {
-            get { return PluginsFolder + @"\plugins_blacklist.txt"; }
+            get { return Path.Combine(PluginsFolder, @"plugins_blacklist.txt"); }
         }
         private string ptblacklistpath
         {
-            get { return PatchesFolder + @"\patches_blacklist.txt"; }
+            get { return Path.Combine(PatchesFolder, @"patches_blacklist.txt"); }
         }
 
         public static string ModFolder
         {
-            get { return RootPath + @"\Mods\"; }
+            get { return Path.Combine(RootPath, "Mods"); }
         }
         public static string PluginsFolder
         {
-            get { return RootPath + @"\BepInEx\plugins\"; }
+            get { return Path.Combine(RootPath, "BepInEx", "plugins"); }
         }
         public static string PatchesFolder
         {
-            get { return RootPath + @"\BepInEx\monomod\"; }
+            get { return Path.Combine(RootPath, "BepInEx", "monomod"); }
         }
 
         private void buttonSelectPath_Click(object sender, EventArgs e)
@@ -631,11 +594,11 @@ namespace BlepOutLinx
         private void BlepOut_FormClosing(object sender, FormClosingEventArgs e)
         {
             Debug.WriteLine("BOI shutting down. " + DateTime.Now);
-            Debug.Flush();
+            BoiConfigManager.WriteConfig();
         }
         private void buttonOption_Click(object sender, EventArgs e)
         {
-            if (opwin == null || opwin.IsDisposed) opwin = new BlepOutIn.Options(this);
+            if (opwin == null || opwin.IsDisposed) opwin = new Options(this);
             opwin.Show();
         }
 

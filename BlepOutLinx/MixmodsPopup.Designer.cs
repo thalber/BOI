@@ -77,8 +77,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(275, 26);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Following mods are incompatible with BepInEx and have been deleted from plugins a" +
-    "nd/or monomod folders:";
+            this.label1.Text = "Following mods are incompatible with BepInEx and have been deleted from plugins and/or monomod folders:";
             // 
             // label2
             // 

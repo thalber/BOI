@@ -80,9 +80,9 @@
             this.label25 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonMM2P = new System.Windows.Forms.Button();
             this.labelCOMMODDETAILS = new System.Windows.Forms.Label();
             this.labelCOMMODSTATUS = new System.Windows.Forms.Label();
-            this.buttonMM2P = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabCRS.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -837,6 +837,18 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(217, 235);
             this.tableLayoutPanel1.TabIndex = 24;
             // 
+            // buttonMM2P
+            // 
+            this.buttonMM2P.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonMM2P.Location = new System.Drawing.Point(3, 175);
+            this.buttonMM2P.Name = "buttonMM2P";
+            this.buttonMM2P.Size = new System.Drawing.Size(211, 57);
+            this.buttonMM2P.TabIndex = 2;
+            this.buttonMM2P.Text = "Move from Mods to Plugins";
+            this.buttonMM2P.UseVisualStyleBackColor = true;
+            // 
             // labelCOMMODDETAILS
             // 
             this.labelCOMMODDETAILS.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -862,18 +874,6 @@
             this.labelCOMMODSTATUS.TabIndex = 0;
             this.labelCOMMODSTATUS.Text = "COMMODSTATUS";
             this.labelCOMMODSTATUS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // buttonMM2P
-            // 
-            this.buttonMM2P.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonMM2P.Location = new System.Drawing.Point(3, 175);
-            this.buttonMM2P.Name = "buttonMM2P";
-            this.buttonMM2P.Size = new System.Drawing.Size(211, 57);
-            this.buttonMM2P.TabIndex = 2;
-            this.buttonMM2P.Text = "Move from Mods to Plugins";
-            this.buttonMM2P.UseVisualStyleBackColor = true;
             // 
             // Options
             // 
