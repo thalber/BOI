@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace BlepOutIn
+namespace Blep
 {
     public partial class MixmodsPopup : Form
     {
@@ -13,14 +13,12 @@ namespace BlepOutIn
             {
                 listView.Items.Add(s);
             }
-            
         }
         
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            
-            this.Close();
+            Close();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace BlepOutLinx
+﻿namespace Blep
 {
     partial class BlepOut
     {
@@ -210,6 +210,7 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.ResumeLayout(false);
 

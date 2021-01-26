@@ -126,7 +126,7 @@
     <value>4, 4</value>
   </data>
   <data name="btnSelectPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 39</value>
+    <value>96, 39</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnSelectPath.TabIndex" type="System.Int32, mscorlib">
@@ -163,13 +163,13 @@
     <value>False</value>
   </data>
   <data name="Modlist.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 136</value>
+    <value>4, 155</value>
   </data>
   <data name="Modlist.ScrollAlwaysVisible" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="Modlist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>302, 249</value>
+    <value>312, 269</value>
   </data>
   <data name="Modlist.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -202,10 +202,10 @@
     <value>True</value>
   </data>
   <data name="btnLaunch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 4</value>
+    <value>210, 4</value>
   </data>
   <data name="btnLaunch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 39</value>
+    <value>98, 39</value>
   </data>
   <data name="btnLaunch.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -241,7 +241,7 @@
     <value>3, 19</value>
   </data>
   <data name="lblPathStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 20</value>
+    <value>90, 20</value>
   </data>
   <data name="lblPathStatus.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -274,7 +274,7 @@
     <value>3, 0</value>
   </data>
   <data name="lblProcessStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 19</value>
+    <value>90, 19</value>
   </data>
   <data name="lblProcessStatus.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -298,13 +298,13 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 4</value>
+    <value>107, 4</value>
   </data>
   <data name="tableLayoutPanel4.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 39</value>
+    <value>96, 39</value>
   </data>
   <data name="tableLayoutPanel4.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -325,13 +325,13 @@
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblPathStatus" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblProcessStatus" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Absolute,20" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 81</value>
+    <value>4, 100</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>302, 47</value>
+    <value>312, 47</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -354,6 +354,9 @@
   <data name="tableLayoutPanel2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left, Right</value>
   </data>
+  <data name="tableLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
@@ -370,15 +373,17 @@
     <value>5, 22</value>
   </data>
   <data name="labelDesc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 46</value>
+    <value>302, 65</value>
   </data>
   <data name="labelDesc.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="labelDesc.Text" xml:space="preserve">
-    <value>Author: thalber
-BepInEx adapted for RW and Partiality mods by:
-bee/pastebee</value>
+    <value>BepInEx: Bepis
+Partiality wrapper: notfood
+Dragons: bee/pastebee
+BOI: thalber
+BOI IS NOT A MODLOADER</value>
   </data>
   <data name="labelDesc.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
@@ -408,13 +413,14 @@ bee/pastebee</value>
     <value>5, 2</value>
   </data>
   <data name="labelHead.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 20</value>
+    <value>302, 20</value>
   </data>
   <data name="labelHead.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="labelHead.Text" xml:space="preserve">
-    <value>BlepOutIn - Rain World mod manager for BepInEx</value>
+    <value>BOI - Rain World mod manager for BepInEx
+</value>
   </data>
   <data name="labelHead.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
@@ -441,7 +447,7 @@ bee/pastebee</value>
     <value>2</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>302, 70</value>
+    <value>312, 89</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -480,7 +486,7 @@ bee/pastebee</value>
     <value>4</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>310, 389</value>
+    <value>320, 428</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -516,7 +522,7 @@ bee/pastebee</value>
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>334, 467</value>
+    <value>344, 506</value>
   </data>
   <data name="tableLayoutPanel5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
@@ -531,7 +537,7 @@ bee/pastebee</value>
     <value>3, 3</value>
   </data>
   <data name="buttonClearMeta.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 42</value>
+    <value>96, 42</value>
   </data>
   <data name="buttonClearMeta.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -555,10 +561,10 @@ bee/pastebee</value>
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="buttonUprootPart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 3</value>
+    <value>105, 3</value>
   </data>
   <data name="buttonUprootPart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 42</value>
+    <value>58, 42</value>
   </data>
   <data name="buttonUprootPart.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -588,10 +594,10 @@ bee/pastebee</value>
     <value>NoControl</value>
   </data>
   <data name="btn_Help.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 3</value>
+    <value>169, 3</value>
   </data>
   <data name="btn_Help.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 42</value>
+    <value>44, 42</value>
   </data>
   <data name="btn_Help.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -615,10 +621,10 @@ bee/pastebee</value>
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="buttonOption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>212, 3</value>
+    <value>219, 3</value>
   </data>
   <data name="buttonOption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 42</value>
+    <value>99, 42</value>
   </data>
   <data name="buttonOption.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -639,13 +645,13 @@ bee/pastebee</value>
     <value>3</value>
   </data>
   <data name="tableLayoutPanel5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 407</value>
+    <value>11, 446</value>
   </data>
   <data name="tableLayoutPanel5.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>311, 48</value>
+    <value>321, 48</value>
   </data>
   <data name="tableLayoutPanel5.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>

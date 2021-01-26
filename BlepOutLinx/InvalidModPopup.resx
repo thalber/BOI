@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="label1.Text" xml:space="preserve">
-    <value>The mod you are trying to enable is INVALID and can NOT function with BepInEx.
+    <value>The mod you are trying to enable is INVALID. Trying to launch the game with it will most likely result in an immediate crash.
 This usually means that the mod assembly mixes MonoMod patches and Partiality mods.
 For more details, see HELP&amp;&amp;INFO window.
 </value>

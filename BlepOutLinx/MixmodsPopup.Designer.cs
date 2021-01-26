@@ -1,4 +1,4 @@
-﻿namespace BlepOutIn
+﻿namespace Blep
 {
     partial class MixmodsPopup
     {
@@ -75,9 +75,10 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(4, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(275, 26);
+            this.label1.Size = new System.Drawing.Size(274, 26);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Following mods are incompatible with BepInEx and have been deleted from plugins and/or monomod folders:";
+            this.label1.Text = "Following mods are INVALID and are very likely to cause an immediate crash with B" +
+    "epInEx:";
             // 
             // label2
             // 

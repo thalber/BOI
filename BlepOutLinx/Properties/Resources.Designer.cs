@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlepOutIn.Properties {
+namespace Blep.Properties {
     using System;
     
     

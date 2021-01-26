@@ -71,11 +71,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlepOutIn.cs">
+    <Compile Include="BOI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BlepOutIn.Designer.cs">
-      <DependentUpon>BlepOutIn.cs</DependentUpon>
+    <Compile Include="BOI.Designer.cs">
+      <DependentUpon>BOI.cs</DependentUpon>
     </Compile>
     <Compile Include="BoiCustom.cs" />
     <Compile Include="ConfigManager.cs" />
@@ -124,8 +124,8 @@
     <Compile Include="PubstuntInfoPopup.Designer.cs">
       <DependentUpon>PubstuntInfoPopup.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="BlepOutIn.resx">
-      <DependentUpon>BlepOutIn.cs</DependentUpon>
+    <EmbeddedResource Include="BOI.resx">
+      <DependentUpon>BOI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoWindow.resx">
       <DependentUpon>InfoWindow.cs</DependentUpon>
@@ -158,6 +158,9 @@
     <EmbeddedResource Include="PubstuntInfoPopup.resx">
       <DependentUpon>PubstuntInfoPopup.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="app.config" />
     <None Include="BOIS.pfx" />
     <None Include="packages.config" />

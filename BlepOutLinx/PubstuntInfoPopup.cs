@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace BlepOutIn
+namespace Blep
 {
     public partial class PubstuntInfoPopup : Form
     {
@@ -15,7 +15,7 @@ namespace BlepOutIn
         private void btnExit_Click(object sender, EventArgs e)
         {
             
-            this.Close();
+            Close();
         }
     }
 }

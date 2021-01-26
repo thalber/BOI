@@ -1,13 +1,12 @@
 ﻿using Mono.Cecil;
-using System.IO;
-using System.Security.Cryptography;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
-using System.Windows.Forms;
+using System.IO;
+using System.Security.Cryptography;
 
 
-namespace BlepOutLinx
+namespace Blep
 {
     //
     //  CODE MODS
@@ -18,37 +17,37 @@ namespace BlepOutLinx
         public ModRelay(string path)
         {
             ModPath = path;
-            this.isValid = !ModData.AbsolutelyIgnore(ModPath);
+            isValid = !ModData.AbsolutelyIgnore(ModPath);
             if (isValid)
             {
                 if (BlepOut.AintThisPS(path))
                 {
-                    this.AssociatedModData = new InvalidModData(path);
-                    this.MyType = ModType.Invalid;
+                    AssociatedModData = new InvalidModData(path);
+                    MyType = ModType.Invalid;
                     return;
                 }
                 ModType mt = GetModType(ModPath);
                 switch (mt)
                 {
                     case ModType.Unknown:
-                        this.AssociatedModData = new ModData(path);
-                        this.MyType = ModType.Unknown;
+                        AssociatedModData = new ModData(path);
+                        MyType = ModType.Unknown;
                         break;
                     case ModType.Patch:
-                        this.AssociatedModData = new PtModData(path);
-                        this.MyType = ModType.Patch;
+                        AssociatedModData = new PtModData(path);
+                        MyType = ModType.Patch;
                         break;
                     case ModType.Partmod:
-                        this.AssociatedModData = new HkModData(path);
-                        this.MyType = ModType.Partmod;
+                        AssociatedModData = new HkModData(path);
+                        MyType = ModType.Partmod;
                         break;
                     case ModType.BepPlugin:
-                        this.AssociatedModData = new BepPluginData(path);
-                        this.MyType = ModType.BepPlugin;
+                        AssociatedModData = new BepPluginData(path);
+                        MyType = ModType.BepPlugin;
                         break;
                     case ModType.Invalid:
-                        this.AssociatedModData = new InvalidModData(path);
-                        this.MyType = ModType.Invalid;
+                        AssociatedModData = new InvalidModData(path);
+                        MyType = ModType.Invalid;
                         break;
                 }
             }
@@ -171,7 +170,7 @@ namespace BlepOutLinx
         {
             get
             {
-                return (AssociatedModData.TarFolder + AssociatedModData.TarName);
+                return (Path.Combine(AssociatedModData.TarFolder, AssociatedModData.TarName));
             }
         }
 
@@ -196,21 +195,19 @@ namespace BlepOutLinx
 
         public void Enable()
         {
-            if (AssociatedModData is InvalidModData) return;
             if (enabled) return;
             File.Copy(AssociatedModData.OrigPath, TarPath);
         }
 
         public void Disable()
         {
-            if (AssociatedModData is InvalidModData) return;
             if (!enabled) return;
             File.Delete(TarPath);
         }
 
         public override string ToString()
         {
-            return AssociatedModData.DisplayedName + " : " + this.MyType.ToString().ToUpper();
+            return AssociatedModData.DisplayedName + " : " + MyType.ToString().ToUpper();
         }
     }
 
@@ -218,7 +215,7 @@ namespace BlepOutLinx
     {
         public ModData(string path)
         {
-            this.OrigPath = path;
+            OrigPath = path;
 
         }
         public virtual string TarName
@@ -226,20 +223,11 @@ namespace BlepOutLinx
             get { return DisplayedName; }
         }
 
-        public virtual string TarFolder
-        {
-            get { return BlepOut.RootPath + @"\BepInEx\Plugins\"; }
-        }
+        public virtual string TarFolder => Path.Combine(BlepOut.RootPath, "BepInEx", "plugins");
         public string OrigPath;
 
-        public virtual bool Enabled
-        {
-            get { return (File.Exists(TarFolder + this.TarName)); }
-        }
-        public virtual string DisplayedName
-        {
-            get { return new FileInfo(OrigPath).Name; }
-        }
+        public virtual bool Enabled => (File.Exists(Path.Combine(TarFolder, TarName)));
+        public virtual string DisplayedName => new FileInfo(OrigPath).Name;
         public static bool AbsolutelyIgnore(string tpath)
         {
             return (new FileInfo(tpath).Extension != @".dll" || new FileInfo(tpath).Attributes.HasFlag(FileAttributes.ReparsePoint));
@@ -272,7 +260,7 @@ namespace BlepOutLinx
 
         public override string TarName => "Assembly-CSharp." + DisplayedName.Replace(".dll", string.Empty) + ".mm.dll";
 
-        public override string TarFolder => BlepOut.RootPath + @"\BepInEx\Monomod\";
+        public override string TarFolder => Path.Combine(BlepOut.RootPath, "BepInEx", "Monomod");
 
         public static string GiveMeBackMyName(string partname)
         {
@@ -307,22 +295,21 @@ namespace BlepOutLinx
         }
     }
 
-    public class InvalidModData : ModData
+    public class InvalidModData : PtModData
     {
         public InvalidModData(string path) : base(path)
         {
 
         }
 
-        public override bool Enabled => false;
+        //public override bool Enabled => false;
 
-        public override string TarName => null;
+        //public override string TarName => null;
 
         public override string ToString()
         {
             return DisplayedName + ": INVALID";
         }
-
 
     }
 
@@ -371,9 +358,9 @@ namespace BlepOutLinx
                 switch (CurrCfgState)
                 {
                     case CfgState.PackInfo:
-                        return path + @"\packInfo.json";
+                        return Path.Combine(path, "packInfo.json");
                     case CfgState.RegInfo:
-                        return path + @"\regionInfo.json";
+                        return Path.Combine(path + "regionInfo.json");
                     case CfgState.None:
                         return null;
                     default: return null;
@@ -444,7 +431,7 @@ namespace BlepOutLinx
                 }
                 catch (JsonException ioe)
                 {
-                    Debug.WriteLine($"ERROR READING REGPACK CONFIG JSON FOR: {this.regionName}");
+                    Debug.WriteLine($"ERROR READING REGPACK CONFIG JSON FOR: {regionName}");
                     Debug.Indent();
                     Debug.WriteLine(ioe);
                     Debug.Unindent();
@@ -459,7 +446,7 @@ namespace BlepOutLinx
                 Debug.WriteLine($"Region mod {regionName} does not have a config file; cannot apply any changes.");
                 return;
             }
-            Debug.WriteLine($"Writing changes to regpack config for: {this.regionName}, contents:");
+            Debug.WriteLine($"Writing changes to regpack config for: {regionName}, contents:");
             Debug.Indent();
             Debug.WriteLine(jo);
             Debug.Unindent();
@@ -481,7 +468,7 @@ namespace BlepOutLinx
     {
         public static JObject jo;
         public static bool hasBeenChanged = false;
-        public static string edtConfigPath => BlepOut.RootPath + @"\edtSetup.json";
+        public static string edtConfigPath => Path.Combine(BlepOut.RootPath, "edtSetup.json");
         public static bool edtConfigExists => File.Exists(edtConfigPath);
         public static void loadJo()
         {
@@ -515,6 +502,10 @@ namespace BlepOutLinx
             try
             {
                 File.WriteAllText(edtConfigPath, jo.ToString());
+                Debug.WriteLine("Saving config. Contents:");
+                Debug.Indent();
+                Debug.WriteLine(jo.ToString());
+                Debug.Unindent();
             }
             catch (IOException ioe)
             {

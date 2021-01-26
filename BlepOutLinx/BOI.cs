@@ -5,15 +5,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
-using System.Security;
-using Newtonsoft.Json;
-using BlepOutIn;
 
-namespace BlepOutLinx
+namespace Blep
 {
     public partial class BlepOut : Form
     {
-
         public BlepOut()
         {
             InitializeComponent();
@@ -61,11 +57,6 @@ namespace BlepOutLinx
             patchBlacklist.Clear();
             if (IsMyPathCorrect) Setup();
             StatusUpdate();
-            Process[] searchres = Process.GetProcessesByName("RainWorld");
-            foreach (Process pr in searchres)
-            {
-                Console.WriteLine(pr.Id);
-            }
         }
         private void Setup()
         {
@@ -90,15 +81,15 @@ namespace BlepOutLinx
             TargetSelect.SelectedPath = RootPath;
             if (PubstuntFound && firstshow)
             {
-                BlepOutIn.PubstuntInfoPopup popup;
-                popup = new BlepOutIn.PubstuntInfoPopup();
-                this.AddOwnedForm(popup);
+                Blep.PubstuntInfoPopup popup;
+                popup = new Blep.PubstuntInfoPopup();
+                AddOwnedForm(popup);
                 popup.Show();
             }
             if (MixmodsFound)
             {
-                BlepOutIn.MixmodsPopup mixmodsPopup = new BlepOutIn.MixmodsPopup(outrmixmods);
-                this.AddOwnedForm(mixmodsPopup);
+                MixmodsPopup mixmodsPopup = new Blep.MixmodsPopup(outrmixmods);
+                AddOwnedForm(mixmodsPopup);
                 mixmodsPopup.Show();
             }
             ReadyForRefresh = true;
@@ -131,8 +122,7 @@ namespace BlepOutLinx
                     else
                     {
                         ModRelay.ModType mt = ModRelay.GetModType(s);
-
-                        if (mt != ModRelay.ModType.Patch && !patchBlacklist.Contains(s) && !fi.Attributes.HasFlag(FileAttributes.ReparsePoint))
+                        if (!(mt == ModRelay.ModType.Patch || mt == ModRelay.ModType.Invalid) && !patchBlacklist.Contains(s) && !fi.Attributes.HasFlag(FileAttributes.ReparsePoint))
                         {
                             Debug.WriteLine("Found a misplaced mod in Patches folder: " + fi.Name + "; Type: " + mt.ToString());
                             if (File.Exists(ModFolder + PtModData.GiveMeBackMyName(fi.Name)))
@@ -197,8 +187,8 @@ namespace BlepOutLinx
                 {
                     metafiletracker = true;
                 }
-                Debug.WriteLineIf(metafiletracker, "Found modhash/modmeta files in mods folder.");
             }
+            Debug.WriteLineIf(metafiletracker, "Found modhash/modmeta files in mods folder.");
         }
 
         //
@@ -395,7 +385,7 @@ namespace BlepOutLinx
                 byte[] ModOrigSha = mr.origchecksum;
                 byte[] ModTarSha = mr.TarCheckSum;
 
-                if (!BlepOutIn.BoiCustom.BOIC_Bytearr_Compare(ModTarSha, ModOrigSha))
+                if (!BoiCustom.BOIC_Bytearr_Compare(ModTarSha, ModOrigSha))
                 {
                     FileInfo orfi = new FileInfo(mr.ModPath);
                     FileInfo tarfi = new FileInfo(mr.TarPath);
@@ -421,9 +411,9 @@ namespace BlepOutLinx
         public static string RootPath = string.Empty;
         private bool metafiletracker;
         private bool TSbtnMode = true;
-        private BlepOutIn.Options opwin;
-        private BlepOutIn.InvalidModPopup inp;
-        BlepOutIn.InfoWindow iw;
+        private Blep.Options opwin;
+        private Blep.InvalidModPopup inp;
+        private Blep.InfoWindow iw;
 
         public static string BOIpath
         {
@@ -557,28 +547,28 @@ namespace BlepOutLinx
         }
         private void btn_Help_Click(object sender, EventArgs e)
         {
-            if (iw == null || iw.IsDisposed) iw = new BlepOutIn.InfoWindow(this);
+            if (iw == null || iw.IsDisposed) iw = new Blep.InfoWindow(this);
             iw.Show();
         }
         private void buttonUprootPart_Click(object sender, EventArgs e)
         {
-            BlepOutIn.PartYeet py = new BlepOutIn.PartYeet(this);
-            this.AddOwnedForm(py);
+            Blep.PartYeet py = new Blep.PartYeet(this);
+            AddOwnedForm(py);
             py.ShowDialog();
         }
         private void buttonClearMeta_Click(object sender, EventArgs e)
         {
-            BlepOutIn.MetafilePurgeSuggestion psg = new BlepOutIn.MetafilePurgeSuggestion(this);
-            this.AddOwnedForm(psg);
+            Blep.MetafilePurgeSuggestion psg = new Blep.MetafilePurgeSuggestion(this);
+            AddOwnedForm(psg);
             psg.ShowDialog();
         }
         private void Modlist_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             if (!ReadyForRefresh) return;
-            if (Modlist.Items[e.Index] is ModRelay && (Modlist.Items[e.Index] as ModRelay).MyType == ModRelay.ModType.Invalid)
+            if (Modlist.Items[e.Index] is ModRelay && (Modlist.Items[e.Index] as ModRelay).MyType == ModRelay.ModType.Invalid && e.NewValue == CheckState.Checked)
             {
-                e.NewValue = CheckState.Unchecked;
-                if (inp == null || inp.IsDisposed) inp = new BlepOutIn.InvalidModPopup(this, (Modlist.Items[e.Index] as ModRelay).AssociatedModData.DisplayedName);
+                //e.NewValue = CheckState.Unchecked;
+                if (inp == null || inp.IsDisposed) inp = new InvalidModPopup(this, (Modlist.Items[e.Index] as ModRelay).AssociatedModData.DisplayedName);
                 inp.ShowDialog();
             }
             CheckState[] ich = new CheckState[Modlist.Items.Count];

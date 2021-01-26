@@ -1,4 +1,4 @@
-﻿namespace BlepOutIn
+﻿namespace Blep
 {
     partial class Options
     {
@@ -779,6 +779,7 @@
             this.textBoxEDT_CHARSELECT.Name = "textBoxEDT_CHARSELECT";
             this.textBoxEDT_CHARSELECT.Size = new System.Drawing.Size(53, 20);
             this.textBoxEDT_CHARSELECT.TabIndex = 21;
+            this.textBoxEDT_CHARSELECT.TextChanged += new System.EventHandler(this.EDT_PROPERTY_CHANGED);
             // 
             // TextBoxEDT_CHEATKARMA
             // 
@@ -789,6 +790,7 @@
             this.TextBoxEDT_CHEATKARMA.Name = "TextBoxEDT_CHEATKARMA";
             this.TextBoxEDT_CHEATKARMA.Size = new System.Drawing.Size(53, 20);
             this.TextBoxEDT_CHEATKARMA.TabIndex = 22;
+            this.TextBoxEDT_CHEATKARMA.TextChanged += new System.EventHandler(this.EDT_PROPERTY_CHANGED);
             // 
             // label25
             // 

@@ -1,4 +1,4 @@
-﻿namespace BlepOutIn
+﻿namespace Blep
 {
     partial class MetafilePurgeSuggestion
     {

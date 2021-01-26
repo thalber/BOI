@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace BlepOutLinx
+namespace Blep
 {
     internal static class Program
     {

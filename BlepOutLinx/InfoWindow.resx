@@ -122,10 +122,8 @@
 
 This tool only recognizes Rain World folder as valid if BepInEx is installed. All mods are stored inside Rain World\Mods and copied to BepInEx\plugins or BepInEx\monomod when enabled.
 
-Mod lists are fetched when loading and refreshed every time the window is focused.
-Mods are also brought up to date both ways, so neither AutoUpdate nor manual updates will cause conflicts.
-Mods that do not work with BepInEx are automatically removed from active folders (BOI notifies you when it does so) and can not be enabled again.
-Symlinks are ignored entirely.
+HOW TO USE:
+Place mods' DLL files into RainWorld\Mods folder, enable them in main window. Never forget that dependancies and README files exist.
 
 See "Mod types" tab for more info on different mod types, and "Links" tab for some potentially useful directions.
 

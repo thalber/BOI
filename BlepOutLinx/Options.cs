@@ -1,17 +1,11 @@
-﻿using System;
+﻿using Blep;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using Newtonsoft.Json;
-using System.IO;
-using BlepOutLinx;
 using System.Diagnostics;
+using System.IO;
+using System.Windows.Forms;
 
-namespace BlepOutIn
+namespace Blep
 {
     public partial class Options : Form
     {
@@ -26,7 +20,7 @@ namespace BlepOutIn
             regmodlist = new List<RegModData>();
             FetchStuff();
         }
-        public BlepOutLinx.BlepOut mf;
+        public Blep.BlepOut mf;
         private bool readytoapply = true;
         private RegModData curRmd;
         private List<RegModData> regmodlist;
@@ -135,7 +129,7 @@ namespace BlepOutIn
             }
             readytoapply = true;
         }
-        private static string CRSpath => BlepOut.ModFolder + @"CustomResources";
+        private static string CRSpath => Path.Combine(BlepOut.ModFolder, @"CustomResources");
         private void Options_Activated(object sender, EventArgs e)
         {
             //this.Enabled = mf.Enabled;
@@ -242,8 +236,9 @@ namespace BlepOutIn
             FetchStuff();
         }
 
-        string langinplugins => Path.Combine(BlepOut.PluginsFolder, "Language");
-        string langinmods => Path.Combine(BlepOut.ModFolder + "Language");
+        private string langinplugins => Path.Combine(BlepOut.PluginsFolder, "Language");
+
+        private string langinmods => Path.Combine(BlepOut.ModFolder + "Language");
     }
 
     

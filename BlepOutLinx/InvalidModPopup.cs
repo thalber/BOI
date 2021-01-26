@@ -1,31 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
-namespace BlepOutIn
+namespace Blep
 {
     public partial class InvalidModPopup : Form
     {
-        public InvalidModPopup(BlepOutLinx.BlepOut mainfotm, string modname)
+        public InvalidModPopup(Blep.BlepOut mainfotm, string modname)
         {
             InitializeComponent();
             mf = mainfotm;
             if (modname != null)
             {
-                label1.Text = ($"The mod you are trying to enable ({modname}) is INVALID and can NOT function with BepInEx. This usually means that the mod assembly mixes MonoMod patches and Partiality mods. For more details, see HELP&&INFO window.");
+                label1.Text = ($"The mod you are trying to enable ({modname}) is INVALID. Launching the game with it will most likely result in an immediate crash.\nFor more details, see HELP&&INFO window.");
             }
             mf.Enabled = false;
         }
-        BlepOutLinx.BlepOut mf;
+
+        private Blep.BlepOut mf;
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void InvalidModPopup_FormClosed(object sender, FormClosedEventArgs e)

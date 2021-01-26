@@ -1,15 +1,15 @@
 ﻿using System.Windows.Forms;
 
-namespace BlepOutIn
+namespace Blep
 {
     public partial class InfoWindow : Form
     {
-        public InfoWindow(BlepOutLinx.BlepOut mainform)
+        public InfoWindow(Blep.BlepOut mainform)
         {
             InitializeComponent();
             mf = mainform;
         }
-        private BlepOutLinx.BlepOut mf;
+        private Blep.BlepOut mf;
         private int hmm = 0;
 
         private void linkLabelRDB_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

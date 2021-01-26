@@ -1,4 +1,4 @@
-﻿namespace BlepOutIn
+﻿namespace Blep
 {
     partial class InfoWindow
     {
@@ -196,8 +196,8 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(267, 39);
             this.label7.TabIndex = 4;
-            this.label7.Text = "Mods that BOI can not determine the type of.\r\nGo into BepInEx\\Plugins with their " +
-    "original names when enabled.\r\n";
+            this.label7.Text = "Files that BOI can not determine the type of.\r\nGo into BepInEx\\Plugins with their" +
+    " original names when enabled.\r\n";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label3

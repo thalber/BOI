@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using Newtonsoft.Json.Linq;
+﻿using Blep;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Diagnostics;
-using BlepOutLinx;
+using System.IO;
 
-namespace BlepOutIn
+namespace Blep
 {
-    class BoiConfigManager
+    internal class BoiConfigManager
     {
         public static JObject confjo;
         public static void ReadConfig()
