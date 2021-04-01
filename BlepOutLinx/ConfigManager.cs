@@ -12,7 +12,6 @@ namespace Blep
         public static JObject confjo;
         public static void ReadConfig()
         {
-            if (File.Exists(Path.Combine(BlepOut.BOIpath, "cfg.txt"))) File.Delete(Path.Combine(BlepOut.BOIpath, "cfg.txt"));
             try
             {
                 confjo = null;

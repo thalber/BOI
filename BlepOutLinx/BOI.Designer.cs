@@ -33,25 +33,36 @@
             this.TargetSelect = new System.Windows.Forms.FolderBrowserDialog();
             this.Modlist = new System.Windows.Forms.CheckedListBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnLaunch = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.lblPathStatus = new System.Windows.Forms.Label();
             this.lblProcessStatus = new System.Windows.Forms.Label();
+            this.btnLaunch = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.labelDesc = new System.Windows.Forms.Label();
             this.labelHead = new System.Windows.Forms.Label();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.rwp = new System.Diagnostics.Process();
             this.btn_Help = new System.Windows.Forms.Button();
             this.buttonUprootPart = new System.Windows.Forms.Button();
             this.buttonClearMeta = new System.Windows.Forms.Button();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonOption = new System.Windows.Forms.Button();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.MaskModeSelect = new System.Windows.Forms.ComboBox();
+            this.textBox_MaskInput = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.TagInputBox = new System.Windows.Forms.RichTextBox();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
+            this.tableLayoutPanel7.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSelectPath
@@ -71,11 +82,11 @@
             // 
             this.Modlist.AllowDrop = true;
             resources.ApplyResources(this.Modlist, "Modlist");
-            this.Modlist.CheckOnClick = true;
             this.Modlist.FormattingEnabled = true;
             this.Modlist.Name = "Modlist";
             this.Modlist.Sorted = true;
             this.Modlist.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.Modlist_ItemCheck);
+            this.Modlist.SelectedIndexChanged += new System.EventHandler(this.Modlist_SelectionChanged);
             this.Modlist.DragDrop += new System.Windows.Forms.DragEventHandler(this.Modlist_DragDrop);
             this.Modlist.DragEnter += new System.Windows.Forms.DragEventHandler(this.Modlist_DragEnter);
             // 
@@ -83,16 +94,9 @@
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.btnSelectPath, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnLaunch, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnLaunch, 2, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
-            // btnLaunch
-            // 
-            resources.ApplyResources(this.btnLaunch, "btnLaunch");
-            this.btnLaunch.Name = "btnLaunch";
-            this.btnLaunch.UseVisualStyleBackColor = true;
-            this.btnLaunch.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnLaunch_MouseClick);
             // 
             // tableLayoutPanel4
             // 
@@ -115,12 +119,18 @@
             this.lblProcessStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblProcessStatus.Name = "lblProcessStatus";
             // 
+            // btnLaunch
+            // 
+            resources.ApplyResources(this.btnLaunch, "btnLaunch");
+            this.btnLaunch.Name = "btnLaunch";
+            this.btnLaunch.UseVisualStyleBackColor = true;
+            this.btnLaunch.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnLaunch_MouseClick);
+            // 
             // tableLayoutPanel2
             // 
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
             this.tableLayoutPanel2.Controls.Add(this.labelDesc, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.labelHead, 0, 0);
-            this.tableLayoutPanel2.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
             // labelDesc
@@ -132,14 +142,6 @@
             // 
             resources.ApplyResources(this.labelHead, "labelHead");
             this.labelHead.Name = "labelHead";
-            // 
-            // tableLayoutPanel3
-            // 
-            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel1, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.Modlist, 0, 3);
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel2, 0, 0);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             // 
             // rwp
             // 
@@ -175,6 +177,7 @@
             // tableLayoutPanel5
             // 
             resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
+            this.tableLayoutPanel3.SetColumnSpan(this.tableLayoutPanel5, 2);
             this.tableLayoutPanel5.Controls.Add(this.buttonClearMeta, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.buttonUprootPart, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.btn_Help, 2, 0);
@@ -188,13 +191,80 @@
             this.buttonOption.UseVisualStyleBackColor = true;
             this.buttonOption.Click += new System.EventHandler(this.buttonOption_Click);
             // 
+            // tableLayoutPanel6
+            // 
+            resources.ApplyResources(this.tableLayoutPanel6, "tableLayoutPanel6");
+            this.tableLayoutPanel6.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel7, 0, 2);
+            this.tableLayoutPanel6.Controls.Add(this.textBox_MaskInput, 0, 1);
+            this.tableLayoutPanel6.Controls.Add(this.label3, 0, 3);
+            this.tableLayoutPanel6.Controls.Add(this.label4, 0, 4);
+            this.tableLayoutPanel6.Controls.Add(this.TagInputBox, 0, 5);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel3.SetRowSpan(this.tableLayoutPanel6, 3);
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // tableLayoutPanel7
+            // 
+            resources.ApplyResources(this.tableLayoutPanel7, "tableLayoutPanel7");
+            this.tableLayoutPanel7.Controls.Add(this.label2, 0, 0);
+            this.tableLayoutPanel7.Controls.Add(this.MaskModeSelect, 1, 0);
+            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // MaskModeSelect
+            // 
+            resources.ApplyResources(this.MaskModeSelect, "MaskModeSelect");
+            this.MaskModeSelect.FormattingEnabled = true;
+            this.MaskModeSelect.Name = "MaskModeSelect";
+            this.MaskModeSelect.TextChanged += new System.EventHandler(this.MaskModeSelect_TextChanged);
+            // 
+            // textBox_MaskInput
+            // 
+            resources.ApplyResources(this.textBox_MaskInput, "textBox_MaskInput");
+            this.textBox_MaskInput.Name = "textBox_MaskInput";
+            this.textBox_MaskInput.TextChanged += new System.EventHandler(this.textBoxMaskInput_TextChanged);
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
+            // 
+            // TagInputBox
+            // 
+            resources.ApplyResources(this.TagInputBox, "TagInputBox");
+            this.TagInputBox.Name = "TagInputBox";
+            this.TagInputBox.TextChanged += new System.EventHandler(this.TagTextChanged);
+            // 
+            // tableLayoutPanel3
+            // 
+            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel2, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel6, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel1, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel5, 0, 3);
+            this.tableLayoutPanel3.Controls.Add(this.Modlist, 0, 2);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            // 
             // BlepOut
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.Controls.Add(this.tableLayoutPanel3);
-            this.Controls.Add(this.tableLayoutPanel5);
             this.MaximizeBox = false;
             this.Name = "BlepOut";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
@@ -204,14 +274,17 @@
             this.Enter += new System.EventHandler(this.BlepOut_Activated);
             this.Leave += new System.EventHandler(this.BlepOut_Deactivate);
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
+            this.tableLayoutPanel7.ResumeLayout(false);
+            this.tableLayoutPanel7.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
-            this.tableLayoutPanel5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -223,7 +296,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label labelHead;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button btnLaunch;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Label lblPathStatus;
@@ -235,6 +307,16 @@
         public System.Windows.Forms.Button buttonUprootPart;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.Button buttonOption;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox MaskModeSelect;
+        private System.Windows.Forms.TextBox textBox_MaskInput;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.RichTextBox TagInputBox;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
     }
 }
 

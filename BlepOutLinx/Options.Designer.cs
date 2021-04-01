@@ -83,6 +83,23 @@
             this.buttonMM2P = new System.Windows.Forms.Button();
             this.labelCOMMODDETAILS = new System.Windows.Forms.Label();
             this.labelCOMMODSTATUS = new System.Windows.Forms.Label();
+            this.tabBackupTool = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.NoteBox = new System.Windows.Forms.RichTextBox();
+            this.NameBox = new System.Windows.Forms.TextBox();
+            this.labelBUcreationTime = new System.Windows.Forms.Label();
+            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
+            this.label28 = new System.Windows.Forms.Label();
+            this.BackupSearchBar = new System.Windows.Forms.TextBox();
+            this.btnMakeBackup = new System.Windows.Forms.Button();
+            this.btnRestoreBackup = new System.Windows.Forms.Button();
+            this.btnNukeActiveSave = new System.Windows.Forms.Button();
+            this.btnDeletBackup = new System.Windows.Forms.Button();
+            this.listBackups = new System.Windows.Forms.ListBox();
             this.tabControl.SuspendLayout();
             this.tabCRS.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -95,6 +112,10 @@
             this.tableLayoutPanel9.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tabBackupTool.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel11.SuspendLayout();
+            this.tableLayoutPanel12.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -104,6 +125,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.tabCRS);
             this.tabControl.Controls.Add(this.tabEDT);
+            this.tabControl.Controls.Add(this.tabBackupTool);
             this.tabControl.Location = new System.Drawing.Point(12, 12);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -254,8 +276,8 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(237, 68);
             this.label6.TabIndex = 0;
-            this.label6.Text = "PLEASE NOTE:\r\nEnabling or disabling region mods corrupts savefile data. Reset you" +
-    "r saveslot after doing so to avoid major bugs.";
+            this.label6.Text = "PLEASE NOTE:\r\nEnabling or disabling region mods, as well as changing load order, " +
+    "corrupts savefile data. Reset your saveslot after this to avoid bugs.";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel7
@@ -877,6 +899,264 @@
             this.labelCOMMODSTATUS.Text = "COMMODSTATUS";
             this.labelCOMMODSTATUS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // tabBackupTool
+            // 
+            this.tabBackupTool.Controls.Add(this.tableLayoutPanel2);
+            this.tabBackupTool.Location = new System.Drawing.Point(4, 22);
+            this.tabBackupTool.Name = "tabBackupTool";
+            this.tabBackupTool.Padding = new System.Windows.Forms.Padding(3);
+            this.tabBackupTool.Size = new System.Drawing.Size(457, 326);
+            this.tabBackupTool.TabIndex = 4;
+            this.tabBackupTool.Text = "Save backups";
+            this.tabBackupTool.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.01123F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.98877F));
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel11, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel12, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.listBackups, 0, 1);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(6, 6);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(445, 314);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // tableLayoutPanel11
+            // 
+            this.tableLayoutPanel11.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel11.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel11.ColumnCount = 2;
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.84906F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.15094F));
+            this.tableLayoutPanel11.Controls.Add(this.label29, 0, 0);
+            this.tableLayoutPanel11.Controls.Add(this.label27, 0, 2);
+            this.tableLayoutPanel11.Controls.Add(this.label14, 0, 1);
+            this.tableLayoutPanel11.Controls.Add(this.NoteBox, 0, 3);
+            this.tableLayoutPanel11.Controls.Add(this.NameBox, 1, 0);
+            this.tableLayoutPanel11.Controls.Add(this.labelBUcreationTime, 1, 1);
+            this.tableLayoutPanel11.Location = new System.Drawing.Point(229, 65);
+            this.tableLayoutPanel11.Name = "tableLayoutPanel11";
+            this.tableLayoutPanel11.RowCount = 4;
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel11.Size = new System.Drawing.Size(213, 246);
+            this.tableLayoutPanel11.TabIndex = 1;
+            // 
+            // label29
+            // 
+            this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label29.Location = new System.Drawing.Point(4, 1);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(69, 29);
+            this.label29.TabIndex = 5;
+            this.label29.Text = "Name";
+            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label27
+            // 
+            this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label27.AutoSize = true;
+            this.label27.BackColor = System.Drawing.SystemColors.Window;
+            this.tableLayoutPanel11.SetColumnSpan(this.label27, 2);
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label27.Location = new System.Drawing.Point(4, 63);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(205, 32);
+            this.label27.TabIndex = 4;
+            this.label27.Text = "Your notes";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label14
+            // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label14.Location = new System.Drawing.Point(4, 31);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(69, 31);
+            this.label14.TabIndex = 2;
+            this.label14.Text = "Creation time";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // NoteBox
+            // 
+            this.NoteBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel11.SetColumnSpan(this.NoteBox, 2);
+            this.NoteBox.Location = new System.Drawing.Point(4, 99);
+            this.NoteBox.Name = "NoteBox";
+            this.NoteBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
+            this.NoteBox.Size = new System.Drawing.Size(205, 143);
+            this.NoteBox.TabIndex = 2;
+            this.NoteBox.Text = "";
+            this.NoteBox.TextChanged += new System.EventHandler(this.NoteBox_TextChanged);
+            // 
+            // NameBox
+            // 
+            this.NameBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.NameBox.Location = new System.Drawing.Point(80, 4);
+            this.NameBox.Name = "NameBox";
+            this.NameBox.Size = new System.Drawing.Size(129, 20);
+            this.NameBox.TabIndex = 0;
+            this.NameBox.TextChanged += new System.EventHandler(this.NameBox_TextChanged);
+            // 
+            // labelBUcreationTime
+            // 
+            this.labelBUcreationTime.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelBUcreationTime.AutoSize = true;
+            this.labelBUcreationTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelBUcreationTime.Location = new System.Drawing.Point(80, 31);
+            this.labelBUcreationTime.Name = "labelBUcreationTime";
+            this.labelBUcreationTime.Size = new System.Drawing.Size(129, 31);
+            this.labelBUcreationTime.TabIndex = 3;
+            this.labelBUcreationTime.Text = "time_last_modified";
+            this.labelBUcreationTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tableLayoutPanel12
+            // 
+            this.tableLayoutPanel12.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel12.ColumnCount = 4;
+            this.tableLayoutPanel2.SetColumnSpan(this.tableLayoutPanel12, 2);
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel12.Controls.Add(this.label28, 0, 1);
+            this.tableLayoutPanel12.Controls.Add(this.BackupSearchBar, 1, 1);
+            this.tableLayoutPanel12.Controls.Add(this.btnMakeBackup, 2, 0);
+            this.tableLayoutPanel12.Controls.Add(this.btnRestoreBackup, 2, 1);
+            this.tableLayoutPanel12.Controls.Add(this.btnNukeActiveSave, 0, 0);
+            this.tableLayoutPanel12.Controls.Add(this.btnDeletBackup, 3, 1);
+            this.tableLayoutPanel12.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
+            this.tableLayoutPanel12.RowCount = 2;
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(439, 56);
+            this.tableLayoutPanel12.TabIndex = 6;
+            // 
+            // label28
+            // 
+            this.label28.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label28.Location = new System.Drawing.Point(3, 28);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(59, 28);
+            this.label28.TabIndex = 5;
+            this.label28.Text = "Search";
+            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // BackupSearchBar
+            // 
+            this.BackupSearchBar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BackupSearchBar.Location = new System.Drawing.Point(68, 31);
+            this.BackupSearchBar.Name = "BackupSearchBar";
+            this.BackupSearchBar.Size = new System.Drawing.Size(147, 20);
+            this.BackupSearchBar.TabIndex = 6;
+            this.BackupSearchBar.TextChanged += new System.EventHandler(this.BackupSearchBar_TextChanged);
+            // 
+            // btnMakeBackup
+            // 
+            this.btnMakeBackup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel12.SetColumnSpan(this.btnMakeBackup, 2);
+            this.btnMakeBackup.Location = new System.Drawing.Point(221, 3);
+            this.btnMakeBackup.Name = "btnMakeBackup";
+            this.btnMakeBackup.Size = new System.Drawing.Size(215, 22);
+            this.btnMakeBackup.TabIndex = 7;
+            this.btnMakeBackup.Text = "Back up current save";
+            this.btnMakeBackup.UseVisualStyleBackColor = true;
+            this.btnMakeBackup.Click += new System.EventHandler(this.BackupRelatedBtnClick);
+            // 
+            // btnRestoreBackup
+            // 
+            this.btnRestoreBackup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRestoreBackup.Location = new System.Drawing.Point(221, 31);
+            this.btnRestoreBackup.Name = "btnRestoreBackup";
+            this.btnRestoreBackup.Size = new System.Drawing.Size(103, 22);
+            this.btnRestoreBackup.TabIndex = 8;
+            this.btnRestoreBackup.Text = "Restore backup\r\n";
+            this.btnRestoreBackup.UseVisualStyleBackColor = true;
+            this.btnRestoreBackup.Click += new System.EventHandler(this.BackupRelatedBtnClick);
+            // 
+            // btnNukeActiveSave
+            // 
+            this.btnNukeActiveSave.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNukeActiveSave.BackColor = System.Drawing.Color.Tomato;
+            this.tableLayoutPanel12.SetColumnSpan(this.btnNukeActiveSave, 2);
+            this.btnNukeActiveSave.Location = new System.Drawing.Point(3, 3);
+            this.btnNukeActiveSave.Name = "btnNukeActiveSave";
+            this.btnNukeActiveSave.Size = new System.Drawing.Size(212, 22);
+            this.btnNukeActiveSave.TabIndex = 9;
+            this.btnNukeActiveSave.Text = "Clear current save";
+            this.btnNukeActiveSave.UseVisualStyleBackColor = false;
+            this.btnNukeActiveSave.Click += new System.EventHandler(this.BackupRelatedBtnClick);
+            // 
+            // btnDeletBackup
+            // 
+            this.btnDeletBackup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeletBackup.Location = new System.Drawing.Point(330, 31);
+            this.btnDeletBackup.Name = "btnDeletBackup";
+            this.btnDeletBackup.Size = new System.Drawing.Size(106, 22);
+            this.btnDeletBackup.TabIndex = 10;
+            this.btnDeletBackup.Text = "Delete backup";
+            this.btnDeletBackup.UseVisualStyleBackColor = true;
+            this.btnDeletBackup.Click += new System.EventHandler(this.BackupRelatedBtnClick);
+            // 
+            // listBackups
+            // 
+            this.listBackups.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBackups.FormattingEnabled = true;
+            this.listBackups.IntegralHeight = false;
+            this.listBackups.Location = new System.Drawing.Point(3, 65);
+            this.listBackups.Name = "listBackups";
+            this.listBackups.Size = new System.Drawing.Size(220, 246);
+            this.listBackups.TabIndex = 0;
+            this.listBackups.SelectedIndexChanged += new System.EventHandler(this.listBackups_SelectedIndexChanged);
+            // 
             // Options
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -913,6 +1193,12 @@
             this.tableLayoutPanel10.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.tabBackupTool.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel11.ResumeLayout(false);
+            this.tableLayoutPanel11.PerformLayout();
+            this.tableLayoutPanel12.ResumeLayout(false);
+            this.tableLayoutPanel12.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -974,5 +1260,22 @@
         private System.Windows.Forms.Label labelCOMMODDETAILS;
         private System.Windows.Forms.Label labelCOMMODSTATUS;
         private System.Windows.Forms.Button buttonMM2P;
+        private System.Windows.Forms.TabPage tabBackupTool;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.ListBox listBackups;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
+        private System.Windows.Forms.Label labelBUcreationTime;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.RichTextBox NoteBox;
+        private System.Windows.Forms.TextBox NameBox;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.TextBox BackupSearchBar;
+        private System.Windows.Forms.Button btnMakeBackup;
+        private System.Windows.Forms.Button btnRestoreBackup;
+        private System.Windows.Forms.Button btnNukeActiveSave;
+        private System.Windows.Forms.Button btnDeletBackup;
+        private System.Windows.Forms.Label label29;
     }
 }

@@ -14,6 +14,8 @@ namespace Blep
         {
             InitializeComponent();
             firstshow = true;
+            MaskModeSelect.Items.AddRange(new object[] {Maskmode.Names, Maskmode.Tags, Maskmode.NamesAndTags});
+            MaskModeSelect.SelectedItem = Maskmode.NamesAndTags;
             TextWriterTraceListener tr = new TextWriterTraceListener(File.CreateText("BOILOG.txt"));
             Debug.Listeners.Add(tr);
             Debug.AutoFlush = true;
@@ -22,6 +24,7 @@ namespace Blep
             pluginBlacklist = new List<string>();
             patchBlacklist = new List<string>();
             outrmixmods = new List<string>();
+            TagManager.ReadTagsFromFile(tagfilePath);
             BoiConfigManager.ReadConfig();
             UpdateTargetPath(BoiConfigManager.TarPath);
             firstshow = false;
@@ -81,8 +84,8 @@ namespace Blep
             TargetSelect.SelectedPath = RootPath;
             if (PubstuntFound && firstshow)
             {
-                Blep.PubstuntInfoPopup popup;
-                popup = new Blep.PubstuntInfoPopup();
+                PubstuntInfoPopup popup;
+                popup = new PubstuntInfoPopup();
                 AddOwnedForm(popup);
                 popup.Show();
             }
@@ -96,14 +99,13 @@ namespace Blep
             buttonClearMeta.Visible = metafiletracker;
             Debug.Unindent();
         }
-
         private void ResolveBlacklists()
         {
             RetrieveHkBlacklist();
             RetrievePtBlacklist();
         }
 
-        //deletes Pubstunt and mixmods
+        //deletes Pubstunt and mixmods from where they shouldn't be
         private void Rootout()
         {
             string[] patchfoldercontents = Directory.GetFiles(PatchesFolder);
@@ -190,7 +192,6 @@ namespace Blep
             }
             Debug.WriteLineIf(metafiletracker, "Found modhash/modmeta files in mods folder.");
         }
-
         //
         //blacklist stuff
         //
@@ -288,22 +289,23 @@ namespace Blep
                 var fi = new FileInfo(s);
                 if (fi.Extension == ".dll" && !patchBlacklist.Contains(fi.Name) && !fi.Attributes.HasFlag(FileAttributes.ReparsePoint))
                 {
-                    if (!File.Exists(ModFolder + PtModData.GiveMeBackMyName(fi.Name)))
+                    if (!File.Exists(Path.Combine(ModFolder, PtModData.GiveMeBackMyName(fi.Name))))
                     {
-                        File.Copy(s, ModFolder + PtModData.GiveMeBackMyName(fi.Name));
-                        Debug.WriteLine(fi.Name + "from patch folder does not have a counterpart in Mods, copying");
+                        File.Copy(s, Path.Combine(ModFolder + PtModData.GiveMeBackMyName(fi.Name)));
+                        Debug.WriteLine(fi.Name + " from patch folder does not have a counterpart in Mods, copying");
                     }
                     else if (fi.LastWriteTime < new FileInfo(ModFolder + PtModData.GiveMeBackMyName(fi.Name)).LastWriteTime)
                     {
                         File.Delete(s);
-                        File.Copy(ModFolder + PtModData.GiveMeBackMyName(fi.Name), s);
-                        Debug.WriteLine(fi.Name + "from Patches folder brought up to date.");
+                        File.Copy(Path.Combine(ModFolder, PtModData.GiveMeBackMyName(fi.Name)), s);
+                        Debug.WriteLine(fi.Name + " from Patches folder brought up to date.");
                     }
                 }
             }
             string pathtomods(FileInfo fi)
             {
-                return Path.Combine(ModFolder, fi.Name);
+
+                return Path.Combine(ModFolder, PtModData.GiveMeBackMyName(fi.Name));
             }
         }
         private void CompileModList()
@@ -331,6 +333,52 @@ namespace Blep
                     Modlist.SetItemCheckState(i, (mr.enabled) ? CheckState.Checked : CheckState.Unchecked);
                 }
             }
+        }
+        private void ApplyMaskToModlist(string mask)
+        {
+            bool oldrst = ReadyForRefresh;
+            ReadyForRefresh = false;
+            Modlist.Items.Clear();
+            foreach (ModRelay mr in targetFiles)
+            {
+                if (ModSelectedByMask(mask, mr)) Modlist.Items.Add(mr);
+
+            }
+            for (int i = 0; i < Modlist.Items.Count; i++)
+            {
+                if (Modlist.Items[i] is ModRelay)
+                {
+                    ModRelay mr = Modlist.Items[i] as ModRelay;
+                    Modlist.SetItemCheckState(i, (mr.enabled) ? CheckState.Checked : CheckState.Unchecked);
+                }
+            }
+            ReadyForRefresh = oldrst;
+        }
+
+        private bool ModSelectedByMask(string mask, ModRelay mr)
+        {
+            if (mask == string.Empty) return true;
+            string cmm = MaskModeSelect.Text;
+            if (cmm == nameof(Maskmode.Names) || cmm == nameof(Maskmode.NamesAndTags)) if (mr.ToString().ToLower().Contains(mask.ToLower())) return true;
+            if (cmm == nameof(Maskmode.NamesAndTags) || cmm == nameof(Maskmode.Tags))
+            {
+                string[] tags = TagManager.GetTagsArray(mr.AssociatedModData.DisplayedName);
+                foreach (string tag in tags)
+                {
+                    if (tag.ToLower().Contains(mask.ToLower())) return true;
+                }
+            }
+            
+                
+            return false;
+        }
+
+        [Flags]
+        private enum Maskmode
+        {
+            Tags,
+            Names,
+            NamesAndTags
         }
 
         //apply/unapply all mods needed
@@ -404,27 +452,19 @@ namespace Blep
                 }
             }
         }
-        public bool IsMyPathCorrect
+        public static bool IsMyPathCorrect
         {
             get { return (Directory.Exists(PluginsFolder) && Directory.Exists(PatchesFolder)); }
         }
         public static string RootPath = string.Empty;
-        private bool metafiletracker;
-        private bool TSbtnMode = true;
-        private Blep.Options opwin;
-        private Blep.InvalidModPopup inp;
-        private Blep.InfoWindow iw;
-
-        public static string BOIpath
-        {
-            get { return Assembly.GetExecutingAssembly().Location.Replace("BlepOutIn.exe", string.Empty); }
-        }
-
-        public static string cfgpath
-        {
-            get { return Path.Combine(BOIpath, "cfg.json"); }
-        }
-
+        private static bool metafiletracker;
+        private static bool TSbtnMode = true;
+        private Options opwin;
+        private InvalidModPopup inp;
+        private InfoWindow iw;
+        public static string BOIpath => Directory.GetCurrentDirectory();
+        public static string cfgpath => Path.Combine(BOIpath, "cfg.json");
+        public static string tagfilePath => Path.Combine(BOIpath, "MODTAGS.txt");
         public static bool AintThisPS(string path)
         {
             var fi = new FileInfo(path);
@@ -457,27 +497,11 @@ namespace Blep
         private bool ReadyForRefresh;
         private bool PubstuntFound;
         private bool MixmodsFound;
-        private string hkblacklistpath
-        {
-            get { return Path.Combine(PluginsFolder, @"plugins_blacklist.txt"); }
-        }
-        private string ptblacklistpath
-        {
-            get { return Path.Combine(PatchesFolder, @"patches_blacklist.txt"); }
-        }
-
-        public static string ModFolder
-        {
-            get { return Path.Combine(RootPath, "Mods"); }
-        }
-        public static string PluginsFolder
-        {
-            get { return Path.Combine(RootPath, "BepInEx", "plugins"); }
-        }
-        public static string PatchesFolder
-        {
-            get { return Path.Combine(RootPath, "BepInEx", "monomod"); }
-        }
+        private string hkblacklistpath => Path.Combine(PluginsFolder, @"plugins_blacklist.txt");
+        private string ptblacklistpath => Path.Combine(PatchesFolder, @"patches_blacklist.txt");
+        public static string ModFolder => Path.Combine(RootPath, "Mods");
+        public static string PluginsFolder => Path.Combine(RootPath, "BepInEx", "plugins");
+        public static string PatchesFolder => Path.Combine(RootPath, "BepInEx", "monomod");
 
         private void buttonSelectPath_Click(object sender, EventArgs e)
         {
@@ -501,7 +525,8 @@ namespace Blep
         {
             UpdateTargetPath(RootPath);
             StatusUpdate();
-            buttonUprootPart.Visible = Directory.Exists(RootPath + @"\RainWorld_Data\Managed_backup");
+            ApplyMaskToModlist(textBox_MaskInput.Text);
+            buttonUprootPart.Visible = Directory.Exists(Path.Combine(RootPath, "RainWorld_Data", "Managed_backup"));
         }
         private void BlepOut_Deactivate(object sender, EventArgs e)
         {
@@ -509,6 +534,7 @@ namespace Blep
             {
 
             }
+            TagManager.SaveToFile(tagfilePath);
         }
         private void StatusUpdate()
         {
@@ -531,7 +557,7 @@ namespace Blep
             try
             {
                 rw = new System.Diagnostics.Process();
-                rw.StartInfo.FileName = RootPath + @"\RainWorld.exe";
+                rw.StartInfo.FileName = Path.Combine(RootPath, "RainWorld.exe");
                 rw.Start();
                 Debug.WriteLine("Game launched.");
             }
@@ -585,6 +611,10 @@ namespace Blep
         {
             Debug.WriteLine("BOI shutting down. " + DateTime.Now);
             BoiConfigManager.WriteConfig();
+            List<string> mns = new List<string>();
+            foreach (ModRelay mr in targetFiles) mns.Add(mr.AssociatedModData.DisplayedName);
+            TagManager.TagCleanup(mns.ToArray());
+            TagManager.SaveToFile(tagfilePath);
         }
         private void buttonOption_Click(object sender, EventArgs e)
         {
@@ -609,28 +639,48 @@ namespace Blep
                 }
                 // move the dll file to the Mods folder
                 string ModFilePath = Path.Combine(RootPath, "Mods", ModFileInfo.Name);
-                if(System.IO.File.Exists(ModFilePath))
+                if(File.Exists(ModFilePath))
                 {
                     Debug.WriteLine($"Error: {ModFileInfo.Name} was ignored, as it already exists.");
                     continue;
                 }
                 // move the dll file to the Mods folder
-                System.IO.File.Copy(ModFileInfo.FullName, ModFilePath);
+                File.Copy(ModFileInfo.FullName, ModFilePath);
                 // get mod data
                 var mr = new ModRelay(ModFilePath);
                 // add the mod to the mod list
-                Modlist.Items.Add(mr);
+                targetFiles.Add(mr);
                 Debug.WriteLine($"{ModFileInfo.Name} successfully added.");
                 // since it's a new mod just added to the folder, it shouldn't be checked as active, nothing else to do here
             }
             Debug.Unindent();
             Debug.WriteLine("Drag&Drop operation ended.");
         }
-
         private void Modlist_DragEnter(object sender, DragEventArgs e)
         {
             // if we're about to drop a file, indicate a copy to allow the drop
             if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
         }
+        private void textBoxMaskInput_TextChanged(object sender, EventArgs e)
+        {
+            ApplyMaskToModlist(textBox_MaskInput.Text);
+        }
+
+        private void Modlist_SelectionChanged(object sender, EventArgs e)
+        {
+            if (Modlist.SelectedItem == null) return;
+            TagInputBox.Text = TagManager.GetTagString(((ModRelay)Modlist.SelectedItem)?.AssociatedModData.DisplayedName);
+        }
+        private void TagTextChanged(object sender, EventArgs e)
+        {
+            if (Modlist.SelectedItem == null) return;
+            TagManager.SetTagData(((ModRelay)Modlist.SelectedItem).AssociatedModData.DisplayedName, TagInputBox.Text);
+        }
+        private void MaskModeSelect_TextChanged(object sender, EventArgs e)
+        {
+            if (!ReadyForRefresh) return;
+            ApplyMaskToModlist(textBox_MaskInput.Text);
+        }
+
     }
 }

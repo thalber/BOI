@@ -55,7 +55,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 66.95652F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.04348F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(260, 114);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(260, 137);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // label2
@@ -66,7 +66,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(4, 22);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(252, 60);
+            this.label2.Size = new System.Drawing.Size(252, 75);
             this.label2.TabIndex = 2;
             this.label2.Text = "There are leftover modHash and modMeta files from Partiality in Mods folder. Thei" +
     "r existence is pointless if you are using BepInEx. Would you like to relieve the" +
@@ -83,11 +83,11 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Controls.Add(this.buttonCancel, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.buttonUproot, 0, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(4, 86);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(4, 101);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(252, 24);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(252, 32);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // buttonCancel
@@ -97,7 +97,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.Location = new System.Drawing.Point(129, 3);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(120, 18);
+            this.buttonCancel.Size = new System.Drawing.Size(120, 26);
             this.buttonCancel.TabIndex = 1;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
@@ -110,7 +110,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonUproot.Location = new System.Drawing.Point(3, 3);
             this.buttonUproot.Name = "buttonUproot";
-            this.buttonUproot.Size = new System.Drawing.Size(120, 18);
+            this.buttonUproot.Size = new System.Drawing.Size(120, 26);
             this.buttonUproot.TabIndex = 0;
             this.buttonUproot.Text = "Set them free";
             this.buttonUproot.UseVisualStyleBackColor = true;

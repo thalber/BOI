@@ -174,9 +174,9 @@ namespace Blep
             }
         }
 
-        public string ModPath;
-        public ModData AssociatedModData;
-        public bool isValid;
+        public string ModPath { get; set; }
+        public ModData AssociatedModData { get; set; }
+        public bool isValid { get; set; }
 
         public enum ModType
         {
@@ -192,19 +192,16 @@ namespace Blep
         {
             get { return AssociatedModData.Enabled; }
         }
-
         public void Enable()
         {
             if (enabled) return;
             File.Copy(AssociatedModData.OrigPath, TarPath);
         }
-
         public void Disable()
         {
             if (!enabled) return;
             File.Delete(TarPath);
         }
-
         public override string ToString()
         {
             return AssociatedModData.DisplayedName + " : " + MyType.ToString().ToUpper();
@@ -216,7 +213,7 @@ namespace Blep
         public ModData(string path)
         {
             OrigPath = path;
-
+            DisplayedName = new FileInfo(path).Name;
         }
         public virtual string TarName
         {
@@ -226,8 +223,8 @@ namespace Blep
         public virtual string TarFolder => Path.Combine(BlepOut.RootPath, "BepInEx", "plugins");
         public string OrigPath;
 
-        public virtual bool Enabled => (File.Exists(Path.Combine(TarFolder, TarName)));
-        public virtual string DisplayedName => new FileInfo(OrigPath).Name;
+        public virtual bool Enabled => File.Exists(Path.Combine(TarFolder, TarName));
+        public virtual string DisplayedName { get; set; }
         public static bool AbsolutelyIgnore(string tpath)
         {
             return (new FileInfo(tpath).Extension != @".dll" || new FileInfo(tpath).Attributes.HasFlag(FileAttributes.ReparsePoint));
@@ -264,7 +261,6 @@ namespace Blep
 
         public static string GiveMeBackMyName(string partname)
         {
-
             string sl = partname;
             if (sl.StartsWith("Assembly-CSharp.") && sl.EndsWith(".mm.dll"))
             {
@@ -302,10 +298,6 @@ namespace Blep
 
         }
 
-        //public override bool Enabled => false;
-
-        //public override string TarName => null;
-
         public override string ToString()
         {
             return DisplayedName + ": INVALID";
@@ -340,11 +332,11 @@ namespace Blep
         {
             get
             {
-                if (File.Exists(path + @"\packInfo.json"))
+                if (File.Exists(Path.Combine(path, @"packInfo.json")))
                 {
                     return CfgState.PackInfo;
                 }
-                else if (File.Exists(path + @"\regionInfo.json"))
+                else if (File.Exists(Path.Combine(path, @"regionInfo.json") ))
                 {
                     return CfgState.RegInfo;
                 }
@@ -402,7 +394,7 @@ namespace Blep
         {
             get
             {
-                return (Directory.Exists(path + @"\World") || Directory.Exists(path + @"\Levels"));
+                return (Directory.Exists(Path.Combine(path, "World") ) || Directory.Exists(Path.Combine(path, "Levels")));
             }
         }
         public int? loadOrder
@@ -461,7 +453,7 @@ namespace Blep
     }
 
     //
-    // EDT CONFIG it's not a mod config but who the fuck cares lol
+    // EDT CONFIG
     //
 
     public static class EDTCFGDATA
