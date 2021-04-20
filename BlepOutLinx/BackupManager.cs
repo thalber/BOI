@@ -39,6 +39,7 @@ namespace Blep
             try
             {
                 Directory.Delete(toDelete.Location, true);
+                if (toDelete.Location == ActiveSave?.Location) Directory.CreateDirectory(toDelete.Location);
                 if (AllBackups.Contains(toDelete)) AllBackups.Remove(toDelete);
                 else if (ActiveSave == toDelete) ActiveSave = null;
             }

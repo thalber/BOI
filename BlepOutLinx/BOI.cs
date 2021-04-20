@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace Blep
 {
@@ -264,49 +265,42 @@ namespace Blep
         //brings mods up to date if necessary
         private void RetrieveAllDlls()
         {
-            string[] pluginFolderContents = Directory.GetFiles(PluginsFolder);
-            foreach (string s in pluginFolderContents)
+            var plugins = new DirectoryInfo(PluginsFolder);
+            var monomod = new DirectoryInfo(PatchesFolder);
+            List<string> bl = new List<string>();
+            bl.AddRange(pluginBlacklist);
+            bl.AddRange(patchBlacklist);
+            var fl = plugins.GetFiles().ToList();
+            fl.AddRange(monomod.GetFiles());
+            foreach (FileInfo inpl in fl)
             {
-                var fi = new FileInfo(s);
-                if (fi.Extension == ".dll" && !pluginBlacklist.Contains(fi.Name) && !fi.Attributes.HasFlag(FileAttributes.ReparsePoint))
+                try
                 {
-                    if (File.Exists(pathtomods(fi)))
-                    {
-
-                    }
-                    else
-                    {
-                        File.Copy(s, pathtomods(fi));
-                        Debug.WriteLine(fi.Name + " from Plugins does not have a counterpart in Mods, copying.");
-                    }
-
+                    if (inpl.Attributes.HasFlag(FileAttributes.ReparsePoint)) continue;
+                    string pb = PathBack(inpl);
+                    if (pb == null || bl.Contains(inpl.Name)) continue;
+                    var wayBack = new FileInfo(pb);
+                    if (!wayBack.Exists) inpl.CopyTo(wayBack.FullName);
                 }
-
-            }
-            string[] patchFolderContents = Directory.GetFiles(PatchesFolder);
-            foreach (string s in patchFolderContents)
-            {
-                var fi = new FileInfo(s);
-                if (fi.Extension == ".dll" && !patchBlacklist.Contains(fi.Name) && !fi.Attributes.HasFlag(FileAttributes.ReparsePoint))
+                catch (IOException ioe)
                 {
-                    if (!File.Exists(Path.Combine(ModFolder, PtModData.GiveMeBackMyName(fi.Name))))
-                    {
-                        File.Copy(s, Path.Combine(ModFolder + PtModData.GiveMeBackMyName(fi.Name)));
-                        Debug.WriteLine(fi.Name + " from patch folder does not have a counterpart in Mods, copying");
-                    }
-                    else if (fi.LastWriteTime < new FileInfo(ModFolder + PtModData.GiveMeBackMyName(fi.Name)).LastWriteTime)
-                    {
-                        File.Delete(s);
-                        File.Copy(Path.Combine(ModFolder, PtModData.GiveMeBackMyName(fi.Name)), s);
-                        Debug.WriteLine(fi.Name + " from Patches folder brought up to date.");
-                    }
+                    Debug.WriteLine($"ERROR WHILE RETRIEVING {inpl}: ");
+                    Debug.Indent();
+                    Debug.WriteLine(ioe);
+                    Debug.Unindent();
                 }
+                
             }
-            string pathtomods(FileInfo fi)
-            {
+            
+            
+            
 
+            string PathBack(FileInfo fi)
+            {
+                if (fi.Attributes.HasFlag(FileAttributes.ReparsePoint) || fi.Extension != ".dll") { return null; }
                 return Path.Combine(ModFolder, PtModData.GiveMeBackMyName(fi.Name));
             }
+
         }
         private void CompileModList()
         {
@@ -354,7 +348,6 @@ namespace Blep
             }
             ReadyForRefresh = oldrst;
         }
-
         private bool ModSelectedByMask(string mask, ModRelay mr)
         {
             if (mask == string.Empty) return true;
@@ -429,7 +422,7 @@ namespace Blep
         {
             foreach (ModRelay mr in Modlist.Items)
             {
-                if (mr.MyType == ModRelay.ModType.Invalid || !mr.enabled) continue;
+                if (mr.MyType == ModRelay.ModType.Invalid || !mr.enabled || new FileInfo(mr.TarPath).Attributes.HasFlag(FileAttributes.ReparsePoint)) continue;
                 byte[] ModOrigSha = mr.origchecksum;
                 byte[] ModTarSha = mr.TarCheckSum;
 
