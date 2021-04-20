@@ -74,10 +74,10 @@ namespace Blep
             }
             catch (IOException ioe)
             {
-                Debug.WriteLine("ERROR CHECKING ASSEMBLY TYPE: IOException occured");
-                Debug.Indent();
-                Debug.WriteLine(ioe);
-                Debug.Unindent();
+                Wood.WriteLine("ERROR CHECKING ASSEMBLY TYPE: IOException occured");
+                Wood.Indent();
+                Wood.WriteLine(ioe);
+                Wood.Unindent();
             }
             int ftc = 0;
             if (ultstate.ishk) ftc++;
@@ -423,10 +423,10 @@ namespace Blep
                 }
                 catch (JsonException ioe)
                 {
-                    Debug.WriteLine($"ERROR READING REGPACK CONFIG JSON FOR: {regionName}");
-                    Debug.Indent();
-                    Debug.WriteLine(ioe);
-                    Debug.Unindent();
+                    Wood.WriteLine($"ERROR READING REGPACK CONFIG JSON FOR: {regionName}");
+                    Wood.Indent();
+                    Wood.WriteLine(ioe);
+                    Wood.Unindent();
                 }
                 
             }
@@ -435,13 +435,13 @@ namespace Blep
         {
             if (jo == null)
             {
-                Debug.WriteLine($"Region mod {regionName} does not have a config file; cannot apply any changes.");
+                Wood.WriteLine($"Region mod {regionName} does not have a config file; cannot apply any changes.");
                 return;
             }
-            Debug.WriteLine($"Writing changes to regpack config for: {regionName}, contents:");
-            Debug.Indent();
-            Debug.WriteLine(jo);
-            Debug.Unindent();
+            Wood.WriteLine($"Writing changes to regpack config for: {regionName}, contents:");
+            Wood.Indent();
+            Wood.WriteLine(jo);
+            Wood.Unindent();
             
             hasBeenChanged = false;
             File.WriteAllText(pathToCfg, jo.ToString());
@@ -473,17 +473,17 @@ namespace Blep
             }
             catch (IOException ioe)
             {
-                Debug.WriteLine("Error reading EDT config file:");
-                Debug.Indent();
-                Debug.WriteLine(ioe);
-                Debug.Unindent();
+                Wood.WriteLine("Error reading EDT config file:");
+                Wood.Indent();
+                Wood.WriteLine(ioe);
+                Wood.Unindent();
             }
             catch (JsonReaderException jre)
             {
-                Debug.WriteLine("Error parsing EDT config:");
-                Debug.Indent();
-                Debug.WriteLine(jre);
-                Debug.Unindent();
+                Wood.WriteLine("Error parsing EDT config:");
+                Wood.Indent();
+                Wood.WriteLine(jre);
+                Wood.Unindent();
             }
             hasBeenChanged = false;
             
@@ -494,21 +494,21 @@ namespace Blep
             try
             {
                 File.WriteAllText(edtConfigPath, jo.ToString());
-                Debug.WriteLine("Saving config. Contents:");
-                Debug.Indent();
-                Debug.WriteLine(jo.ToString());
-                Debug.Unindent();
+                Wood.WriteLine("Saving config. Contents:");
+                Wood.Indent();
+                Wood.WriteLine(jo.ToString());
+                Wood.Unindent();
             }
             catch (IOException ioe)
             {
-                Debug.WriteLine("Error writing EDT config file:");
-                Debug.Indent();
-                Debug.WriteLine(ioe);
-                Debug.Unindent();
+                Wood.WriteLine("Error writing EDT config file:");
+                Wood.Indent();
+                Wood.WriteLine(ioe);
+                Wood.Unindent();
             }
             catch (System.ArgumentNullException)
             {
-                Debug.WriteLine("JO is null; nothing to write.");
+                Wood.WriteLine("JO is null; nothing to write.");
             }
         }
         public static string startmap

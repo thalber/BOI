@@ -20,17 +20,17 @@ namespace Blep
             }
             catch (JsonException joe)
             {
-                Debug.WriteLine("ERROR PARSING BOI CONFIG FILE:");
-                Debug.Indent();
-                Debug.WriteLine(joe);
-                Debug.Unindent();
+                Wood.WriteLine("ERROR PARSING BOI CONFIG FILE:");
+                Wood.Indent();
+                Wood.WriteLine(joe);
+                Wood.Unindent();
             }
             catch (IOException ioe)
             {
-                Debug.WriteLine("ERROR OPENING BOI CONFIG FILE:");
-                Debug.Indent();
-                Debug.WriteLine(ioe);
-                Debug.Unindent();
+                Wood.WriteLine("ERROR OPENING BOI CONFIG FILE:");
+                Wood.Indent();
+                Wood.WriteLine(ioe);
+                Wood.Unindent();
             }
         }
         public static void WriteConfig()
@@ -41,17 +41,16 @@ namespace Blep
             }
             catch (NullReferenceException)
             {
-                Debug.WriteLine("Can not save config: nothing to write");
+                Wood.WriteLine("Can not save config: nothing to write");
             }
             catch (IOException ioe)
             {
-                Debug.WriteLine("ERROR SERIALIZING BOI CONFIG FILE:");
-                Debug.Indent();
-                Debug.WriteLine(ioe);
-                Debug.Unindent();
+                Wood.WriteLine("ERROR SERIALIZING BOI CONFIG FILE:");
+                Wood.Indent();
+                Wood.WriteLine(ioe);
+                Wood.Unindent();
             }
         }
-
         public static string TarPath
         {
             get

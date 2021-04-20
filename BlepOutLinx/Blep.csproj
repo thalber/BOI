@@ -97,7 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BackupManager.cs" />
-    <Compile Include="BlepLog.cs" />
+    <Compile Include="Wood.cs" />
     <Compile Include="BOI.cs">
       <SubType>Form</SubType>
     </Compile>

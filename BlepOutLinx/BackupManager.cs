@@ -45,10 +45,10 @@ namespace Blep
             }
             catch (IOException ioe)
             {
-                Debug.WriteLine($"ERROR DELETING SAVE {toDelete.MyName}:");
-                Debug.Indent();
-                Debug.WriteLine(ioe);
-                Debug.Unindent();
+                Wood.WriteLine($"ERROR DELETING SAVE {toDelete.MyName}:");
+                Wood.Indent();
+                Wood.WriteLine(ioe);
+                Wood.Unindent();
             }
             
         }
@@ -133,10 +133,10 @@ namespace Blep
                 }
                 catch (IOException ioe)
                 {
-                    Debug.WriteLine($"Error saving backup data for savefile backup {MyName}");
-                    Debug.Indent();
-                    Debug.Write(ioe);
-                    Debug.Unindent();
+                    Wood.WriteLine($"Error saving backup data for savefile backup {MyName}");
+                    Wood.Indent();
+                    Wood.Write(ioe);
+                    Wood.Unindent();
                 }
                 return false;
             }
@@ -167,7 +167,7 @@ namespace Blep
             {
 
                 int terrc = BoiCustom.BOIC_RecursiveDirectoryCopy(Location, to);
-                Debug.WriteLine((terrc == 0) ? $"Savefolder state successfully copied to {to}" : $"Attempt to copy a savefolder from {Location} to {to} complete; total of {terrc} errors encountered.");
+                Wood.WriteLine((terrc == 0) ? $"Savefolder state successfully copied to {to}" : $"Attempt to copy a savefolder from {Location} to {to} complete; total of {terrc} errors encountered.");
                 UserDataStateRelay Nudsr = new UserDataStateRelay(to);
                 Nudsr.CreationTime = DateTime.Now;
                 Nudsr.UserDefinedName = this.UserDefinedName;

@@ -13,7 +13,7 @@ namespace Blep
         {
             InitializeComponent();
             mf = mainForm;
-            Debug.WriteLine("Options window opened " + DateTime.Now);
+            Wood.WriteLine("Options window opened " + DateTime.Now);
             labelREGIONNAME.Text = string.Empty;
             labelREGIONDESC.Text = string.Empty;
             labelSTRUCTURESTATUS.Text = string.Empty;
@@ -27,7 +27,7 @@ namespace Blep
 
         private void FetchStuff()
         {
-            Debug.WriteLine("Fetching jsons and stuff.");
+            Wood.WriteLine("Fetching jsons and stuff.");
             CRSlist.Items.Clear();
             regpacklist.Clear();
             if (Directory.Exists(CRSpath))
@@ -235,10 +235,10 @@ namespace Blep
             }
             catch (IOException ioe)
             {
-                Debug.WriteLine("ERROR MOVING LANGUAGE FOLDER:");
-                Debug.Indent();
-                Debug.WriteLine(ioe);
-                Debug.Unindent();
+                Wood.WriteLine("ERROR MOVING LANGUAGE FOLDER:");
+                Wood.Indent();
+                Wood.WriteLine(ioe);
+                Wood.Unindent();
             }
             ApplyStuff();
             FetchStuff();

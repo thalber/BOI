@@ -20,10 +20,10 @@ namespace Blep
             }
             catch (IOException ioe)
             {
-                Debug.WriteLine($"ERROR READING TAGS FILE FROM {filepath}:");
-                Debug.Indent();
-                Debug.WriteLine(ioe);
-                Debug.Unindent();
+                Wood.WriteLine($"ERROR READING TAGS FILE FROM {filepath}:");
+                Wood.Indent();
+                Wood.WriteLine(ioe);
+                Wood.Unindent();
                 return false;
             }
         }
@@ -35,10 +35,10 @@ namespace Blep
             }
             catch (JsonException je)
             {
-                Debug.WriteLine("ERROR PARSING TAG DATA FILE:");
-                Debug.Indent();
-                Debug.WriteLine(je);
-                Debug.Unindent();
+                Wood.WriteLine("ERROR PARSING TAG DATA FILE:");
+                Wood.Indent();
+                Wood.WriteLine(je);
+                Wood.Unindent();
             }
             
         }
@@ -58,10 +58,10 @@ namespace Blep
             }
             catch (IOException ioe)
             {
-                Debug.WriteLine($"ERROR WRITING TAGS FILE TO {filepath}:");
-                Debug.Indent();
-                Debug.WriteLine(ioe);
-                Debug.Unindent();
+                Wood.WriteLine($"ERROR WRITING TAGS FILE TO {filepath}:");
+                Wood.Indent();
+                Wood.WriteLine(ioe);
+                Wood.Unindent();
                 return false;
             }
         }

@@ -62,15 +62,15 @@
             this.label15 = new System.Windows.Forms.Label();
             this.tabTools = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.label27 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
             this.TabControl.SuspendLayout();
             this.tabInfo.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -192,9 +192,9 @@
             this.tableLayoutPanel2.RowCount = 5;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.04819F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.56627F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.78313F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.39759F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26.50602F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 23.19277F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.90361F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 21.68675F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(350, 339);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
@@ -235,9 +235,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(7, 247);
+            this.label6.Location = new System.Drawing.Point(7, 262);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(68, 88);
+            this.label6.Size = new System.Drawing.Size(68, 73);
             this.label6.TabIndex = 3;
             this.label6.Text = "Invalid";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -248,12 +248,13 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label10.Location = new System.Drawing.Point(79, 247);
+            this.label10.Location = new System.Drawing.Point(79, 262);
             this.label10.Margin = new System.Windows.Forms.Padding(0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(267, 88);
+            this.label10.Size = new System.Drawing.Size(267, 73);
             this.label10.TabIndex = 7;
-            this.label10.Text = resources.GetString("label10.Text");
+            this.label10.Text = "These mods are likely to not function correctly with BepInEx. They can still be e" +
+    "nabled as patches, but expect an instant crash for most of them.";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label19
@@ -292,9 +293,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(7, 167);
+            this.label5.Location = new System.Drawing.Point(7, 176);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(68, 79);
+            this.label5.Size = new System.Drawing.Size(68, 85);
             this.label5.TabIndex = 2;
             this.label5.Text = "Patch";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -308,7 +309,7 @@
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label4.Location = new System.Drawing.Point(7, 99);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(68, 67);
+            this.label4.Size = new System.Drawing.Size(68, 76);
             this.label4.TabIndex = 1;
             this.label4.Text = "Partmod";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -319,10 +320,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label9.Location = new System.Drawing.Point(79, 167);
+            this.label9.Location = new System.Drawing.Point(79, 176);
             this.label9.Margin = new System.Windows.Forms.Padding(0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(267, 79);
+            this.label9.Size = new System.Drawing.Size(267, 85);
             this.label9.TabIndex = 6;
             this.label9.Text = resources.GetString("label9.Text");
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -337,7 +338,7 @@
             this.label8.Location = new System.Drawing.Point(79, 99);
             this.label8.Margin = new System.Windows.Forms.Padding(0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(267, 67);
+            this.label8.Size = new System.Drawing.Size(267, 76);
             this.label8.TabIndex = 5;
             this.label8.Text = "Partiality mods, one of the most common mod types. Usually do not directly confli" +
     "ct with each other (there are exceptions).\r\nGo into BepInEx\\Plugins with their o" +
@@ -606,6 +607,21 @@
             this.tableLayoutPanel5.Size = new System.Drawing.Size(350, 339);
             this.tableLayoutPanel5.TabIndex = 0;
             // 
+            // label27
+            // 
+            this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label27.AutoSize = true;
+            this.label27.BackColor = System.Drawing.SystemColors.Window;
+            this.tableLayoutPanel5.SetColumnSpan(this.label27, 4);
+            this.label27.Location = new System.Drawing.Point(65, 246);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(281, 92);
+            this.label27.TabIndex = 8;
+            this.label27.Text = resources.GetString("label27.Text");
+            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // label17
             // 
             this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -637,22 +653,6 @@
             this.label18.Text = resources.GetString("label18.Text");
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label21
-            // 
-            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label21.AutoSize = true;
-            this.label21.BackColor = System.Drawing.SystemColors.Window;
-            this.tableLayoutPanel5.SetColumnSpan(this.label21, 4);
-            this.label21.Location = new System.Drawing.Point(65, 134);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(281, 55);
-            this.label21.TabIndex = 2;
-            this.label21.Text = "GUI for changing values in edtSetup.json file, used by Extended devtools. Not use" +
-    "ful unless you are a modder or want to mess with the game.";
-            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // label22
             // 
             this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -668,6 +668,22 @@
             this.label22.Text = "Very basic tool for fixing simple mistakes made while installing CommunicationMod" +
     "ule language packs.";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label21
+            // 
+            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label21.AutoSize = true;
+            this.label21.BackColor = System.Drawing.SystemColors.Window;
+            this.tableLayoutPanel5.SetColumnSpan(this.label21, 4);
+            this.label21.Location = new System.Drawing.Point(65, 134);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(281, 55);
+            this.label21.TabIndex = 2;
+            this.label21.Text = "GUI for changing values in edtSetup.json file, used by Extended devtools. Not use" +
+    "ful unless you are a modder or want to mess with the game.";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label23
             // 
@@ -724,21 +740,6 @@
             this.label26.TabIndex = 7;
             this.label26.Text = "Backup tool";
             this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label27
-            // 
-            this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label27.AutoSize = true;
-            this.label27.BackColor = System.Drawing.SystemColors.Window;
-            this.tableLayoutPanel5.SetColumnSpan(this.label27, 4);
-            this.label27.Location = new System.Drawing.Point(65, 246);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(281, 92);
-            this.label27.TabIndex = 8;
-            this.label27.Text = resources.GetString("label27.Text");
-            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // InfoWindow
             // 

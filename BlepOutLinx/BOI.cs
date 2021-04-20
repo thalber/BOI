@@ -17,10 +17,8 @@ namespace Blep
             firstshow = true;
             MaskModeSelect.Items.AddRange(new object[] {Maskmode.Names, Maskmode.Tags, Maskmode.NamesAndTags});
             MaskModeSelect.SelectedItem = Maskmode.NamesAndTags;
-            TextWriterTraceListener tr = new TextWriterTraceListener(File.CreateText("BOILOG.txt"));
-            Debug.Listeners.Add(tr);
-            Debug.AutoFlush = true;
-            Debug.WriteLine("BOI starting " + DateTime.Now);
+            Wood.LogPath = Path.Combine(Directory.GetCurrentDirectory(), "BOILOG.txt");
+            Wood.WriteLine("BOI starting " + DateTime.Now);
             targetFiles = new List<ModRelay>();
             pluginBlacklist = new List<string>();
             patchBlacklist = new List<string>();
@@ -38,15 +36,15 @@ namespace Blep
                     if (scrpyr.Contains("Here be dragons!"))
                     {
 
-                        Debug.WriteLine("Dragon thoughts found. Saying hi.");
+                        Wood.WriteLine("Dragon thoughts found. Saying hi.");
                         goto iolaa;
                     }
                 }
             iolaa:
                 {
-                    Debug.WriteLine("...");
-                    Debug.WriteLine("To you and your parent, greetings. May your work persist for as long as we do.");
-                    Debug.WriteLine("Wish you all well. Bzz!");
+                    Wood.WriteLine("...");
+                    Wood.WriteLine("To you and your parent, greetings. May your work persist for as long as we do.");
+                    Wood.WriteLine("Wish you all well. Bzz!");
                 }
             }
         }
@@ -64,8 +62,8 @@ namespace Blep
         }
         private void Setup()
         {
-            Debug.WriteLine("Path valid, starting setup " + DateTime.Now);
-            Debug.Indent();
+            Wood.WriteLine("Path valid, starting setup " + DateTime.Now);
+            Wood.Indent();
             PubstuntFound = false;
             MixmodsFound = false;
             metafiletracker = false;
@@ -98,7 +96,7 @@ namespace Blep
             }
             ReadyForRefresh = true;
             buttonClearMeta.Visible = metafiletracker;
-            Debug.Unindent();
+            Wood.Unindent();
         }
         private void ResolveBlacklists()
         {
@@ -119,7 +117,7 @@ namespace Blep
                     if (AintThisPS(s))
                     {
                         PubstuntFound = true;
-                        Debug.WriteLine("Located PublicityStunt in active Plugins folder, removing.");
+                        Wood.WriteLine("Located PublicityStunt in active Plugins folder, removing.");
                         File.Delete(s);
                     }
                     else
@@ -127,7 +125,7 @@ namespace Blep
                         ModRelay.ModType mt = ModRelay.GetModType(s);
                         if (!(mt == ModRelay.ModType.Patch || mt == ModRelay.ModType.Invalid) && !patchBlacklist.Contains(s) && !fi.Attributes.HasFlag(FileAttributes.ReparsePoint))
                         {
-                            Debug.WriteLine("Found a misplaced mod in Patches folder: " + fi.Name + "; Type: " + mt.ToString());
+                            Wood.WriteLine("Found a misplaced mod in Patches folder: " + fi.Name + "; Type: " + mt.ToString());
                             if (File.Exists(ModFolder + PtModData.GiveMeBackMyName(fi.Name)))
                             {
                                 File.Delete(s);
@@ -149,7 +147,7 @@ namespace Blep
                     if (AintThisPS(s))
                     {
                         File.Delete(s);
-                        Debug.WriteLine("Located PublicityStunt in active Plugins folder, removing.");
+                        Wood.WriteLine("Located PublicityStunt in active Plugins folder, removing.");
                         PubstuntFound = true;
                     }
                     else
@@ -158,15 +156,15 @@ namespace Blep
 
                         if (mt == ModRelay.ModType.Patch || mt == ModRelay.ModType.Invalid)
                         {
-                            Debug.WriteLine("Found a misplaced mod in Plugins folder: " + fi.Name + "; Type: " + mt.ToString());
+                            Wood.WriteLine("Found a misplaced mod in Plugins folder: " + fi.Name + "; Type: " + mt.ToString());
                             if (File.Exists(ModFolder + PtModData.GiveMeBackMyName(fi.Name)))
                             {
                                 File.Delete(s);
-                                Debug.WriteLine("Duplicate exists in Mods folder, deleting.");
+                                Wood.WriteLine("Duplicate exists in Mods folder, deleting.");
                             }
                             else
                             {
-                                Debug.WriteLine("Moving to Mods folder.");
+                                Wood.WriteLine("Moving to Mods folder.");
                                 File.Move(s, ModFolder + PtModData.GiveMeBackMyName(fi.Name));
                             }
                         }
@@ -179,7 +177,7 @@ namespace Blep
             metafiletracker = false;
             if (!Directory.Exists(ModFolder))
             {
-                Debug.WriteLine("Mods folder not found, creating.");
+                Wood.WriteLine("Mods folder not found, creating.");
                 Directory.CreateDirectory(ModFolder);
             }
             string[] modfldcontents = Directory.GetFiles(ModFolder);
@@ -191,7 +189,7 @@ namespace Blep
                     metafiletracker = true;
                 }
             }
-            Debug.WriteLineIf(metafiletracker, "Found modhash/modmeta files in mods folder.");
+            Wood.WriteLineIf(metafiletracker, "Found modhash/modmeta files in mods folder.");
         }
         //
         //blacklist stuff
@@ -211,17 +209,17 @@ namespace Blep
                 CreateHkBlacklist();
                 pluginBlacklist.Add("LogFix.dll");
             }
-            Debug.WriteLine("Plugin folder blacklist contents: ");
-            Debug.Indent();
+            Wood.WriteLine("Plugin folder blacklist contents: ");
+            Wood.Indent();
             foreach (string s in pluginBlacklist)
             {
-                Debug.WriteLine(new FileInfo(s).Name);
+                Wood.WriteLine(new FileInfo(s).Name);
             }
-            Debug.Unindent();
+            Wood.Unindent();
         }
         private void CreateHkBlacklist()
         {
-            Debug.WriteLine("Creating new plugin blacklist file.");
+            Wood.WriteLine("Creating new plugin blacklist file.");
             StreamWriter sw = File.CreateText(hkblacklistpath);
             sw.WriteLine("LogFix.dll");
             sw.Close();
@@ -243,13 +241,13 @@ namespace Blep
                 CreatePtBlacklist();
                 patchBlacklist.Add("Assembly-CSharp.PatchNothing.mm.dll");
             }
-            Debug.WriteLine("Patch folder blacklist contents: ");
-            Debug.Indent();
+            Wood.WriteLine("Patch folder blacklist contents: ");
+            Wood.Indent();
             foreach (string s in patchBlacklist)
             {
-                Debug.WriteLine(new FileInfo(s).Name);
+                Wood.WriteLine(new FileInfo(s).Name);
             }
-            Debug.Unindent();
+            Wood.Unindent();
         }
         private void CreatePtBlacklist()
         {
@@ -284,10 +282,10 @@ namespace Blep
                 }
                 catch (IOException ioe)
                 {
-                    Debug.WriteLine($"ERROR WHILE RETRIEVING {inpl}: ");
-                    Debug.Indent();
-                    Debug.WriteLine(ioe);
-                    Debug.Unindent();
+                    Wood.WriteLine($"ERROR WHILE RETRIEVING {inpl}: ");
+                    Wood.Indent();
+                    Wood.WriteLine(ioe);
+                    Wood.Unindent();
                 }
                 
             }
@@ -379,8 +377,8 @@ namespace Blep
         [Obsolete]
         private void ApplyModlist()
         {
-            Debug.WriteLine("Applying modlist.");
-            Debug.Indent();
+            Wood.WriteLine("Applying modlist.");
+            Wood.Indent();
             for (int i = 0; i < Modlist.Items.Count; i++)
             {
                 if (Modlist.Items[i] is ModRelay)
@@ -391,16 +389,16 @@ namespace Blep
                         mr.Enable();
                     }
                     else mr.Disable();
-                    Debug.WriteLine(mr.AssociatedModData.DisplayedName + " : " + ((mr.enabled) ? "ON" : "OFF"));
+                    Wood.WriteLine(mr.AssociatedModData.DisplayedName + " : " + ((mr.enabled) ? "ON" : "OFF"));
                 }
 
             }
-            Debug.Unindent();
+            Wood.Unindent();
         }
         //overload for manual checks/unchecks
         private void ApplyModlist(CheckState[] cst)
         {
-            Debug.WriteLine("Applying modlist from manual check.");
+            Wood.WriteLine("Applying modlist from manual check.");
             if (cst != null && cst.Length == Modlist.Items.Count)
             {
                 for (int i = 0; i < cst.Length; i++)
@@ -434,13 +432,13 @@ namespace Blep
                     {
                         File.Delete(tarfi.FullName);
                         File.Copy(orfi.FullName, tarfi.FullName);
-                        Debug.WriteLine($"Bringing {orfi.Name} up to date: copying from Mods to {((mr.MyType != ModRelay.ModType.Patch) ? "Plugins" : "Monomod")}.");
+                        Wood.WriteLine($"Bringing {orfi.Name} up to date: copying from Mods to {((mr.MyType != ModRelay.ModType.Patch) ? "Plugins" : "Monomod")}.");
                     }
                     else
                     {
                         File.Delete(orfi.FullName);
                         File.Copy(tarfi.FullName, orfi.FullName);
-                        Debug.WriteLine($"Bringing {orfi.Name} up to date: copying from {((mr.MyType != ModRelay.ModType.Patch) ? "Plugins" : "Monomod")} to Mods.");
+                        Wood.WriteLine($"Bringing {orfi.Name} up to date: copying from {((mr.MyType != ModRelay.ModType.Patch) ? "Plugins" : "Monomod")} to Mods.");
                     }
                 }
             }
@@ -471,11 +469,11 @@ namespace Blep
             }
             catch (IOException ioe)
             {
-                Debug.WriteLine("ATPS: ERROR CHECKING MOD ASSEMBLY :");
-                Debug.Indent();
-                Debug.WriteLine(ioe);
-                Debug.Unindent();
-                Debug.WriteLine("Well, it's probably not PS.");
+                Wood.WriteLine("ATPS: ERROR CHECKING MOD ASSEMBLY :");
+                Wood.Indent();
+                Wood.WriteLine(ioe);
+                Wood.Unindent();
+                Wood.WriteLine("Well, it's probably not PS.");
                 return false;
             }
 
@@ -552,13 +550,13 @@ namespace Blep
                 rw = new System.Diagnostics.Process();
                 rw.StartInfo.FileName = Path.Combine(RootPath, "RainWorld.exe");
                 rw.Start();
-                Debug.WriteLine("Game launched.");
+                Wood.WriteLine("Game launched.");
             }
 
             catch (Exception ce)
             {
-                Debug.WriteLine("Launch failed");
-                Debug.WriteLine(ce);
+                Wood.WriteLine("Launch failed");
+                Wood.WriteLine(ce);
             }
             btnLaunch.Enabled = false;
             StatusUpdate();
@@ -596,13 +594,13 @@ namespace Blep
                 ich[i] = Modlist.GetItemCheckState(i);
             }
             ich[e.Index] = e.NewValue;
-            Debug.WriteLine("Mod state about to change: " + (Modlist.Items[e.Index] as ModRelay).AssociatedModData.DisplayedName + "; Type: " + (Modlist.Items[e.Index] as ModRelay).MyType.ToString());
+            Wood.WriteLine("Mod state about to change: " + (Modlist.Items[e.Index] as ModRelay).AssociatedModData.DisplayedName + "; Type: " + (Modlist.Items[e.Index] as ModRelay).MyType.ToString());
             ApplyModlist(ich);
-            Debug.WriteLine("Resulting state: " + ((Modlist.Items[e.Index] as ModRelay).enabled ? "ON" : "OFF"));
+            Wood.WriteLine("Resulting state: " + ((Modlist.Items[e.Index] as ModRelay).enabled ? "ON" : "OFF"));
         }
         private void BlepOut_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Debug.WriteLine("BOI shutting down. " + DateTime.Now);
+            Wood.WriteLine("BOI shutting down. " + DateTime.Now);
             BoiConfigManager.WriteConfig();
             List<string> mns = new List<string>();
             foreach (ModRelay mr in targetFiles) mns.Add(mr.AssociatedModData.DisplayedName);
@@ -618,8 +616,8 @@ namespace Blep
         private void Modlist_DragDrop(object sender, DragEventArgs e)
         {
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-            Debug.WriteLine($"Drag&Drop: {files.Length} files were dropped in the mod list.");
-            Debug.Indent();
+            Wood.WriteLine($"Drag&Drop: {files.Length} files were dropped in the mod list.");
+            Wood.Indent();
             foreach (string file in files)
             {
                 // get the file info for easier operations
@@ -627,14 +625,14 @@ namespace Blep
                 // check if we are dealing with a dll file
                 if (!String.Equals(ModFileInfo.Extension, ".dll", StringComparison.CurrentCultureIgnoreCase))
                 {
-                    Debug.WriteLine($"Error: {ModFileInfo.Name} was ignored, as it is not a dll file.");
+                    Wood.WriteLine($"Error: {ModFileInfo.Name} was ignored, as it is not a dll file.");
                     continue;
                 }
                 // move the dll file to the Mods folder
                 string ModFilePath = Path.Combine(RootPath, "Mods", ModFileInfo.Name);
                 if(File.Exists(ModFilePath))
                 {
-                    Debug.WriteLine($"Error: {ModFileInfo.Name} was ignored, as it already exists.");
+                    Wood.WriteLine($"Error: {ModFileInfo.Name} was ignored, as it already exists.");
                     continue;
                 }
                 // move the dll file to the Mods folder
@@ -643,11 +641,11 @@ namespace Blep
                 var mr = new ModRelay(ModFilePath);
                 // add the mod to the mod list
                 targetFiles.Add(mr);
-                Debug.WriteLine($"{ModFileInfo.Name} successfully added.");
+                Wood.WriteLine($"{ModFileInfo.Name} successfully added.");
                 // since it's a new mod just added to the folder, it shouldn't be checked as active, nothing else to do here
             }
-            Debug.Unindent();
-            Debug.WriteLine("Drag&Drop operation ended.");
+            Wood.Unindent();
+            Wood.WriteLine("Drag&Drop operation ended.");
         }
         private void Modlist_DragEnter(object sender, DragEventArgs e)
         {

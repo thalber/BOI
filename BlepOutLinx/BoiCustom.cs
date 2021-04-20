@@ -29,10 +29,10 @@ namespace Blep
                 try { File.Copy(fi.FullName, Path.Combine(to, fi.Name)); }
                 catch (IOException ioe)
                 {
-                    Debug.Write("Could not copy a file during recursive copy process");
-                    Debug.Indent();
-                    Debug.WriteLine(ioe);
-                    Debug.Unindent();
+                    Wood.Write("Could not copy a file during recursive copy process");
+                    Wood.Indent();
+                    Wood.WriteLine(ioe);
+                    Wood.Unindent();
                     errc++;
                 }
 
@@ -42,10 +42,10 @@ namespace Blep
                 try { errc += BOIC_RecursiveDirectoryCopy(di.FullName, Path.Combine(to, di.Name)); }
                 catch (IOException ioe)
                 {
-                    Debug.Write("Could not copy a subfolder during recursive copy process");
-                    Debug.Indent();
-                    Debug.WriteLine(ioe);
-                    Debug.Unindent();
+                    Wood.Write("Could not copy a subfolder during recursive copy process");
+                    Wood.Indent();
+                    Wood.WriteLine(ioe);
+                    Wood.Unindent();
                     
                 }
                 
