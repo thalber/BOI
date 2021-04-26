@@ -2,7 +2,7 @@
 using System.IO;
 using System.Diagnostics;
 
-namespace Blep
+namespace Blep.Backend
 {
     public static class BoiCustom
     {

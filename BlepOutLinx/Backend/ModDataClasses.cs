@@ -6,7 +6,7 @@ using System.IO;
 using System.Security.Cryptography;
 
 
-namespace Blep
+namespace Blep.Backend
 {
     //
     //  CODE MODS

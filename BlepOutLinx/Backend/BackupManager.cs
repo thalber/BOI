@@ -7,7 +7,7 @@ using System.Diagnostics;
 using Newtonsoft.Json;
 
 
-namespace Blep
+namespace Blep.Backend
 {
     public static class BackupManager
     {

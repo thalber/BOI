@@ -5,7 +5,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 
-namespace Blep
+namespace Blep.Backend
 {
     internal class BoiConfigManager
     {

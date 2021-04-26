@@ -6,6 +6,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Linq;
+using Blep.Backend;
 
 namespace Blep
 {
@@ -13,6 +14,7 @@ namespace Blep
     {
         public BlepOut()
         {
+            
             InitializeComponent();
             firstshow = true;
             MaskModeSelect.Items.AddRange(new object[] {Maskmode.Names, Maskmode.Tags, Maskmode.NamesAndTags});
@@ -47,6 +49,8 @@ namespace Blep
                     Wood.WriteLine("Wish you all well. Bzz!");
                 }
             }
+            VoiceOfBees.FetchList();
+            if (VoiceOfBees.EntryList.Count > 0) { VoiceOfBees.EntryList[0].TryDownload(ModFolder); }
         }
         public void UpdateTargetPath(string path)
         {
@@ -672,6 +676,12 @@ namespace Blep
             if (!ReadyForRefresh) return;
             ApplyMaskToModlist(textBox_MaskInput.Text);
         }
+
+        private void OpenAudbBrowser(object sender, EventArgs e)
+        {
+            if (browser == null || browser.IsDisposed) { browser = new AUDBBrowser(); browser.Show(); }
+        }
+        private AUDBBrowser browser;
 
     }
 }

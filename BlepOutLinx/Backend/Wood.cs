@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace Blep
+namespace Blep.Backend
 {
     public static class Wood
     {

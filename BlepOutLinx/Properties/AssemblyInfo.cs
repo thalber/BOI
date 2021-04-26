@@ -12,8 +12,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Unlicense")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyInformationalVersion("0.1.5")]
-[assembly: AssemblyVersion("0.1.5")]
+[assembly: AssemblyInformationalVersion("0.1.6")]
+[assembly: AssemblyVersion("0.1.6")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from
@@ -34,4 +34,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 //[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("0.1.5.0")]
+[assembly: AssemblyFileVersion("0.1.6.0")]

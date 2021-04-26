@@ -45,6 +45,7 @@
             this.buttonUprootPart = new System.Windows.Forms.Button();
             this.buttonClearMeta = new System.Windows.Forms.Button();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonBrowseAUDB = new System.Windows.Forms.Button();
             this.buttonOption = new System.Windows.Forms.Button();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
@@ -178,11 +179,19 @@
             // 
             resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
             this.tableLayoutPanel3.SetColumnSpan(this.tableLayoutPanel5, 2);
+            this.tableLayoutPanel5.Controls.Add(this.buttonBrowseAUDB, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.buttonClearMeta, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.buttonUprootPart, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.btn_Help, 2, 0);
             this.tableLayoutPanel5.Controls.Add(this.buttonOption, 3, 0);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            // 
+            // buttonBrowseAUDB
+            // 
+            resources.ApplyResources(this.buttonBrowseAUDB, "buttonBrowseAUDB");
+            this.buttonBrowseAUDB.Name = "buttonBrowseAUDB";
+            this.buttonBrowseAUDB.UseVisualStyleBackColor = true;
+            this.buttonBrowseAUDB.Click += new System.EventHandler(this.OpenAudbBrowser);
             // 
             // buttonOption
             // 
@@ -317,6 +326,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RichTextBox TagInputBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Button buttonBrowseAUDB;
     }
 }
 

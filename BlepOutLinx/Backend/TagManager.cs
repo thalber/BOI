@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using System.Diagnostics;
 using System.IO;
 
-namespace Blep
+namespace Blep.Backend
 {
     public static class TagManager
     {
